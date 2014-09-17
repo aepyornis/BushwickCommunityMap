@@ -1,0 +1,56 @@
+#wrapper {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    min-width: 750px;
+    max-width: 1250px;
+    padding-top: 10px;
+}
+
+
+.font {
+        font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+
+}
+
+.title {
+ 
+}
+
+.title h1 {
+    padding-top: 20px;
+    font-size: 55px;
+    
+
+}
+.title img {
+    padding-top: 25px;
+    padding-bottom: 20px;
+    margin: 0 auto;
+}
+
+.text p {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.end {
+    margin-bottom: 50px;
+}
+
+.gloss {
+    font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+    padding-left: 25px;
+    padding-right: 25px;
+
+}
+
+.gloss p {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.start {
+    padding-top: 50px;
+}
+

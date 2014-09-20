@@ -88,7 +88,7 @@
 				layer.bindPopup(popupContent);
 			}
 
-//FILTERS&&\\
+//FILTERS
 	function fun_alter(feature, layer) {
 		if (feature.properties.jobtype == "A1" || feature.properties.jobtype == "NB") { return true; } 
 			else { return false; }
@@ -300,19 +300,16 @@
 				return L.marker(latlng);}
 		});
 
-
-
-
 //blank pluto popup
-var exp_pluto = new L.geoJson(exp_PLUTO132bushwick,{
-			style: blankPluto,
-			onEachFeature: pop_pluto,
-			pointToLayer: function (feature, latlng) {
-			return L.marker(latlng);}
-				});
-exp_pluto.addTo(map);
+	var exp_pluto = new L.geoJson(exp_PLUTO132bushwick,{
+				style: blankPluto,
+				onEachFeature: pop_pluto,
+				pointToLayer: function (feature, latlng) {
+				return L.marker(latlng);}
+					});
+	exp_pluto.addTo(map);
 
-//control
+//Basemap control
 	var baseMaps = {
 		"Tax Lots": mainMap,
 		"Open Street Map": osmMap,
@@ -324,114 +321,6 @@ exp_pluto.addTo(map);
 
 	L.control.layers(baseMaps, overLays, {collapsed: false}).addTo(map);
 
-
-//age filters
-
-	function age2000(feature, layer) {
-			if (feature.properties.YearBuilt == 2000) {
-				return true;
-			} else {
-			return false;
-				}
-		}
-	function age2001(feature, layer) {
-			if (feature.properties.YearBuilt == 2001) {
-				return true;
-			} else {
-			return false;
-				}
-		}
-	function age2002(feature, layer) {
-			if (feature.properties.YearBuilt == 2002) {
-				return true;
-			} else {
-			return false;
-				}
-		}
-	function age2003(feature, layer) {
-			if (feature.properties.YearBuilt == 2003) {
-				return true;
-			} else {
-			return false;
-				}
-		}
-	function age2004(feature, layer) {
-			if (feature.properties.YearBuilt == 2004) {
-				return true;
-			} else {
-			return false;
-				}
-		}
-	function age2005(feature, layer) {
-			if (feature.properties.YearBuilt == 2005) {
-				return true;
-			} else {
-			return false;
-				}
-		}
-	function age2006(feature, layer) {
-			if (feature.properties.YearBuilt == 2006) {
-				return true;
-			} else {
-			return false;
-				}
-		}
-	function age2007(feature, layer) {
-			if (feature.properties.YearBuilt == 2007) {
-				return true;
-			} else {
-			return false;
-				}
-		}
-	function age2008(feature, layer) {
-			if (feature.properties.YearBuilt == 2008) {
-				return true;
-			} else {
-			return false;
-				}
-		}
-	function age2009(feature, layer) {
-			if (feature.properties.YearBuilt == 2009) {
-				return true;
-			} else {
-			return false;
-				}
-		}
-	function age2010(feature, layer) {
-			if (feature.properties.YearBuilt == 2010) {
-				return true;
-			} else {
-			return false;
-				}
-		}
-	function age2011(feature, layer) {
-			if (feature.properties.YearBuilt == 2011) {
-				return true;
-			} else {
-			return false;
-				}
-		}
-	function age2012(feature, layer) {
-			if (feature.properties.YearBuilt == 2012) {
-				return true;
-			} else {
-			return false;
-				}
-		}
-	function age2013(feature, layer) {
-			if (feature.properties.YearBuilt == 2013) {
-				return true;
-			} else {
-			return false;
-				}
-		}
-	function age2014(feature, layer) {
-			if (feature.properties.YearBuilt == 2014) {
-				return true;
-			} else {
-			return false;
-				}
-		} 
 //check boxes
 	//inputed ID must be in "" like "farButton"
 	//to disable, put "disable" for layer
@@ -457,12 +346,11 @@ exp_pluto.addTo(map);
 	createButton("rentStabButton", likelyRentStab);
 	// createButton("permitsButton", julyJobs);
 	createButton("vacantLand", landuse11);
+	//disabled buttons: DOB violations, evictions
 	$( "#violationsButton" ).button();
 	$( "#evictButton" ).button();
 	$( "#violationsButton" ).button( "disable" );
 	$( "#evictButton" ).button( "disable" );
-
-
 
 	//can't use createButton for FAR...it's has extra stuff
 	$( "#farButton" ).button();
@@ -473,7 +361,6 @@ exp_pluto.addTo(map);
 	      		map.addLayer(FAR);
 	      		legend.addTo(map);
 				info.addTo(map);
-
 	  		} else {
 	  			map.removeLayer(FAR);
 				legend.removeFrom(map);
@@ -490,179 +377,150 @@ exp_pluto.addTo(map);
 	var g2 = L.marker([40.700852, -73.936285]).bindPopup("Rheingold Rezoning");
 	var g3 = L.marker([40.700082, -73.913740]).bindPopup("358 Grove St. Condos");	
 
-
 	var gentriLayer = new L.layerGroup([g1, g2, g3])
 
 	createButton("gentriLayer", gentriLayer);
 
-	//DOB permits choices
-
-	// var altA1 = new L.geoJson(exp_julySHP,{
-	// 				onEachFeature: pop_alter,
-	// 				filter:  fun_a1,
-	// 				pointToLayer: function (feature, latlng) {  
-	// 					return L.circleMarker(latlng, {
-	// 						radius: feature.properties.radius_qgis2leaf,
-	// 						fillColor: feature.properties.color_qgis2leaf,
-	// 						color: '#000',
-	// 						weight: 1,
-	// 						opacity: feature.properties.transp_qgis2leaf,
-	// 						fillOpacity: feature.properties.transp_fill_qgis2leaf
-	// 						})
-	// 					}
-	// 				});
-
-
-	// var altA2A3 = new L.geoJson(exp_julySHP,{
-	// 				onEachFeature:  pop_alter,
-	// 				filter: fun_a2a3,
-	// 				pointToLayer: function (feature, latlng) {  
-	// 					return L.circleMarker(latlng, {
-	// 						radius: feature.properties.radius_qgis2leaf,
-	// 						fillColor: feature.properties.color_qgis2leaf,
-	// 						color: '#000',
-	// 						weight: 1,
-	// 						opacity: feature.properties.transp_qgis2leaf,
-	// 						fillOpacity: feature.properties.transp_fill_qgis2leaf
-	// 						})
-	// 					}
-	// 				});
-
-
-	// var altNB = new L.geoJson(exp_julySHP,{
-	// 				onEachFeature:  pop_alter,
-	// 				filter: fun_NB,
-	// 				pointToLayer: function (feature, latlng) {  
-	// 					return L.circleMarker(latlng, {
-	// 						radius: feature.properties.radius_qgis2leaf,
-	// 						fillColor: feature.properties.color_qgis2leaf,
-	// 						color: '#000',
-	// 						weight: 1,
-	// 						opacity: feature.properties.transp_qgis2leaf,
-	// 						fillOpacity: feature.properties.transp_fill_qgis2leaf
-	// 						})
-	// 					}
-	// 				});
-
-
-
-
-		// createButton("a1", altA1);
-		// createButton("a2a3", altA2A3);
-		// createButton("newBuild", altNB);
-
-
 
 //Year Slider
-	//abstracted previous process; but now there a delay because it's recreating layers and filtering each time
+	//abstracted previous process; but now there's a delay because it's recreating layers and filtering each time
 	//Orignal can be found here: age_layers_original.js	
 	
-(function yearLayers() {
-	var lowValue = 2010;
-	var highValue = 2014;
-	var ageLayerGroup = L.layerGroup();
+	(function yearLayers() {
+		var lowValue = 2010;
+		var highValue = 2014;
+		var ageLayerGroup = L.layerGroup();
 
+	 	$(document).ready(function(){ 
 
- 	$(document).ready(function(){ 
+			$( "#yearSlider" ).slider({
+				range: true,
+				min: 2000,
+				max: 2014,
+				values: [ 2010, 2014 ],
+				slide: function( event, ui ) {
+					$( "#yearRange" ).val(ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+				},
+				change: function( event, ui ) {
+					lowValue = $( "#yearSlider" ).slider( "values", 0 );
+					highValue = $( "#yearSlider" ).slider( "values", 1 );
+					var isChecked = $('#buildingYear').prop('checked');
+		  			
+					if (isChecked == true) {
 
-		$( "#yearSlider" ).slider({
-			range: true,
-			min: 2000,
-			max: 2014,
-			values: [ 2010, 2014 ],
-			slide: function( event, ui ) {
-				$( "#yearRange" ).val(ui.values[ 0 ] + " - " + ui.values[ 1 ] );
-			},
-			change: function( event, ui ) {
-				lowValue = $( "#yearSlider" ).slider( "values", 0 );
-				highValue = $( "#yearSlider" ).slider( "values", 1 );
+						ageLayerGroup.clearLayers();
+						yearLayersCreate(lowValue, highValue);
+		  		
+		  			}
+				}
+
+			});
+
+			$( "#yearRange" ).val( $( "#yearSlider" ).slider( "values", 0 ) +
+						"   -   " + $( "#yearSlider" ).slider( "values", 1 ) );
+
+			$( "#buildingYear" ).button();
+			
+			$('#buildingYear').click(function(){
 				var isChecked = $('#buildingYear').prop('checked');
-	  			
-				if (isChecked == true) {
+				if (isChecked == true) { 
+				    	yearLayersCreate(lowValue, highValue)
 
-				ageLayerGroup.clearLayers();
-				yearLayersCreate(lowValue, highValue);
-	  		
-	  			}
-			 }
+				  	} else {
+				  		
+				  		ageLayerGroup.clearLayers();
 
+				   		}
+				   });
 		});
 
-		$( "#yearRange" ).val( $( "#yearSlider" ).slider( "values", 0 ) +
-					"   -   " + $( "#yearSlider" ).slider( "values", 1 ) );
 
-		$( "#buildingYear" ).button();
-			
-		$('#buildingYear').click(function(){
-			var isChecked = $('#buildingYear').prop('checked');
-			if (isChecked == true) { 
-			    	yearLayersCreate(lowValue, highValue)
+		function yearLayersCreate (start, end) {
+				var yellow = {
+			    	fillColor: '#ffff66',
+			    	fillOpacity: 1,
+			    	opacity: 1,
+			    	stroke: false
+				};
 
-			  	} else {
-			  		
-			  		ageLayerGroup.clearLayers();
+				function age(feature, layer) {
+						if ( (feature.properties.YearBuilt >= start && feature.properties.YearBuilt <= end) == true) {
+							return true;
 
-			   		}
-			   });
-	});
+						} else { return false; }
+				}	
 
+			for (var i = start; i <= end; i++) {
+					var ageLayer = new L.geoJson(exp_PLUTO132bushwick,{
+					style: yellow,
+					onEachFeature: pop_pluto,
+					filter: age,
+					pointToLayer: function (feature, latlng) {
+					return L.marker(latlng);}
+					});
+					ageLayerGroup.addLayer(ageLayer);
+			}
 
-	function yearLayersCreate (start, end) {
-			var yellow = {
-		    	fillColor: '#ffff66',
-		    	fillOpacity: 1,
-		    	opacity: 1,
-		    	stroke: false
-			};
+			ageLayerGroup.addTo(map);
 
-			function age(feature, layer) {
-					if ( (feature.properties.YearBuilt >= start && feature.properties.YearBuilt <= end) == true) {
-						return true;
-
-					} else { return false; }
-			}	
-
-		for (var i = start; i <= end; i++) {
-				var ageLayer = new L.geoJson(exp_PLUTO132bushwick,{
-				style: yellow,
-				onEachFeature: pop_pluto,
-				filter: age,
-				pointToLayer: function (feature, latlng) {
-				return L.marker(latlng);}
-				});
-				ageLayerGroup.addLayer(ageLayer);
 		}
 
-		ageLayerGroup.addTo(map);
+	})(); 
 
-	}
-
-})(); 
-
-
-
-
-//Month Slider
-var value1 = 5;
-var value2 = 6;
-var permitsStuff = function() {
-  
+//DOB Permits + Month Slider
+	var value1 = 5;
+	var value2 = 6;
+	var permitsStuff = function() {
+	  
 
 	function numToMonth(x) {
-      var months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
-      return months[x];
-      }
-    function monthMove() {
-      var value1 = $( '#monthSlider' ).slider ( "values", 0 );
-      var value2 = $( '#monthSlider' ).slider ( "values", 1 );
-     $( "#monthText" ).val ( numToMonth(value1) + "  -  " + numToMonth(value2) );
-    }
-      
+	      var months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+	      return months[x];
+	}
+	function monthMove() {
+	      var value1 = $( '#monthSlider' ).slider ( "values", 0 );
+	      var value2 = $( '#monthSlider' ).slider ( "values", 1 );
+	     $( "#monthText" ).val ( numToMonth(value1) + "  -  " + numToMonth(value2) );
+	}
+	
+
+
+	//update functions create layer and update them to filter according to the current state of the slider     
 	var a1Layer;
 	var update_a1 = function() {
 			function fun_a1(feature, layer) {
+				 
+				  if (feature.properties.JobType == "A1") {
+				  		if 	( feature.properties.NumMonth >= value1 && feature.properties.NumMonth <= value2) { 
+				  			return true;
+				  		} else { return false; }
+
+				  	} else { return false; }
+			}
+
+
+			a1Layer = L.geoJson(exp_CodedJobs,{
+		          onEachFeature: pop_alter,
+		          filter: fun_a1,
+		          pointToLayer: function (feature, latlng) {  
+		            return L.circleMarker(latlng, {
+		              radius: 4.0,
+		              fillColor: '#237f9d',
+		              color: '#000',
+		              weight: 1,
+		              opacity: 1.0,
+		              fillOpacity: 1.0
+		              })
+		            }
+		    });
+	};
+		
+
+	var a2Layer;
+	var update_a2 = function() {
+			function fun_a2(feature, layer) {
 			 
-			  if (feature.properties.JobType == "A1") {
+			  if (feature.properties.JobType == "A2" || feature.properties.JobType == "A3") {
 			  		if 	( feature.properties.NumMonth >= value1 && feature.properties.NumMonth <= value2) { 
 			  			return true;
 			  		} else { return false; }
@@ -671,13 +529,13 @@ var permitsStuff = function() {
 			}
 
 
-			a1Layer = L.geoJson(exp_CodedJobs,{
+			a2Layer = L.geoJson(exp_CodedJobs,{
 			          onEachFeature: pop_alter,
-			          filter: fun_a1,
+			          filter: fun_a2,
 			          pointToLayer: function (feature, latlng) {  
 			            return L.circleMarker(latlng, {
 			              radius: 4.0,
-			              fillColor: '#237f9d',
+			              fillColor: '#3aadd3',
 			              color: '#000',
 			              weight: 1,
 			              opacity: 1.0,
@@ -686,123 +544,87 @@ var permitsStuff = function() {
 			            }
 			          });
 	};
+	
+
+	var NBLayer;
+	var update_NB = function() {
+			function fun_NB(feature, layer) {
+			 
+			  if (feature.properties.JobType == "NB") {
+			  		if 	( feature.properties.NumMonth >= value1 && feature.properties.NumMonth <= value2) { 
+			  			return true;
+			  		} else { return false; }
+
+			  	} else { return false; }
+			}
+
+
+			NBLayer = L.geoJson(exp_CodedJobs,{
+			          onEachFeature: pop_alter,
+			          filter: fun_NB,
+			          pointToLayer: function (feature, latlng) {  
+			            return L.circleMarker(latlng, {
+			              radius: 5.0,
+			              fillColor: '#1a5d73',
+			              color: '#000',
+			              weight: 1,
+			              opacity: 1.0,
+			              fillOpacity: 1.0
+			              })
+			            }
+			          });
+	};
+
+	
 	update_a1();
+	update_a2();
+	update_NB();
 
-var a2Layer;
-var update_a2 = function() {
-		function fun_a2(feature, layer) {
-		 
-		  if (feature.properties.JobType == "A2" || feature.properties.JobType == "A3") {
-		  		if 	( feature.properties.NumMonth >= value1 && feature.properties.NumMonth <= value2) { 
-		  			return true;
-		  		} else { return false; }
+	createButton("a1", a1Layer);
+	createButton("a2a3", a2Layer);
+	createButton("newBuild", NBLayer);
 
-		  	} else { return false; }
-		}
+	$( "#monthSlider" ).slider({
+					range: true,
+					min: 0,
+					max: 6,
+					values: [ 5, 6 ],
+					slide: function( event, ui ) {
+						$( "#monthText" ).val( numToMonth(ui.values[ 0 ]) + "  -  " + numToMonth(ui.values[ 1 ]) );
+					},
+					change: function ( event, ui ) {
+						map.removeLayer(a1Layer);
+						map.removeLayer(a2Layer);
+						map.removeLayer(NBLayer);
+						value1 = $( '#monthSlider' ).slider ( "values", 0 );
+						value2 = $( '#monthSlider' ).slider ( "values", 1 );
+						update_a1();
+						update_a2();
+						update_NB();
+						var isA1Checked = $('#a1').prop('checked');
+						var isA2Checked = $('#a2a3').prop('checked');
+						var isNBChecked = $('#newBuild').prop('checked');
+						if (isA1Checked == true) {
+	              				map.addLayer(a1Layer);
+	              		}
+	              		if (isA2Checked == true) {
+	              			map.addLayer(a2Layer);
+	              		}
+	              		if (isNBChecked == true) {
+	              			map.addLayer(NBLayer);
+	              		}
 
+					}
+	});
+	monthMove();	
+					
+	}
 
-		a2Layer = L.geoJson(exp_CodedJobs,{
-		          onEachFeature: pop_alter,
-		          filter: fun_a2,
-		          pointToLayer: function (feature, latlng) {  
-		            return L.circleMarker(latlng, {
-		              radius: 4.0,
-		              fillColor: '#3aadd3',
-		              color: '#000',
-		              weight: 1,
-		              opacity: 1.0,
-		              fillOpacity: 1.0
-		              })
-		            }
-		          });
-};
-update_a2();
+	permitsStuff();
 
-var NBLayer;
-var update_NB = function() {
-		function fun_NB(feature, layer) {
-		 
-		  if (feature.properties.JobType == "NB") {
-		  		if 	( feature.properties.NumMonth >= value1 && feature.properties.NumMonth <= value2) { 
-		  			return true;
-		  		} else { return false; }
+//Tell your own story
 
-		  	} else { return false; }
-		}
-
-
-		NBLayer = L.geoJson(exp_CodedJobs,{
-		          onEachFeature: pop_alter,
-		          filter: fun_NB,
-		          pointToLayer: function (feature, latlng) {  
-		            return L.circleMarker(latlng, {
-		              radius: 5.0,
-		              fillColor: '#1a5d73',
-		              color: '#000',
-		              weight: 1,
-		              opacity: 1.0,
-		              fillOpacity: 1.0
-		              })
-		            }
-		          });
-};
-update_NB();
-
-
-
-
-
-createButton("a1", a1Layer);
-createButton("a2a3", a2Layer);
-createButton("newBuild", NBLayer);
-
-$( "#monthSlider" ).slider({
-				range: true,
-				min: 0,
-				max: 6,
-				values: [ 5, 6 ],
-				slide: function( event, ui ) {
-					$( "#monthText" ).val( numToMonth(ui.values[ 0 ]) + "  -  " + numToMonth(ui.values[ 1 ]) );
-				},
-				change: function ( event, ui ) {
-					map.removeLayer(a1Layer);
-					map.removeLayer(a2Layer);
-					map.removeLayer(NBLayer);
-					value1 = $( '#monthSlider' ).slider ( "values", 0 );
-					value2 = $( '#monthSlider' ).slider ( "values", 1 );
-					update_a1();
-					update_a2();
-					update_NB();
-					var isA1Checked = $('#a1').prop('checked');
-					var isA2Checked = $('#a2a3').prop('checked');
-					var isNBChecked = $('#newBuild').prop('checked');
-					 if (isA1Checked == true) {
-       
-              				map.addLayer(a1Layer);
-              			}
-
-              		if (isA2Checked == true) {
-              			map.addLayer(a2Layer);
-              		}
-              		if (isNBChecked == true) {
-              			map.addLayer(NBLayer);
-              		}
-
-				}
-	   	});
-	   		
-
-monthMove();	
-				
-
-}
-
-permitsStuff();
-
-// Tell your own story
-
-		
-		function onMapClick(e) {
+	function onMapClick(e) {
 
 		var popHTML = '<div class="userPopUp"><form action="#"><label>Your Name:</label><div class="userBox"><input type="text" name="name" /></div><label>Your Email or phone:</label><div class="userBox"><input type="text" name="Email" class="email" /><label>Your story:</label><TEXTAREA rows="12" cols="60" class="story" name="story" placeholder="Write your story here..."></TEXTAREA></div><div class="userBox"><fieldset><label for="storyType">Type of story</label><select name="storyType" class="storyType"><option>Neighborhood Change</option><option>Landlord Abuse</option><option>Eviction</option><option>Rent</option><option>This place needs help</option><option>Success story</option><option>Other</option></select></fieldset></div><div class="userBox"><input type="submit" value="Submit"><input type="button" value="Delete this marker" class="marker-delete-button"/></div></form></div>';
 
@@ -854,22 +676,21 @@ permitsStuff();
 
 	$( '#userButton'  ).button();
 	$(document).ready(function() {
-	   $('#userButton').click(function(){
-	      var isChecked = $('#userButton').prop('checked');
-	      if (isChecked == true) { 
+		   $('#userButton').click(function(){
+		      var isChecked = $('#userButton').prop('checked');
+		      if (isChecked == true) { 
 
-	      		map.removeLayer(exp_pluto);
-	      		map.on('click', onMapClick);
+		      		map.removeLayer(exp_pluto);
+		      		map.on('click', onMapClick);
 
-	  		} else {
-	  			
-	  			map.off('click', onMapClick);
-	  			map.addLayer(exp_pluto); 
+		  		} else {
+		  			
+		  			map.off('click', onMapClick);
+		  			map.addLayer(exp_pluto); 
 
-	   		}
-	   });
-	});
-
+		   		}
+		   });
+		});
 
 //Glossary PopUP
 	(function() {

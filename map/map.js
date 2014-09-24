@@ -371,7 +371,7 @@
 	   });
 	});
 
-//Sites of Gentrification Markers, 
+//Sites of Gentrification Markers 
 
 	var g1 = L.marker([40.695875, -73.928266]).bindPopup("The Colony 1209");
 	var g2 = L.marker([40.700852, -73.936285]).bindPopup("Rheingold Rezoning");
@@ -380,7 +380,6 @@
 	var gentriLayer = new L.layerGroup([g1, g2, g3])
 
 	createButton("gentriLayer", gentriLayer);
-
 
 //Year Slider
 	//abstracted previous process; but now there's a delay because it's recreating layers and filtering each time
@@ -468,25 +467,28 @@
 	})(); 
 
 //DOB Permits + Month Slider
+	
+var permitsStuff = function() {
 	var value1 = 5;
 	var value2 = 6;
-	var permitsStuff = function() {
-	  
+	var a1Layer;
+	var a2Layer;
+	var NBLayer;  
 
-	function numToMonth(x) {
-	      var months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
-	      return months[x];
-	}
-	function monthMove() {
-	      var value1 = $( '#monthSlider' ).slider ( "values", 0 );
-	      var value2 = $( '#monthSlider' ).slider ( "values", 1 );
-	     $( "#monthText" ).val ( numToMonth(value1) + "  -  " + numToMonth(value2) );
-	}
-	
+		function numToMonth(x) {
+		      var months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+		      return months[x];
+		}
+		function monthMove() {
+		      var value1 = $( '#monthSlider' ).slider ( "values", 0 );
+		      var value2 = $( '#monthSlider' ).slider ( "values", 1 );
+		     $( "#monthText" ).val ( numToMonth(value1) + "  -  " + numToMonth(value2) );
+		}
+		
 
 
 	//update functions create layer and update them to filter according to the current state of the slider     
-	var a1Layer;
+	
 	var update_a1 = function() {
 			function fun_a1(feature, layer) {
 				 
@@ -516,7 +518,7 @@
 	};
 		
 
-	var a2Layer;
+	
 	var update_a2 = function() {
 			function fun_a2(feature, layer) {
 			 
@@ -545,8 +547,6 @@
 			          });
 	};
 	
-
-	var NBLayer;
 	var update_NB = function() {
 			function fun_NB(feature, layer) {
 			 
@@ -579,7 +579,6 @@
 	update_a1();
 	update_a2();
 	update_NB();
-
 	createButton("a1", a1Layer);
 	createButton("a2a3", a2Layer);
 	createButton("newBuild", NBLayer);
@@ -605,7 +604,7 @@
 						var isA2Checked = $('#a2a3').prop('checked');
 						var isNBChecked = $('#newBuild').prop('checked');
 						if (isA1Checked == true) {
-	              				map.addLayer(a1Layer);
+	              			map.addLayer(a1Layer);
 	              		}
 	              		if (isA2Checked == true) {
 	              			map.addLayer(a2Layer);
@@ -616,9 +615,9 @@
 
 					}
 	});
-	monthMove();	
+	// monthMove();	
 					
-	}
+	};
 
 	permitsStuff();
 

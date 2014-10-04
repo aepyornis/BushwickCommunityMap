@@ -105,8 +105,13 @@ var deserialize = function(js, callback) {
             }
             return value;
         });
+
+        // add this to pretty print JSON. Outputs strings, and may not save correctly
+        // result = JSON.stringify(result, null, '\t');
+
         
         console.log("json parsed, return it");
+
     } else {
         result = "Sorry, JSON could not be parsed.";
     }
@@ -115,19 +120,36 @@ var deserialize = function(js, callback) {
     //prior code
     // callback(null, result);
 
-      callback(result);
+    callback(result);
+
 };
 
 exports.deserialize = deserialize;
 
-deserialize(arcGISJSON, (function (theJSON) { 
-        fs.writeFile(outputFilename, theJSON, function(err) {
-                    if(err) {
-                      console.log(err);
-                    } else {
-                      console.log("JSON saved to " + outputFilename);
-                    }
-        }); 
-    })  
-);
+
+//this function writes a JSON file
+    // deserialize(arcGISJSON, (function (theJSON) { 
+    //         fs.writeFile(outputFilename, theJSON, function(err) {
+    //                     if(err) {
+    //                       console.log(err);
+    //                     } else {
+    //                       console.log("JSON saved to " + outputFilename);
+    //                     }
+    //         }); 
+    //     })  
+    // );
+
+//this functions writes a JS file with data stored in variable. 
+    deserialize(arcGISJSON, (function (theJSON) { 
+            var stream = fs.createWriteStream(outputFilename);
+
+            stream.once('open', function(fd) {
+            stream.write("var bushwickJSON = ");
+            stream.write(theJSON);
+            stream.end();
+            });
+
+
+        })  
+    );
 

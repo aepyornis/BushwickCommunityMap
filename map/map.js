@@ -3,6 +3,7 @@
 		scrollWheelZoom: false
 	}).setView([40.6941, -73.9162], 14);
 
+
 //basemap creation
 	var mainMap = L.tileLayer('http://m.elephant-bird.net/bwtiles/bwtiles/{z}/{x}/{y}.png', {
 	    attribution: 'mapz by ziggy'
@@ -238,7 +239,7 @@
 				layer.bindPopup(content_FAR);
 			}
 
-	FAR = new L.geoJson(exp_PLUTO132bushwick, {
+	FAR = new L.geoJson(bushwickJSON, {
 		style: far_style,
 		onEachFeature: far_onEachFeature
 	});
@@ -266,9 +267,7 @@
 			};
 
 //layers
-
-
-	var likelyRentStab = new L.geoJson(exp_PLUTO132bushwick, {
+	var likelyRentStab = new L.geoJson(bushwickJSON, {
 		style: myStyle,
 		filter: fun_rentStab,
 	});
@@ -292,7 +291,7 @@
 
 
 
-	var landuse11 = new L.geoJson(exp_PLUTO132bushwick,{
+	var landuse11 = new L.geoJson(bushwickJSON,{
 				style: white,
 				onEachFeature: pop_pluto,
 				filter: fun_landuse11,
@@ -301,7 +300,7 @@
 		});
 
 //blank pluto popup
-	var exp_pluto = new L.geoJson(exp_PLUTO132bushwick,{
+	var exp_pluto = new L.geoJson(bushwickJSON,{
 				style: blankPluto,
 				onEachFeature: pop_pluto,
 				pointToLayer: function (feature, latlng) {
@@ -450,7 +449,7 @@
 				}	
 
 			for (var i = start; i <= end; i++) {
-					var ageLayer = new L.geoJson(exp_PLUTO132bushwick,{
+					var ageLayer = new L.geoJson(bushwickJSON,{
 					style: yellow,
 					onEachFeature: pop_pluto,
 					filter: age,

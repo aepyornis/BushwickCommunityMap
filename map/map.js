@@ -239,7 +239,7 @@
 				layer.bindPopup(content_FAR);
 			}
 
-	FAR = new L.geoJson(bushwickJSON, {
+	FAR = new L.geoJson(bushwickPluto, {
 		style: far_style,
 		onEachFeature: far_onEachFeature
 	});
@@ -267,7 +267,7 @@
 			};
 
 //layers
-	var likelyRentStab = new L.geoJson(bushwickJSON, {
+	var likelyRentStab = new L.geoJson(bushwickPluto, {
 		style: myStyle,
 		filter: fun_rentStab,
 	});
@@ -291,7 +291,7 @@
 
 
 
-	var landuse11 = new L.geoJson(bushwickJSON,{
+	var landuse11 = new L.geoJson(bushwickPluto,{
 				style: white,
 				onEachFeature: pop_pluto,
 				filter: fun_landuse11,
@@ -300,7 +300,7 @@
 		});
 
 //blank pluto popup
-	var exp_pluto = new L.geoJson(bushwickJSON,{
+	var exp_pluto = new L.geoJson(bushwickPluto,{
 				style: blankPluto,
 				onEachFeature: pop_pluto,
 				pointToLayer: function (feature, latlng) {
@@ -449,7 +449,7 @@
 				}	
 
 			for (var i = start; i <= end; i++) {
-					var ageLayer = new L.geoJson(bushwickJSON,{
+					var ageLayer = new L.geoJson(bushwickPluto,{
 					style: yellow,
 					onEachFeature: pop_pluto,
 					filter: age,

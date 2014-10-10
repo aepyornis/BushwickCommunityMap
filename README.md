@@ -7,4 +7,4 @@ The Bushwick Community Map is a mapping project that will provide local resident
 El Mapa de la Comunidad de Bushwick es un proyecto de mapa que proveerá datos sobre la vivienda y la planificación urbana a los residentes locales y a los organizadores de la comunidad para ayudar a seguir los cambios que ocurren en Bushwick, en particular los vicios urbanos de gentrificación y desplazamiento.
 
 
-See it in action here: [BushwickCommunityMap.org](www.bushwickcommunitymap.org)
+See it in action here: [BushwickCommunityMap.org](http://www.bushwickcommunitymap.org)

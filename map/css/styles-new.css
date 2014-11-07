@@ -1,0 +1,32 @@
+/* new styles */
+
+#ui-container {
+position: absolute; 
+top: 5px; 
+right: 10px; 
+width: 400px; 
+height: 60px; 
+background: transparent; 
+z-index:10;
+}
+
+#ui-container a { 
+  margin: 15px 10px 0 0;
+  float: right;
+  vertical-align: baseline;
+  width: 70px;
+  padding: 10px;
+  text-align: center;
+  font: bold 11px "Helvetica",Arial;
+  line-height: normal;
+  color: #555;
+  border-radius: 4px;
+  border: 1px solid #777777;
+  background: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+.ui-container a.selected,
+.ui-container a:hover { 
+  color: #F84F40;
+}

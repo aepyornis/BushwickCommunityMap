@@ -99,17 +99,17 @@ app.map = (function(w,d, $, _){
     // add stamen toner layer as default base layer
     el.map.addLayer(el.tonerLite);
     // add the tax lot layer from cartodb
-    getCBD(el.styles.regular);
+    getTaxLots(el.styles.regular);
   
   } 
 
   // function to load CartoDB tax lot layer
-  var getCBD = function(css) {
+  var getTaxLots = function(css) {
     // cartodb visualization URL to access Pluto tax lot tiles
-    var cbdURL = "http://chenrick.cartodb.com/api/v2/viz/76127e6e-6535-11e4-a4cb-0e853d047bba/viz.json";
+    var cdbURL = "http://chenrick.cartodb.com/api/v2/viz/76127e6e-6535-11e4-a4cb-0e853d047bba/viz.json";
     var query = 'SELECT * FROM exp_132bushwick';
 
-    cartodb.createLayer(el.map, cbdURL, {
+    cartodb.createLayer(el.map, cdbURL, {
         cartodb_logo: false, 
         legends: false
       }, 

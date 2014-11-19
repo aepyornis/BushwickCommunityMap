@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+    <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+    <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+    <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+    <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Bushwick Community Map intro</title>
+        <meta name="description" content="">        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="cleartype" content="on">
+
+        <!-- Browser favicon -->
+        <!-- <link rel="shortcut icon" href="favicon.png"> -->
+        
+        <!-- CSS files -->
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/styles-new.css">
+        <link rel="stylesheet" type="text/css" href="../css/cartodb.css">
+
+        <!-- Uncomment to include modernizer.js
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        -->
+
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+        <div id="map"></div>
+
+        <!-- JavaScript libraries -->
+        <script src="../js/jquery.min.js"></script>
+        <script src="../js/cartodb.js"></script>
+        <script src="../js/odyssey.js"></script>
+        <!-- Javascripts -->
+        <script>
+          function click(el) {
+            var element = O.Core.getElement(el);
+            var t = O.Trigger();
+            element.onclick = function() {
+              t.trigger();
+            }
+            return t;
+          }
+
+          O.Template({
+            init: function() {
+              var seq = O.Triggers.Sequential();
+
+              var baseurl = this.baseurl = 'http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
+              var map = this.map = L.map('map').setView([0, 0.0], 4);
+              var basemap = this.basemap = L.tileLayer(baseurl, {
+                attribution: 'data OSM - map CartoDB'
+              }).addTo(map);
+
+              // enable keys to move
+              O.Keys().on('map').left().then(seq.prev, seq)
+              O.Keys().on('map').right().then(seq.next, seq)
+
+              click(document.getElementsByClassName('next')).then(seq.next, seq)
+              click(document.getElementsByClassName('prev')).then(seq.prev, seq)
+
+              var slides = O.Actions.Slides('slides');
+              var story = O.Story()
+
+              this.story = story;
+              this.seq = seq;
+              this.slides = slides;
+              this.progress = O.UI.DotProgress('dots').count(0);
+            },
+
+            update: function(actions) {
+              if (!actions.length) return;
+              this.story.clear();
+
+              // update footer title and author
+              var title_ = actions.global.title === undefined ? '' : actions.global.title,
+                  author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
+
+              document.getElementById('title').innerHTML = title_;
+              document.getElementById('author').innerHTML = author_;
+              document.title = title_ + " | " + author_ +' Odyssey.js';
+
+              var sl = actions;
+
+              document.getElementById('slides').innerHTML = '';
+              this.progress.count(sl.length);
+
+              // create new story
+              for (var i = 0; i < sl.length; ++i) {
+                var slide = sl[i];
+                var tmpl = "&lt;div class='slide' style='diplay:none'&gt;"
+                tmpl += slide.html();
+                tmpl += "&lt;/div&gt;";
+                document.getElementById('slides').innerHTML += tmpl;
+
+                this.progress.step(i).then(this.seq.step(i), this.seq)
+
+                var actions = O.Parallel(
+                  this.slides.activate(i),
+                  slide(this),
+                  this.progress.activate(i)
+                );
+
+                this.story.addState(
+                  this.seq.step(i),
+                  actions
+                )
+              }
+              this.story.go(this.seq.current());
+            },
+
+            changeSlide: function(n) {
+              this.seq.current(n);
+            }
+          });
+
+        </script>
+
+        <!-- Uncomment to include Google Analytics
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+        -->
+
+    </body>
+</html>

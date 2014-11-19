@@ -1,132 +1,276 @@
-<!DOCTYPE html>
-    <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-    <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-    <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-    <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Bushwick Community Map intro</title>
-        <meta name="description" content="">        
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta http-equiv="cleartype" content="on">
+<!DOCTYPE html><html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Bushwick Community Map Intro</title>
+  <meta name="description" content="An introduction to the Bushwick Community Map">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- Browser favicon -->
-        <!-- <link rel="shortcut icon" href="favicon.png"> -->
-        
-        <!-- CSS files -->
-        <link rel="stylesheet" href="../css/style.css">
-        <link rel="stylesheet" href="../css/styles-new.css">
-        <link rel="stylesheet" type="text/css" href="../css/cartodb.css">
+  <link rel="stylesheet" href="http://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/themes/css/cartodb.css">
+  <link rel="stylesheet" href="http://cartodb.github.io/odyssey.js/sandbox/css/slides.css">
 
-        <!-- Uncomment to include modernizer.js
-        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-        -->
+  <script src="http://cartodb.github.io/odyssey.js/vendor/modernizr-2.6.2.min.js"></script>        
 
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
-        <div id="map"></div>
+  </head>
+  <body>
+      <div id="map" style="width: 100%; height: 100%;"></div>
 
-        <!-- JavaScript libraries -->
-        <script src="../js/jquery.min.js"></script>
-        <script src="../js/cartodb.js"></script>
-        <script src="../js/odyssey.js"></script>
-        <!-- Javascripts -->
-        <script>
-          function click(el) {
-            var element = O.Core.getElement(el);
-            var t = O.Trigger();
-            element.onclick = function() {
-              t.trigger();
+      <div id="test" style="position:absolute; width:200px; height:200px; background:#FFF; top:0; right:0; z-index:100;"></div>
+
+      <div id="slides_container" style="display:block;">
+        <div id="dots"></div>
+
+        <div id="slides"></div>
+
+        <ul id="navButtons">
+          <li><a class="prev"></a></li>
+          <li><a class="next"></a></li>
+        </ul>
+      </div>
+      <div id="credits">
+        <span class="title" id="title">Bushwick Community Map Introduction</span>
+        <span class="author"><strong id="author">By @clhenrick using</strong> <a href="http://cartodb.github.io/odyssey.js/">Odyssey.js</a><span>
+      </span></span></div>        
+
+      <!-- JavaScript libraries -->
+<!--        <script src="../js/cartodb.js"></script>
+      <script src="../js/odyssey.js"></script> -->
+
+      <!-- Javascripts -->
+       <script src="http://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/cartodb.js"></script>
+      <script src="http://cartodb.github.io/odyssey.js/dist/odyssey.js" charset="UTF-8"></script>
+
+      <script>
+        var resizePID;
+
+        function clearResize() {
+          clearTimeout(resizePID);
+          resizePID = setTimeout(function() { adjustSlides(); }, 100);
+        }
+
+        if (!window.addEventListener) {
+          window.attachEvent("resize", function load(event) {
+            clearResize();
+          });
+        } else {
+          window.addEventListener("resize", function load(event) {
+            clearResize();
+          });
+        }
+
+        function adjustSlides() {
+          var container = document.getElementById("slides_container"),
+              slide = document.querySelectorAll('.selected_slide')[0];
+
+          if (slide) {
+            if (slide.offsetHeight+169+40+80 >= window.innerHeight) {
+              container.style.bottom = "80px";
+
+              var h = container.offsetHeight;
+
+              slide.style.height = h-169+"px";
+              slide.classList.add("scrolled");
+            } else {
+              container.style.bottom = "auto";
+              container.style.minHeight = "0";
+
+              slide.style.height = "auto";
+              slide.classList.remove("scrolled");
             }
-            return t;
           }
+        }
 
-          O.Template({
-            init: function() {
-              var seq = O.Triggers.Sequential();
+        var resizeAction = O.Action(function() {
+          function imageLoaded() {
+            counter--;
 
-              var baseurl = this.baseurl = 'http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
-              var map = this.map = L.map('map').setView([0, 0.0], 4);
-              var basemap = this.basemap = L.tileLayer(baseurl, {
-                attribution: 'data OSM - map CartoDB'
-              }).addTo(map);
+            if (counter === 0) {
+              adjustSlides();
+            }
+          }
+          var images = $('img');
+          var counter = images.length;
 
-              // enable keys to move
-              O.Keys().on('map').left().then(seq.prev, seq)
-              O.Keys().on('map').right().then(seq.next, seq)
-
-              click(document.getElementsByClassName('next')).then(seq.next, seq)
-              click(document.getElementsByClassName('prev')).then(seq.prev, seq)
-
-              var slides = O.Actions.Slides('slides');
-              var story = O.Story()
-
-              this.story = story;
-              this.seq = seq;
-              this.slides = slides;
-              this.progress = O.UI.DotProgress('dots').count(0);
-            },
-
-            update: function(actions) {
-              if (!actions.length) return;
-              this.story.clear();
-
-              // update footer title and author
-              var title_ = actions.global.title === undefined ? '' : actions.global.title,
-                  author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
-
-              document.getElementById('title').innerHTML = title_;
-              document.getElementById('author').innerHTML = author_;
-              document.title = title_ + " | " + author_ +' Odyssey.js';
-
-              var sl = actions;
-
-              document.getElementById('slides').innerHTML = '';
-              this.progress.count(sl.length);
-
-              // create new story
-              for (var i = 0; i < sl.length; ++i) {
-                var slide = sl[i];
-                var tmpl = "&lt;div class='slide' style='diplay:none'&gt;"
-                tmpl += slide.html();
-                tmpl += "&lt;/div&gt;";
-                document.getElementById('slides').innerHTML += tmpl;
-
-                this.progress.step(i).then(this.seq.step(i), this.seq)
-
-                var actions = O.Parallel(
-                  this.slides.activate(i),
-                  slide(this),
-                  this.progress.activate(i)
-                );
-
-                this.story.addState(
-                  this.seq.step(i),
-                  actions
-                )
-              }
-              this.story.go(this.seq.current());
-            },
-
-            changeSlide: function(n) {
-              this.seq.current(n);
+          images.each(function() {
+            if (this.complete) {
+              imageLoaded.call( this );
+            } else {
+              $(this).one('load', imageLoaded);
             }
           });
+        });
 
-        </script>
+        function click(el) {
+          var element = O.Core.getElement(el);
+          var t = O.Trigger();
 
-        <!-- Uncomment to include Google Analytics
-        <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
-        -->
+          // TODO: clean properly
+          function click() {
+            t.trigger();
+          }
 
-    </body>
-</html>
+          if (element) element.onclick = click;
+
+          return t;
+        }
+
+        O.Template({
+          init: function() {
+            var seq = O.Triggers.Sequential();
+
+            var baseurl = this.baseurl = 'http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
+            var map = this.map = L.map('map').setView([40.6941, -73.9162], 14);
+            var basemap = this.basemap = L.tileLayer(baseurl, {
+              attribution: 'data OSM - map CartoDB'
+            }).addTo(map);
+
+            // enanle keys to move
+            O.Keys().on('map').left().then(seq.prev, seq)
+            O.Keys().on('map').right().then(seq.next, seq)
+
+            click(document.querySelectorAll('.next')).then(seq.next, seq)
+            click(document.querySelectorAll('.prev')).then(seq.prev, seq)
+
+            var slides = O.Actions.Slides('slides');
+            var story = O.Story()
+
+            this.story = story;
+            this.seq = seq;
+            this.slides = slides;
+            this.progress = O.UI.DotProgress('dots').count(0);
+          },
+
+          update: function(actions) {
+            var self = this;
+
+            if (!actions.length) return;
+
+            this.story.clear();
+
+            if (this.baseurl && (this.baseurl !== actions.global.baseurl)) {
+              this.baseurl = actions.global.baseurl || 'http://0.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
+
+              this.basemap.setUrl(this.baseurl);
+            }
+
+            if (this.cartoDBLayer && ("http://"+self.cartoDBLayer.options.user_name+".cartodb.com/api/v2/viz/"+self.cartoDBLayer.options.layer_definition.stat_tag+"/viz.json" !== actions.global.vizjson)) {
+              this.map.removeLayer(this.cartoDBLayer);
+
+              this.cartoDBLayer = null;
+              this.created = false;
+            }
+
+            if (actions.global.vizjson && !this.cartoDBLayer) {
+              if (!this.created) { // sendCode debounce < vis loader
+                cdb.vis.Loader.get(actions.global.vizjson, function(vizjson) {
+                  self.map.fitBounds(vizjson.bounds);
+
+                  cartodb.createLayer(self.map, vizjson)
+                    .done(function(layer) {
+                      self.cartoDBLayer = layer;
+
+                      var sublayer = layer.getSubLayer(0),
+                          layer_name = layer.layers[0].options.layer_name,
+                          filter = actions.global.cartodb_filter ? " WHERE "+actions.global.cartodb_filter : "";
+
+                      sublayer.setSQL("SELECT * FROM "+layer_name+filter)
+
+                      self.map.addLayer(layer);
+
+                      self._resetActions(actions);
+                    }).on('error', function(err) {
+                      console.log("some error occurred: " + err);
+                    });
+                });
+
+                this.created = true;
+              }
+
+              return;
+            }
+
+            this._resetActions(actions);
+          },
+
+          _resetActions: function(actions) {
+            // update footer title and author
+            var title_ = actions.global.title === undefined ? '' : actions.global.title,
+                author_ = actions.global.author === undefined ? 'Using' : 'By '+actions.global.author+' using';
+
+            document.getElementById('title').innerHTML = title_;
+            document.getElementById('author').innerHTML = author_;
+            document.title = title_ + " | " + author_ +' Odyssey.js';
+
+            var sl = actions;
+
+            document.getElementById('slides').innerHTML = ''
+            this.progress.count(sl.length);
+
+            // create new story
+            for(var i = 0; i < sl.length; ++i) {
+              var slide = sl[i];
+              var tmpl = "<div class='slide' style='diplay:none'>";
+
+              tmpl += slide.html();
+              tmpl += "</div>";
+              document.getElementById('slides').innerHTML += tmpl;
+
+              this.progress.step(i).then(this.seq.step(i), this.seq)
+
+              var actions = O.Parallel(
+                this.slides.activate(i),
+                slide(this),
+                this.progress.activate(i),
+                resizeAction
+              );
+
+              actions.on("finish.app", function() {
+                adjustSlides();
+              });
+
+              this.story.addState(
+                this.seq.step(i),
+                actions
+              )
+            }
+
+            this.story.go(this.seq.current());
+          },
+
+          changeSlide: function(n) {
+            this.seq.current(n);
+          }
+        });
+      </script>
+
+      <script type="text/javascript" src="http://fast.fonts.net/jsapi/3af16084-ba56-49ca-b37d-0b49b59e1927.js"></script>
+      <script id="md_template" type="text/template">```
+-title: "The Bushwick Community Map"
+-author: "@clhenrick"
+-vizjson: "http://chenrick.cartodb.com/api/v2/viz/f4cbc5ac-688d-11e4-957b-0e9d821ea90d/viz.json"
+-baseurl: "http://otile1.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg"
+```
+
+#The Bushwick Community Map
+```
+- center: [40.6941, -73.9162]
+- zoom: 15
+L.marker([40.6941, -73.9162]).actions.addRemove(S.map)
+```
+## Introduction
+bla bla bla
+
+
+#Here's another slide!
+```
+- center: [40.7348, -73.9970]
+- zoom: 14
+L.marker([40.7348, -73.9970]).actions.addRemove(S.map)
+```
+
+Lorem Ipsum something bla bla bla  
+
+<script>alert("hi!");</script>
+
+#Bla Bla Bla
+
+</script></body></html>

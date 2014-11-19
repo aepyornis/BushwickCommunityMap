@@ -167,4 +167,7 @@ app.map = (function(w,d, $, _){
 })(window, document, jQuery, _);
 
 // call app.map.init() once the dom is loaded
-window.addEventListener('DOMContentLoaded', app.map.init);
+window.addEventListener('DOMContentLoaded', function(){
+  app.map.init();
+  timerangeUI();
+});

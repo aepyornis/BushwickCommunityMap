@@ -27,7 +27,7 @@ function timerangeUI(){
           $('#year-min').css('left', $(ui.handle)[0].style.left);
         }, 10);
 
-      }else if(prevValues[1] != ui.values[1]){
+      } else if (prevValues[1] != ui.values[1]){
         // console.log('right');
         setTimeout(function(){
           $('#year-max').css('left', $(ui.handle)[0].style.left);

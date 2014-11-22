@@ -22,92 +22,7 @@ app.map = (function(w,d, $, _){
     test : null
   };
 
-  /**** sample CartoCSS for styling tax lot data ****/
-  el.styles = {
-   // default style, all lots are the same color
-    regular : '#bushwick_pluto14v1 {' +
-                                  'polygon-fill: hsl(200,50%,50%);' +
-                                  'polygon-opacity: 0.75;' +
-                                  'line-color: #000;' +
-                                  'line-width: 0.2;' +
-                                  'line-opacity: 0.5;' +
-                                '}',
-    // red highlight                            
-    red : '#bushwick_pluto14v1 {' +
-                                  'polygon-fill: hsl(0,100%,30%);' +
-                                  'polygon-opacity: 0.75;' +
-                                  'line-color: #000;' +
-                                  'line-width: 0.2;' +
-                                  'line-opacity: 0.5;' +
-                                '}',
-    
-    // category style based on zoning
-    zoning : "#bushwick_pluto14v1 {" +
-                                     "polygon-opacity: 0.75;" +
-                                     "line-color: #000;" +
-                                     "line-width: 0.2;" +
-                                     "line-opacity: 0.5;" +
-                                  "}" +                                
-                                  '#bushwick_pluto14v1[zoning_style="R"] { polygon-fill: #A6CEE3;}' +
-                                  '#bushwick_pluto14v1[zoning_style="RC"] {polygon-fill: #1F78B4;}' +
-                                  '#bushwick_pluto14v1[zoning_style="M"] {polygon-fill: #FFCC00;}' +
-                                  '#bushwick_pluto14v1[zoning_style="C"] {polygon-fill: #7B00B4;}' +
-                                  '#bushwick_pluto14v1[zoning_style="P"] {polygon-fill: #229A00;}' +
-                                  '#bushwick_pluto14v1[zoning_style=""] {polygon-fill: #6b6868;}',
-    
-    // choropleth style based on Built FAR                                
-    builtFAR : "#bushwick_pluto14v1 {" +
-                               "polygon-fill: #F1EEF6;" +
-                               "polygon-opacity: 0.8;" +
-                               "line-color: #000;" +
-                               "line-width: 0.2;" +
-                               "line-opacity: 0.5;" +
-                            "}" +                           
-                            '#bushwick_pluto14v1[builtfar <= 23.05] { polygon-fill: #91003F;}' +
-                            '#bushwick_pluto14v1[builtfar <= 8.59] {polygon-fill: #CE1256;}' +
-                            '#bushwick_pluto14v1[builtfar <= 3.95] {polygon-fill: #E7298A;}' +
-                            '#bushwick_pluto14v1[builtfar <= 3.53] {polygon-fill: #DF65B0;}' +
-                            '#bushwick_pluto14v1[builtfar <= 2.7] {polygon-fill: #C994C7;}' +
-                            '#bushwick_pluto14v1[builtfar <= 1.57] {polygon-fill: #D4B9DA;}'+  
-                            '#bushwick_pluto14v1[builtfar <= 1.55]{polygon-fill: #F1EEF6;}',
-
-    // choropleth style based on Residential FAR
-    residFAR :  "#bushwick_pluto14v1 {" +
-                               "polygon-fill: #FFFFB2;" +
-                               "polygon-opacity: 0.8;" +
-                               "line-color: #000;" +
-                               "line-width: 0.2;" +
-                               "line-opacity: 0.5;" +
-                            "}" +                           
-                            '#bushwick_pluto14v1[ residfar <= 3.44] { polygon-fill: #BD0026;}' +
-                            '#bushwick_pluto14v1[ residfar <= 2.43] {polygon-fill: #F03B20;}' +
-                            '#bushwick_pluto14v1[ residfar <= 0.9] {polygon-fill: #FD8D3C;}' +
-                            '#bushwick_pluto14v1[ residfar <= 0.9] {polygon-fill: #FECC5C;}' +
-                            '#bushwick_pluto14v1[ residfar <= 0.6] {polygon-fill: #FFFFB2;}',                             
-    // choropleth style for available FAR
-    availFAR : "#bushwick_pluto14v1{" +
-                      "polygon-fill: #FFFFB2;" +
-                      "polygon-opacity: 0.8;" +
-                      "line-color: #000;" +
-                      "line-width: 0.2;" +
-                      "line-opacity: 0.5;" +
-                      "}" +
-                      "#bushwick_pluto14v1 [ availablefar <= 4] {" +
-                      "polygon-fill: #BD0026;" +
-                      "}" +
-                      "#bushwick_pluto14v1 [ availablefar <= 3.2] {" +
-                      "polygon-fill: #F03B20;" +
-                      "}" +
-                      "#bushwick_pluto14v1 [ availablefar <= 2.4000000000000004] {" +
-                      "polygon-fill: #FD8D3C;" +
-                      "}" +
-                      "#bushwick_pluto14v1 [ availablefar <= 1.6] {" +
-                      "polygon-fill: #FECC5C;" +
-                      "}" +
-                      "#bushwick_pluto14v1 [ availablefar <= 0.8] {" +
-                      "polygon-fill: #FFFFB2;" +
-                      "}"
-  };
+  el.styles = app.mapStyles;
 
   el.sql = {
     all : "SELECT * FROM bushwick_pluto14v1;",
@@ -132,8 +47,8 @@ app.map = (function(w,d, $, _){
                         'Map data {attribution.OpenStreetMap}'
     });
     el.tonerLite = new L.StamenTileLayer('toner-lite');
-    el.satellite = new L.Google();
-    el.osmGeocoder = new L.Control.OSMGeocoder(options = {position:'bottomright'});    
+    // el.satellite = new L.Google();
+    // el.osmGeocoder = new L.Control.OSMGeocoder(options = {position:'bottomright'});    
     // add stamen toner layer as default base layer
     el.map.addLayer(el.tonerLite);
     // add the tax lot layer from cartodb
@@ -206,6 +121,7 @@ app.map = (function(w,d, $, _){
   var init = function() {
     initMap();
     initButtons();  
+    // console.log('styles: ', el.styles.styles.regular);
   }
 
   // only return init() and the stuff in the el object

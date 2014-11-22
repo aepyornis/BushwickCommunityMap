@@ -1,3 +1,8 @@
+-- Delete column names to save space in CartoDB
+ALTER TABLE bushwick_pluto14v1 DROP COLUMN ltdheight
+ALTER TABLE bushwick_pluto14v1 DROP COLUMN spdist1
+ALTER TABLE bushwick_pluto14v1 DROP COLUMN spdist2
+
 --- SQL For creating zoning style codes that will be used with CartoCSS to style the tax lots' polygon fills
 --- Using Postgres with PostGIS
 --------------------------------------------------------------------------------------------------------------
@@ -51,17 +56,65 @@ UPDATE bushwick_pluto14v1 SET zoning_style = 'P' WHERE allzoning1 ilike 'P%';
 UPDATE bushwick_pluto14v1 SET zoning_style = 'null' WHERE allzoning1 = '';
 
 -------------------------------------------------------
+-- create a new column for available FAR
+ALTER TABLE bushwick_pluto14v1 ADD COLUMN availablefar REAL DEFAULT 0;
+
 --- For Calculating FAR difference from total residential to built
-UPDATE bushwick_pluto14v1 SET far_diff = residfar - builtfar WHERE allzoning1 ilike '%R%' 
+UPDATE bushwick_pluto14v1 SET availablefar = residfar - builtfar WHERE allzoning1 ilike '%R%'; 
 
 -- set negative values to 0
-UPDATE bushwick_pluto14v1 set far_diff = 0 where far_diff < 0
+UPDATE bushwick_pluto14v1 SET availablefar = 0 WHERE availablefar < 0;
 
 -- set null values to zero
-UPDATE bushwick_pluto14v1 set far_diff = 0 where far_diff IS null
+UPDATE bushwick_pluto14v1 SET availablefar = 0 WHERE availablefar IS NULL;
 
--- check values
-SELECT allzoning1, far_diff FROM bushwick_pluto14v1 WHERE allzoning1 ilike '%r%' ORDER BY far_diff
+--- check values
+--SELECT allzoning1, availablefar FROM bushwick_pluto14v1 WHERE allzoning1 ilike '%r%' ORDER BY availablefar
 
-SELECT allzoning1, far_diff, builtfar, residfar, commfar, cartodb_id 
-    FROM bushwick_pluto14v1 WHERE far_diff > 0 ORDER BY far_diff DESC
+--SELECT allzoning1, availablefar, builtfar, residfar, commfar, cartodb_id 
+ --   FROM bushwick_pluto14v1 WHERE availablefar > 0 ORDER BY availablefar DESC
+
+-------------------------------------------------------
+--SELECT a.* FROM bushwick_pluto14v1 a, vacant_596acres b WHERE ST_Intersects(a.the_geom, b.the_geom)
+
+-- add a column for landuse descriptions
+ALTER TABLE bushwick_pluto14v1 ADD COLUMN lu_descript TEXT
+
+-- add values based on landuse codes
+UPDATE bushwick_pluto14v1 SET lu_descript = 
+    CASE WHEN landuse = '01' THEN 'One and Two Family Buildings'
+         WHEN landuse = '02' THEN 'Multi-Family Walkup'
+         WHEN landuse = '03' THEN 'Multi-Family with Elevator'
+         WHEN landuse = '04' THEN 'Mixed Residential & Commerical'
+         WHEN landuse = '05' THEN 'Commerical & Office'
+         WHEN landuse = '06' THEN 'Industrial & Manufacturing'
+         WHEN landuse = '07' THEN 'Transport & utility'
+         WHEN landuse = '08' THEN 'Public Facilities & Insitutions'
+         WHEN landuse = '09' THEN 'Open Space & Recreation'
+         WHEN landuse = '10' THEN 'Parking Facilities'
+         WHEN landuse = '11' THEN 'Vacant Land'
+         WHEN landuse IS NULL THEN 'N/A'
+         END  
+
+-- SELECT landuse,
+--     CASE WHEN landuse = '01' THEN '1 & 2 Family Buildings'
+--          WHEN landuse = '02' THEN 'Multi-Family Walkup'
+--          WHEN landuse = '03' THEN 'Multi-Family with Elevator'
+--          WHEN landuse = '04' THEN 'Mixed Residential & Commerical'
+--          WHEN landuse = '05' THEN 'Commerical & Office'
+--          WHEN landuse = '06' THEN 'Industrial & Manufacturing'
+--          WHEN landuse = '07' THEN 'Transport & utility'
+--          WHEN landuse = '08' THEN 'Public Facilities & Insitutions'
+--          WHEN landuse = '09' THEN 'Open Space & Recreation'
+--          WHEN landuse = '10' THEN 'Parking Facilities'
+--          WHEN landuse = '11' THEN 'Vacant Land'
+--          WHEN landuse IS NULL THEN 'N/A'
+--          END
+-- FROM bushwick_pluto14v1
+
+
+
+
+
+
+

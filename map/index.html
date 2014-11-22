@@ -1,32 +1,62 @@
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Bushwick Community Map</title>
-  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
-  <link href="http://elephant-bird.net/Bushwick/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" /> -->
+  <title>Northwest Bushwick Community Map</title>  
+  
   <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
-  <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css' />
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/base/jquery-ui.css">
   <!-- <link rel="stylesheet" href="css/style.css" type="text/css" /> -->
   <link rel="stylesheet" type="text/css" href="css/styles-new.css">
 </head>   
 <body>
-  <div id="map"></div>
-  <div id="ui-container">
-    <h4>Toggle Style</h4>
-    <a href="#farres" class="button" id="farres">Res FAR</a>
-    <a href="#farbuilt" class="button" id="farbuilt">Built FAR</a>
-    <a href="#zoning" class="button" id="zoning">Zoning</a>
-    <a href="#regular" class="button" id="regular">Default</a>
+  <div id="menu"></div>
+  <div id="intro">
+    <h1>Northwest Bushwick Community Map</h1>
+    <p>The Bushwick Community Map is a mapping project that will provide local residents and community organizers with housing and urban planning data of our neighborhood to help track the changes happening in Bushwick, particularly the urban vices of gentrification and displacement.</p>
+  </div>
+  <input type="text" placeholder="Search for an address" id="search-box" class="ui"/>
+  <input type="button" id="search-button" />
+  <div id="ui-container" class="ui">
+    
+    <h4>Map Layers</h4><br/>
+    <a href="#regular" id="regular" class="button">Tax Lots</a>
+    <a href="#availfar" id="availfar" class="button">Available FAR</a>
+    <a href="#rentstab" id="rentstab" class="button">Likely Rent Stabilized</a>
+    <a href="#zoning" id="zoning" class="button">Zoning</a>
+    <a href="#vacant" id="vacant" class="button">Vacant Land</a>
+    
+    <hr/>
+
+    <h4>DOB Permits</h4><br/>
+    <input type="checkbox" name="dob" class="regular-checkbox" value="a1" id="a1" /><label for="a1"></label>A1<br/>
+    <input type="checkbox" name="dob" class="regular-checkbox" value="a2a3" id="a2a3" /><label for="a2a3"></label>A2 and A3<br/>
+    <input type="checkbox" name="dob" class="regular-checkbox" value="new-buildings" id="new-buildings"/><label for="new-buildings"></label>New Buildings
+    
+    <hr/>
+    
+    <h4>Stories</h4><br/>
+    <input type="checkbox" name="stories" class="regular-checkbox" value="sites-of-gentrification" id="sites-of-gentrification" /><label for="sites-of-gentrification"></label>Sites of Gentrification<br/>
+    <input type="checkbox" name="stories" class="regular-checkbox" value="personal-stories" id="personal-stories"/><label for="personal-stories"></label>Personal Stories
+  </div>  
+
+  <div id="history" class="ui">
+    <h4>Year Built</h4>
+    <div id="slider-container">      
+      <div id="slider-range"></div>
+      <p class="year" id="year-min"></p>
+      <p class="year" id="year-max"></p>      
+    </div>
   </div>
 
+  <div id="map"></div>
 
   <!-- libraries -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="/js/bootstrap.min.js"></script>
+  <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+  <!--<script src="/js/bootstrap.min.js"></script>-->
   <!-- <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script> -->
   <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+  <!-- <script type="http//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
   <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.2.3"></script>
   <!-- plugins -->
@@ -36,7 +66,8 @@
   <!-- data -->
   <!-- <script src='data/bushwick14v1_edited.js'></script>
   <script src='data/exp_CodedJobs.js'></script> -->
-
+  
+  <script src="js/timerange_ui.js"></script>
   <script src="js/main.js"></script>
 
   <!--

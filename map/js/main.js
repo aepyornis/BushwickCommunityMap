@@ -8,6 +8,7 @@ app.map = (function(w,d, $, _){
   var el = {
     map : null,
     styles: null,
+    sql : null,
     toner : null,
     tonerLite : null,
     satellite : null,
@@ -24,57 +25,94 @@ app.map = (function(w,d, $, _){
   /**** sample CartoCSS for styling tax lot data ****/
   el.styles = {
    // default style, all lots are the same color
-    regular : '#exp_132bushwick {' +
+    regular : '#bushwick_pluto14v1 {' +
                                   'polygon-fill: hsl(200,50%,50%);' +
-                                  'polygon-opacity: 0.5;' +
-                                  'line-color: #FFF;' +
-                                  'line-width: 0.5;' +
-                                  'line-opacity: 1;' +
+                                  'polygon-opacity: 0.75;' +
+                                  'line-color: #000;' +
+                                  'line-width: 0.2;' +
+                                  'line-opacity: 0.5;' +
+                                '}',
+    // red highlight                            
+    red : '#bushwick_pluto14v1 {' +
+                                  'polygon-fill: hsl(0,100%,30%);' +
+                                  'polygon-opacity: 0.75;' +
+                                  'line-color: #000;' +
+                                  'line-width: 0.2;' +
+                                  'line-opacity: 0.5;' +
                                 '}',
     
     // category style based on zoning
-    zoning : "#exp_132bushwick {" +
-                                     "polygon-opacity: 0.8;" +
-                                     "line-color: #FFF;" +
-                                     "line-width: 0.3;" +
-                                     "line-opacity: 1;" +
+    zoning : "#bushwick_pluto14v1 {" +
+                                     "polygon-opacity: 0.75;" +
+                                     "line-color: #000;" +
+                                     "line-width: 0.2;" +
+                                     "line-opacity: 0.5;" +
                                   "}" +                                
-                                  '#exp_132bushwick[zoning_style="R"] { polygon-fill: #A6CEE3;}' +
-                                  '#exp_132bushwick[zoning_style="RC"] {polygon-fill: #1F78B4;}' +
-                                  '#exp_132bushwick[zoning_style="M"] {polygon-fill: #FFCC00;}' +
-                                  '#exp_132bushwick[zoning_style="C"] {polygon-fill: #7B00B4;}' +
-                                  '#exp_132bushwick[zoning_style="P"] {polygon-fill: #229A00;}' +
-                                  '#exp_132bushwick[zoning_style=""] {polygon-fill: #6b6868;}',
+                                  '#bushwick_pluto14v1[zoning_style="R"] { polygon-fill: #A6CEE3;}' +
+                                  '#bushwick_pluto14v1[zoning_style="RC"] {polygon-fill: #1F78B4;}' +
+                                  '#bushwick_pluto14v1[zoning_style="M"] {polygon-fill: #FFCC00;}' +
+                                  '#bushwick_pluto14v1[zoning_style="C"] {polygon-fill: #7B00B4;}' +
+                                  '#bushwick_pluto14v1[zoning_style="P"] {polygon-fill: #229A00;}' +
+                                  '#bushwick_pluto14v1[zoning_style=""] {polygon-fill: #6b6868;}',
     
     // choropleth style based on Built FAR                                
-    builtFAR : "#exp_132bushwick {" +
+    builtFAR : "#bushwick_pluto14v1 {" +
                                "polygon-fill: #F1EEF6;" +
                                "polygon-opacity: 0.8;" +
-                               "line-color: #FFF;" +
-                               "line-width: 0.3;" +
-                               "line-opacity: 1;" +
+                               "line-color: #000;" +
+                               "line-width: 0.2;" +
+                               "line-opacity: 0.5;" +
                             "}" +                           
-                            '#exp_132bushwick[builtfar <= 23.05] { polygon-fill: #91003F;}' +
-                            '#exp_132bushwick[builtfar <= 8.59] {polygon-fill: #CE1256;}' +
-                            '#exp_132bushwick[builtfar <= 3.95] {polygon-fill: #E7298A;}' +
-                            '#exp_132bushwick[builtfar <= 3.53] {polygon-fill: #DF65B0;}' +
-                            '#exp_132bushwick[builtfar <= 2.7] {polygon-fill: #C994C7;}' +
-                            '#exp_132bushwick[builtfar <= 1.57] {polygon-fill: #D4B9DA;}'+  
-                            '#exp_132bushwick[builtfar <= 1.55]{polygon-fill: #F1EEF6;}',
+                            '#bushwick_pluto14v1[builtfar <= 23.05] { polygon-fill: #91003F;}' +
+                            '#bushwick_pluto14v1[builtfar <= 8.59] {polygon-fill: #CE1256;}' +
+                            '#bushwick_pluto14v1[builtfar <= 3.95] {polygon-fill: #E7298A;}' +
+                            '#bushwick_pluto14v1[builtfar <= 3.53] {polygon-fill: #DF65B0;}' +
+                            '#bushwick_pluto14v1[builtfar <= 2.7] {polygon-fill: #C994C7;}' +
+                            '#bushwick_pluto14v1[builtfar <= 1.57] {polygon-fill: #D4B9DA;}'+  
+                            '#bushwick_pluto14v1[builtfar <= 1.55]{polygon-fill: #F1EEF6;}',
 
     // choropleth style based on Residential FAR
-    residFAR :  "#exp_132bushwick {" +
+    residFAR :  "#bushwick_pluto14v1 {" +
                                "polygon-fill: #FFFFB2;" +
                                "polygon-opacity: 0.8;" +
-                               "line-color: #FFF;" +
-                               "line-width: 0.3;" +
-                               "line-opacity: 1;" +
+                               "line-color: #000;" +
+                               "line-width: 0.2;" +
+                               "line-opacity: 0.5;" +
                             "}" +                           
-                            '#exp_132bushwick[ residfar <= 3.44] { polygon-fill: #BD0026;}' +
-                            '#exp_132bushwick[ residfar <= 2.43] {polygon-fill: #F03B20;}' +
-                            '#exp_132bushwick[ residfar <= 0.9] {polygon-fill: #FD8D3C;}' +
-                            '#exp_132bushwick[ residfar <= 0.9] {polygon-fill: #FECC5C;}' +
-                            '#exp_132bushwick[ residfar <= 0.6] {polygon-fill: #FFFFB2;}'                             
+                            '#bushwick_pluto14v1[ residfar <= 3.44] { polygon-fill: #BD0026;}' +
+                            '#bushwick_pluto14v1[ residfar <= 2.43] {polygon-fill: #F03B20;}' +
+                            '#bushwick_pluto14v1[ residfar <= 0.9] {polygon-fill: #FD8D3C;}' +
+                            '#bushwick_pluto14v1[ residfar <= 0.9] {polygon-fill: #FECC5C;}' +
+                            '#bushwick_pluto14v1[ residfar <= 0.6] {polygon-fill: #FFFFB2;}',                             
+    // choropleth style for available FAR
+    availFAR : "#bushwick_pluto14v1{" +
+                      "polygon-fill: #FFFFB2;" +
+                      "polygon-opacity: 0.8;" +
+                      "line-color: #000;" +
+                      "line-width: 0.2;" +
+                      "line-opacity: 0.5;" +
+                      "}" +
+                      "#bushwick_pluto14v1 [ availablefar <= 4] {" +
+                      "polygon-fill: #BD0026;" +
+                      "}" +
+                      "#bushwick_pluto14v1 [ availablefar <= 3.2] {" +
+                      "polygon-fill: #F03B20;" +
+                      "}" +
+                      "#bushwick_pluto14v1 [ availablefar <= 2.4000000000000004] {" +
+                      "polygon-fill: #FD8D3C;" +
+                      "}" +
+                      "#bushwick_pluto14v1 [ availablefar <= 1.6] {" +
+                      "polygon-fill: #FECC5C;" +
+                      "}" +
+                      "#bushwick_pluto14v1 [ availablefar <= 0.8] {" +
+                      "polygon-fill: #FFFFB2;" +
+                      "}"
+  };
+
+  el.sql = {
+    all : "SELECT * FROM bushwick_pluto14v1;",
+    rentStab : "SELECT * FROM bushwick_pluto14v1 WHERE yearbuilt < 1974 AND unitsres > 6;",
+    vacant : "SELECT * FROM bushwick_pluto14v1 WHERE landuse = '11';"
   };
                                                                            
   // instantiate the leaflet map object
@@ -106,8 +144,8 @@ app.map = (function(w,d, $, _){
   // function to load CartoDB tax lot layer
   var getTaxLots = function(css) {
     // cartodb visualization URL to access Pluto tax lot tiles
-    var cdbURL = "http://chenrick.cartodb.com/api/v2/viz/76127e6e-6535-11e4-a4cb-0e853d047bba/viz.json";
-    var query = 'SELECT * FROM exp_132bushwick';
+    var cdbURL = "http://bushwick.cartodb.com/api/v2/viz/64ceb582-71e2-11e4-b052-0e018d66dc29/viz.json";
+    var query = 'SELECT * FROM bushwick_pluto14v1';
 
     cartodb.createLayer(el.map, cdbURL, {
         cartodb_logo: false, 
@@ -124,23 +162,35 @@ app.map = (function(w,d, $, _){
     el.taxLots.setCartoCSS(css);
   };
 
+  var changeSQL = function(sql) {
+    el.taxLots.setSQL(sql);
+  }
+
   // corresponding cartoCSS changes to buttons
   var taxLotActions = {
     regular : function() {
       changeCartoCSS(el.styles.regular);
+      changeSQL(el.sql.all);
       return true;
     },
     zoning : function() {
       changeCartoCSS(el.styles.zoning);
+      changeSQL(el.sql.all);
       return true;
     },
-    farbuilt : function() {
-      changeCartoCSS(el.styles.builtFAR);
+    availfar : function() {
+      changeCartoCSS(el.styles.availFAR);
+      changeSQL(el.sql.all);
       return true;
     },
-    farres : function() {
-      changeCartoCSS(el.styles.residFAR);
+    rentstab : function() {
+      changeCartoCSS(el.styles.red);
+      changeSQL(el.sql.rentStab);
       return true;
+    },
+    vacant : function() {
+      changeCartoCSS(el.styles.red);
+      changeSQL(el.sql.vacant);
     }
   };
 
@@ -167,4 +217,7 @@ app.map = (function(w,d, $, _){
 })(window, document, jQuery, _);
 
 // call app.map.init() once the dom is loaded
-window.addEventListener('DOMContentLoaded', app.map.init);
+window.addEventListener('DOMContentLoaded', function(){
+  app.map.init();
+  timerangeUI();
+});

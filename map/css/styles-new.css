@@ -1,8 +1,13 @@
 /* new styles */
 
 html, body {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
 }
 
 * {
@@ -11,51 +16,188 @@ html, body {
   box-sizing: border-box;         /* Opera/IE 8+ */;
 }
 
-#map {
+#menu{
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100%;
+  height: 40px;
+  background-color: hsla(0, 100%, 30%, 0.75);
+  z-index: 100;
+}
+
+#intro{
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  width: 360px;
+  
+  padding: 12px;
+
+  background-color: hsla(0, 100%, 30%, 0.75);
+  color: white;
+  
+  z-index: 90;
+}
+
+#intro h1{
+  margin: 0 0 12px 0;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+input{
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+}
+
+.ui{
+  background-color: hsla(0, 0%, 100%, 0.92);  
+  border: 2px solid hsl(0, 100%, 35%);
+  border-radius: 14px;  
+}
+
+#history{
+  position: absolute;
+  left: 40px;
+  bottom: 40px;
+  width: 880px;
+  height: 56px;
+
+  padding: 12px;   
+
+  z-index: 85;
+}
+
+.year{
+  position: absolute;
+  border: 0 none;
+  text-align: center;
+  color: hsl(0, 0%, 50%);
+}
+
+#slider-container{
+  position: relative;
+  width: 85%;
+  /*height: 40px;*/
+  margin: 0 24px 0 24px;
+  display: inline-block;
+}
+
+#search-button{
+  position: absolute;
+  top: 65px;
+  right: 46px;
+  width: 24px;
+  height: 24px;  
+  border: 0;
+  background: url('../images/search_button.svg') no-repeat;
+  z-index: 80;
+}
+
+#search-box{
+  position: absolute;
+  top: 60px;
+  right: 40px;
+  width: 280px;
+  height: 28px;
+  padding: 0 36px 0 12px;
+
+  z-index: 70; 
 }
 
 #ui-container {
-position: absolute; 
-top: 20px; 
-right: 20px; 
-width: 108px; 
-height: 250px; 
-font: bold 11px "Helvetica",Arial;
-background: hsla(0,0%,100%,0.95); 
-border: 1px solid #555;
-border-radius: 4px;
-z-index:10;
+  position: absolute; 
+  top: 108px; 
+  right: 40px; 
+  width: 200px;
+  padding: 12px; 
+  z-index: 60;
 }
 
-#ui-container h4 {
-  line-height: 24px;
-  text-align: center;
-  font-weight: 600;
-  width: 100px;
-  margin: 10px 0 0 0;
+.ui h4 {
   padding: 0;
+  margin: 0;
+  color: hsl(0, 100%, 35%);
+  font-size: 16px;
+  display: inline-block;
 }
 
-#ui-container a { 
-  margin: 10px 10px 0 0;
-  float: right;
-  vertical-align: baseline;
-  width: 85px;
-  padding: 10px;
-  text-align: center;
-  /*font: bold 11px "Helvetica",Arial;*/
-  line-height: normal;
-  color: #555555;
+.ui a{
+  width: 100%;
+  margin: 4px 0 4px 0;
+
+  padding: 2px 8px 2px 8px;
+  display: block;
+
+  color: black;
+  background-color: hsl(0, 0%, 98%);
+  box-shadow: inset 0px -15px 10px -12px hsla(0, 0%, 0%, 0.05);
+
+  border: 1px solid hsl(0, 0%, 85%);
   border-radius: 4px;
-  border: 1px solid #777777;
-  background: hsl(45, 50%, 95%);
+
   text-decoration: none;
-  text-transform: uppercase;
-  cursor: pointer;
 }
-#ui-container a.selected,
-#ui-container a:hover { 
-  color: #F84F40;
+
+.ui a.selected,
+.ui a:hover { 
+  color: white;
+  background-color: hsl(0, 100%, 35%);  
+  border: 1px solid hsl(0, 100%, 25%);  
+}
+
+.ui hr{
+  background-color: hsl(0, 100%, 35%);
+  height: 1px;
+  border-width: 0;
+  margin: 8px 0 8px 0;
+}
+
+label {
+  /*display: block;*/
+  vertical-align: middle;
+  margin: 2px 4px 2px 0;
+}
+
+.regular-checkbox {
+  display: none;
+}
+
+.regular-checkbox + label {
+  background-color: #fafafa;
+  border: 1px solid #cacece;
+  box-shadow: inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+  padding: 9px;
+  border-radius: 3px;
+  display: inline-block;
+  position: relative;
+}
+
+.regular-checkbox + label:active, .regular-checkbox:checked + label:active {
+  box-shadow: inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+}
+
+.regular-checkbox:checked + label {
+  box-shadow: inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+  color: #99a1a7;
+}
+
+.regular-checkbox:checked + label:after {
+  content: '\2714';
+  font-size: 12px;
+  position: absolute;
+  top: 0px;
+  left: 3px;
+  color: hsl(0, 100%, 35%);  ;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
 }

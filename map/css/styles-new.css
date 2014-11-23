@@ -201,3 +201,24 @@ label {
   width: 100%;
   height: 100%;
 }
+
+#tool-tip {
+  position: absolute;
+  width: auto;
+  height: auto;
+  background-color: white;
+  opacity: .9;
+  z-index: 150;
+  border-radius: 15px;
+  text-align: center;
+  color: #3E7BB6;
+  vertical-align: bottom;
+  font-family: Helvetica, sans-serif;
+  font-weight: 400;  
+  font-size: 12px;
+  padding: 4px;
+}
+
+#tool-tip p {
+  margin-top: 5px;
+}

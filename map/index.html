@@ -15,7 +15,7 @@
     <h1>Northwest Bushwick Community Map</h1>
     <p>The Bushwick Community Map is a mapping project that will provide local residents and community organizers with housing and urban planning data of our neighborhood to help track the changes happening in Bushwick, particularly the urban vices of gentrification and displacement.</p>
   </div>
-  <input type="text" placeholder="Search for an address" id="search-box" class="ui"/>
+  <input type="text" placeholder="Search for a Bushwick address" id="search-box" class="ui"/>
   <input type="button" id="search-button" />
   <div id="ui-container" class="ui">
     
@@ -65,6 +65,22 @@
   <!-- data -->
   <!-- <script src='data/bushwick14v1_edited.js'></script>
   <script src='data/exp_CodedJobs.js'></script> -->
+  <script type="infowindow/html" id="infowindow_template">
+    <div class="cartodb-popup">
+      <a href="#close" class="cartodb-popup-close-button close">x</a>
+       <div class="cartodb-popup-content-wrapper">
+         <div class="cartodb-popup-header">
+           <img style="width: 100%" src="http://cartodb.com/assets/logos/logos_full_cartodb_light.png"></src>
+         </div>
+         <div class="cartodb-popup-content">
+           <!-- //content.data contains the field info -->
+           <h4>Address: </h4>
+           <p>{{content.data.address}}</p>
+         </div>
+       </div>
+       <div class="cartodb-popup-tip-container"></div>
+    </div>
+  </script>
   
   <script src="js/timerange_ui.js"></script>
   <script src="js/mapStyles.js"></script>

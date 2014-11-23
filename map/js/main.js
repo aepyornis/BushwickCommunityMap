@@ -14,6 +14,9 @@ app.map = (function(w,d, $, _){
     satellite : null,
     taxLots : null,
     dobPermits : null,
+    dobPermitsA1 : null,
+    dobPermitsA2A3 : null,
+    dobPermitsNB : null
   };
 
   // reference cartocss styles from mapStyles.js
@@ -24,9 +27,9 @@ app.map = (function(w,d, $, _){
   // queries for map pluto tax lots
   // sent to cartodb when layer buttons clicked
   el.sql = {
-    all : "SELECT * FROM bushwick_pluto14v1;",
-    rentStab : "SELECT * FROM bushwick_pluto14v1 WHERE yearbuilt < 1974 AND unitsres > 6;",
-    vacant : "SELECT * FROM bushwick_pluto14v1 WHERE landuse = '11';",
+    all : "SELECT * FROM bushwick_pluto14v1",
+    rentStab : "SELECT * FROM bushwick_pluto14v1 WHERE yearbuilt < 1974 AND unitsres > 6",
+    vacant : "SELECT * FROM bushwick_pluto14v1 WHERE landuse = '11'",
   };
                                                                            
   // set up the map
@@ -37,54 +40,95 @@ app.map = (function(w,d, $, _){
       minZoom : 14,
       maxZoom : 20,
       zoom : 15,
-      maxBounds : L.latLngBounds([40.670809,-73.952579],[40.713565,-73.870354])
+      maxBounds : L.latLngBounds([40.670809,-73.952579],[40.713565,-73.870354]),
+      cartodb_logo: false, 
+      legends: false
     }
     // instantiate the Leaflet map
-    el.map = L.map('map', params);
-    el.tonerLite = new L.StamenTileLayer('toner-lite');
+    // el.map = L.map('map', params);
+    // el.tonerLite = new L.StamenTileLayer('toner-lite');
     // add stamen toner layer as default base layer
-    el.map.addLayer(el.tonerLite);
+    // el.map.addLayer(el.tonerLite);
     // add the tax lot layer from cartodb
-    getCDBData();
+    getCDBData(params);
   
   } 
 
   // function to load map pluto tax lot layer and dob permit layer 
   // from CartoDB 
-  var getCDBData = function() {  
-    cartodb.createLayer(el.map, el.cdbURL, {
+  var getCDBData = function(mapOptions) {  
+    cartodb.createVis('map', el.cdbURL, mapOptions, {
         cartodb_logo: false, 
         legends: false
       }, 
-      function(layer) {
-        layer.getSubLayer(0).setCartoCSS(el.styles.regular);
-        layer.getSubLayer(0).setSQL(el.sql.all);
-        layer.getSubLayer(1).setSQL(el.sql.allJobs);
-        layer.createSubLayer({
-          sql : "SELECT * FROM exp_codedjobs_a1",
-          cartocss : '#exp_codedjobs_a1 {marker-fill: hsl(0,50%,60%);}'
-        });
-        layer.createSubLayer({
-          sql : "SELECT * FROM exp_codedjobs_a2a3",
-          cartocss : '#exp_codedjobs_a1 {marker-fill: hsl(100,50%,60%);}'
-        });
-        layer.createSubLayer({
-          sql : "SELECT * FROM exp_codedjobs_nb",
-          cartocss : '#exp_codedjobs_a1 {marker-fill: hsl(350,50%,60%);}'
-        });                
+      function(vis, layers) {
+        // store the map pluto tax lot sublayer
+        layer = layers[1];
+        // layer.getSubLayer(0).setCartoCSS(el.styles.regular);
+        //layer.getSubLayer(0).setSQL(el.sql.all);
         el.taxLots = layer.getSubLayer(0);
-        el.dobPermits = layer.getSubLayer(1);
-        el.dobPermitsA1 = layer.getSubLayer(2);
-        el.dobPermitsA2A3 = layer.getSubLayer(3);
-        el.dobPermitsNB = layer.getSubLayer(4);
+
+        // store the dob permits a1 sublayer
+        el.dobPermitsA1 = layer.createSubLayer({
+          sql : "SELECT * FROM exp_codedjobs_a1",
+          cartocss : '#exp_codedjobs_a1 {marker-width: 7; marker-fill: hsl(0,0%,35%); marker-line-color: white; marker-line-width: 0;}',
+          interactivity: ['address']
+        });
+
+        // store the dob permits a2a3 sublayer
+        el.dobPermitsA2A3 = layer.createSubLayer({
+          sql : "SELECT * FROM exp_codedjobs_a2a3",
+          cartocss : '#exp_codedjobs_a1 {marker-width: 7; marker-fill: hsl(100,0%,60%); marker-line-color: white; marker-line-width: 0;}',
+          interactivity: 'address'
+        });
+
+        // store the dob permits nb sublayer
+        el.dobPermitsNB = layer.createSubLayer({
+          sql : "SELECT * FROM exp_codedjobs_nb",
+          cartocss : '#exp_codedjobs_a1 {marker-width: 7; marker-fill: hsl(350,0%,10%); marker-line-color: white; marker-line-width: 0;}',
+          interactivity: 'address'
+        });
+
+        var event = function(e){
+              $('#tool-tip').css({
+                 left:  e.pageX,
+                 top:   e.pageY
+              });
+          }; 
+
+        // vis.addOverlay({
+        //   type: 'tooltip',
+        //   position : 'top|center',
+        //   template : '<p>{{address}}</p>'
+        // });                      
 
         // hide sublayers for dob permits
         var num_sublayers = layer.getSubLayerCount();
-        for (var i = 1; i < num_sublayers; i++) {
+        for (var i = 1; i < num_sublayers; i++) { 
+          //console.log('sublayers: ', layer.getSubLayer(i)); 
+          layer.getSubLayer(i).setInteraction(true);          
+          layer.getSubLayer(i).infowindow.set('template', $('#infowindow_template').html())
+            .on('error', function(err){
+              console.log('infowindow error: ', err);
+            });
+          
+          layer.getSubLayer(i).on('featureOver', function(e,pos,latlng,data){
+            $('#tool-tip').html('<p>'  + data.address + '</p>');
+            $(document).bind('mousemove', event);
+            $('#tool-tip').show();
+          });
+
+          layer.getSubLayer(i).on('featureOut', function(e,pos,latlng,data){
+           //Make the tooltip go away when off cities
+            $('#tool-tip').hide();
+            $(document).unbind('mousemove', event, false);
+          });
+
           layer.getSubLayer(i).hide();
+
         }
 
-      }).addTo(el.map);    
+      });//.addTo(el.map);    
   };
 
   // change the cartoCSS of a layer
@@ -146,6 +190,8 @@ app.map = (function(w,d, $, _){
     $a1.change(function(){
       if ($a1.is(':checked')){
         el.dobPermitsA1.show();
+        // el.dobPermitsA1.setInteraction(true);
+        el.dobPermitsA1.setInteractivity('address');
       } else {
         el.dobPermitsA1.hide();
       };
@@ -155,6 +201,8 @@ app.map = (function(w,d, $, _){
     $a2a3.change(function(){
       if ($a2a3.is(':checked')){
         el.dobPermitsA2A3.show();
+        // el.dobPermitsA2A3.setInteraction(true);
+        //el.dobPermitsA2A3.setInteractivity('address, job, initialcos, jt_description, ownerphone, ownername, ownertype');
       } else {
         el.dobPermitsA2A3.hide();
       };
@@ -164,6 +212,8 @@ app.map = (function(w,d, $, _){
     $nb.change(function(){
       if ($nb.is(':checked')){
         el.dobPermitsNB.show();
+        // el.dobPermitsNB.setInteraction(true);
+        // el.dobPermitsNB.setInteractivity('address, job, initialcos, jt_description, ownerphone, ownername, ownertype'); 
       } else {
         el.dobPermitsNB.hide();
       };

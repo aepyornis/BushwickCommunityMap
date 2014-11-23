@@ -16,25 +16,22 @@ app.map = (function(w,d, $, _){
     dobPermits : null,
   };
 
+  // reference cartocss styles from mapStyles.js
   el.styles = app.mapStyles;
   // url to cartodb bushwick community map viz json
   el.cdbURL = "http://bushwick.cartodb.com/api/v2/viz/64ceb582-71e2-11e4-b052-0e018d66dc29/viz.json";
 
+  // queries for map pluto tax lots
+  // sent to cartodb when layer buttons clicked
   el.sql = {
     all : "SELECT * FROM bushwick_pluto14v1;",
     rentStab : "SELECT * FROM bushwick_pluto14v1 WHERE yearbuilt < 1974 AND unitsres > 6;",
     vacant : "SELECT * FROM bushwick_pluto14v1 WHERE landuse = '11';",
-    allJobs : "SELECT * FROM exp_codedjobs;",
-    a1 : "SELECT * FROM exp_codedjobs WHERE jobtype = 'A1';",
-    a2a3 : "SELECT * FROM exp_codedjobs WHERE jobtype in ('A2', 'A3');",
-    nb : "SELECT * FROM exp_codedjobs WHERE jobtype = 'NB';",
-    a2a3nb : "SELECT * FROM exp_codedjobs WHERE jobtype IN ('A2', 'A3', 'NB');",
-    a1nb : "SELECT * FROM exp_codedjobs WHERE jobtype IN ('A1', 'NB');",
-    a1a2a3 : "SELECT * FROM exp_codedjobs WHERE jobtype IN ('A1', 'A2', 'A3');"
   };
                                                                            
-  // instantiate the leaflet map object
+  // set up the map
   var initMap = function() {
+    // map paramaters
     var params = {
       center : [40.6941, -73.9162],
       minZoom : 14,
@@ -42,11 +39,9 @@ app.map = (function(w,d, $, _){
       zoom : 15,
       maxBounds : L.latLngBounds([40.670809,-73.952579],[40.713565,-73.870354])
     }
-
+    // instantiate the Leaflet map
     el.map = L.map('map', params);
     el.tonerLite = new L.StamenTileLayer('toner-lite');
-    // el.satellite = new L.Google();
-    // el.osmGeocoder = new L.Control.OSMGeocoder(options = {position:'bottomright'});    
     // add stamen toner layer as default base layer
     el.map.addLayer(el.tonerLite);
     // add the tax lot layer from cartodb
@@ -54,7 +49,8 @@ app.map = (function(w,d, $, _){
   
   } 
 
-  // function to load map pluto tax lot layer and dob permit layer from CartoDB 
+  // function to load map pluto tax lot layer and dob permit layer 
+  // from CartoDB 
   var getCDBData = function() {  
     cartodb.createLayer(el.map, el.cdbURL, {
         cartodb_logo: false, 
@@ -91,16 +87,17 @@ app.map = (function(w,d, $, _){
       }).addTo(el.map);    
   };
 
-  // change the cartoCSS of the tax lot layer
+  // change the cartoCSS of a layer
   var changeCartoCSS = function(layer, css) {
     layer.setCartoCSS(css);
   };
 
+  // change SQL query of a layer
   var changeSQL = function(layer, sql) {
     layer.setSQL(sql);
   }
 
-  // corresponding cartoCSS changes to buttons
+  // corresponding cartoCSS changes to tax lot layer buttons
   var taxLotActions = {
     regular : function() {
       changeCartoCSS(el.taxLots, el.styles.regular);
@@ -128,18 +125,7 @@ app.map = (function(w,d, $, _){
     }
   };
 
-  var checkBoxActions = {
-    a1 : function() {
-      changeSQL(el.dobPermits, el.sql.a1);
-    },
-    a2a3 : function() {
-      changeSQL(el.dobPermits, el.sql.a2a3);
-    },
-    nb : function() {
-      changeSQL(el.dobPermits, el.sql.nb);
-    }
-  }
-
+  // add tax lot layer button event listeners
   var initButtons = function() {
     $('.button').click(function() {
       $('.button').removeClass('selected');
@@ -147,13 +133,6 @@ app.map = (function(w,d, $, _){
       taxLotActions[$(this).attr('id')]();
     });    
   }
-
-  var initCheckboxes = function() {
-    $('input:checkbox').click(function() {      
-      checkBoxActions[$(this).attr('id')]();
-      el.dobPermits.show();
-    });
-  } 
 
   // change dob permit layer sql based on check box boolean
   var initCheckboxesTwo = function() {
@@ -163,6 +142,7 @@ app.map = (function(w,d, $, _){
           $a2a3 = $('#a2a3'),
           $nb = $('#nb');
 
+    // toggle A1 major alterations
     $a1.change(function(){
       if ($a1.is(':checked')){
         el.dobPermitsA1.show();
@@ -171,6 +151,7 @@ app.map = (function(w,d, $, _){
       };
     });
 
+    // toggle A2, A3 minor alterations
     $a2a3.change(function(){
       if ($a2a3.is(':checked')){
         el.dobPermitsA2A3.show();
@@ -179,6 +160,7 @@ app.map = (function(w,d, $, _){
       };
     });    
 
+    // toggle NB new buildings
     $nb.change(function(){
       if ($nb.is(':checked')){
         el.dobPermitsNB.show();
@@ -186,7 +168,6 @@ app.map = (function(w,d, $, _){
         el.dobPermitsNB.hide();
       };
     });        
-
   }
 
   // get it going!

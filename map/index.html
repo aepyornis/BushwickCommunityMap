@@ -29,19 +29,24 @@
     <hr/>
 
     <h4>DOB Permits</h4><br/>
-    <input type="checkbox" name="dob" class="regular-checkbox" value="a1" id="a1" /><label for="a1"></label>A1<br/>
-    <input type="checkbox" name="dob" class="regular-checkbox" value="a2a3" id="a2a3" /><label for="a2a3"></label>A2 and A3<br/>
-    <input type="checkbox" name="dob" class="regular-checkbox" value="new-buildings" id="new-buildings"/><label for="new-buildings"></label>New Buildings
+    <input type="checkbox" name="dob" class="regular-checkbox dob" value="a1" id="a1" />
+      <label for="a1"></label>A1: Major Alteration<br/>
+    <input type="checkbox" name="dob" class="regular-checkbox dob" value="a2a3" id="a2a3" />
+      <label for="a2a3"></label>A2, A3: Minor Alteration<br/>
+    <input type="checkbox" name="dob" class="regular-checkbox dob" value="new-buildings" id="nb"/>
+      <label for="nb"></label>New Buildings
     
     <hr/>
     
     <h4>Stories</h4><br/>
-    <input type="checkbox" name="stories" class="regular-checkbox" value="sites-of-gentrification" id="sites-of-gentrification" /><label for="sites-of-gentrification"></label>Sites of Gentrification<br/>
-    <input type="checkbox" name="stories" class="regular-checkbox" value="personal-stories" id="personal-stories"/><label for="personal-stories"></label>Personal Stories
+    <input type="checkbox" name="stories" class="regular-checkbox" value="sites-of-gentrification" id="sites-of-gentrification"/>
+      <label for="sites-of-gentrification"></label>Sites of Gentrification<br/>
+    <input type="checkbox" name="stories" class="regular-checkbox" value="personal-stories" id="personal-stories"/>
+      <label for="personal-stories"></label>Personal Stories
   </div>  
 
   <div id="history" class="ui">
-    <h4>Year Built</h4>
+  <h4>Year Built</h4>
     <div id="slider-container">      
       <div id="slider-range"></div>
       <p class="year" id="year-min"></p>
@@ -52,11 +57,7 @@
   <div id="map"></div>
 
   <!-- libraries -->
-  <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
-  <!--<script src="/js/bootstrap.min.js"></script>-->
-  <!-- <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script> -->
   <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
-  <!-- <script type="http//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
   <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.2.3"></script>
   <!-- plugins -->

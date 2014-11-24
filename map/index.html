@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <title>Northwest Bushwick Community Map</title>  
-  
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
   <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/base/jquery-ui.css">
   <!-- <link rel="stylesheet" href="css/style.css" type="text/css" /> -->
@@ -69,14 +69,15 @@
   <div id="tool-tip"></div>
 
   <!-- libraries -->
-  <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+  <script src="bower_components/leaflet-plugins/layer/tile/Bing.js"></script>
+  <script src="bower_components/cartodb.js/dist/cartodb.noleaflet.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
-
   <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.2.3"></script>
   <!-- plugins -->
   <!-- replacing Google Maps API with key -->
   <!--<script src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script> -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvc75lurezNSnEDDYzoz2grEBOHK7ToT8"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvc75lurezNSnEDDYzoz2grEBOHK7ToT8"></script>  
 
   <!-- dob permit layer info window template -->  
   <script type="infowindow/html" id="infowindow_template">

@@ -51,8 +51,26 @@ app.map = (function(w,d, $, _){
     // instantiate the Leaflet map
     el.map = L.map('map', params);
     // stamen toner lite base layer
-    el.tonerLite = new L.StamenTileLayer('toner-lite');
-    el.map.addLayer(el.tonerLite);
+     el.tonerLite = new L.StamenTileLayer('toner-lite');
+    el.map.addLayer(el.tonerLite);    
+
+    // add Bing satelitte imagery layer
+    el.satellite = new L.BingLayer('AkuX5_O7AVBpUN7ujcWGCf4uovayfogcNVYhWKjbz2Foggzu8cYBxk6e7wfQyBQW');
+
+
+     el.baseLayers = {
+        streets: el.tonerLite,
+        satellite: el.satellite
+    };
+
+    L.control.layers(el.baseLayers, {}, {
+          position: 'bottomleft'
+      }).addTo(el.map);
+
+    el.map.on('baselayerchange', function(e){
+      e.layer.bringToBack();
+    })   
+
     // add the tax lot layer from cartodb
     getCDBData(params);
   } 
@@ -131,9 +149,13 @@ app.map = (function(w,d, $, _){
 
           layer.getSubLayer(i).hide();
 
-        }
+        }// end for loop
 
-      }).addTo(el.map);    
+      el.map.addLayer(layer, false);
+      el.tonerLite.bringToBack();
+
+      });//.addTo(el.map);
+
   };
 
   // change the cartoCSS of a layer

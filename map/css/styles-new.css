@@ -37,7 +37,7 @@ html, body {
   background-color: hsla(0, 100%, 30%, 0.75);
   color: white;
   
-  z-index: 90;
+  z-index: 95;
 }
 
 #intro h1{
@@ -59,7 +59,7 @@ input{
 .ui{
   background-color: hsla(0, 0%, 100%, 0.92);  
   border: 2px solid hsl(0, 100%, 35%);
-  border-radius: 14px;  
+  border-radius: 7px;  
 }
 
 #history{
@@ -68,7 +68,6 @@ input{
   bottom: 40px;
   width: 880px;
   height: 56px;
-
   padding: 12px;   
 
   z-index: 85;

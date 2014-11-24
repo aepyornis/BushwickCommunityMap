@@ -16,7 +16,9 @@ app.map = (function(w,d, $, _){
     dobPermits : null,
     dobPermitsA1 : null,
     dobPermitsA2A3 : null,
-    dobPermitsNB : null
+    dobPermitsNB : null,
+    geocoder : null,
+    geocoderMarker : null
   };
 
   // reference cartocss styles from mapStyles.js
@@ -31,6 +33,8 @@ app.map = (function(w,d, $, _){
     rentStab : "SELECT * FROM bushwick_pluto14v1 WHERE yearbuilt < 1974 AND unitsres > 6",
     vacant : "SELECT * FROM bushwick_pluto14v1 WHERE landuse = '11'",
   };
+
+  el.geocoder = new google.maps.Geocoder();
                                                                            
   // set up the map
   var initMap = function() {
@@ -41,31 +45,28 @@ app.map = (function(w,d, $, _){
       maxZoom : 20,
       zoom : 15,
       maxBounds : L.latLngBounds([40.670809,-73.952579],[40.713565,-73.870354]),
-      cartodb_logo: false, 
-      legends: false
+      zoomControl : false
     }
     // instantiate the Leaflet map
-    // el.map = L.map('map', params);
-    // el.tonerLite = new L.StamenTileLayer('toner-lite');
+    el.map = L.map('map', params);
+    el.tonerLite = new L.StamenTileLayer('toner-lite');
     // add stamen toner layer as default base layer
-    // el.map.addLayer(el.tonerLite);
+    el.map.addLayer(el.tonerLite);
     // add the tax lot layer from cartodb
     getCDBData(params);
-  
   } 
 
   // function to load map pluto tax lot layer and dob permit layer 
   // from CartoDB 
   var getCDBData = function(mapOptions) {  
-    cartodb.createVis('map', el.cdbURL, mapOptions, {
+    cartodb.createLayer(el.map, el.cdbURL, {
         cartodb_logo: false, 
         legends: false
       }, 
-      function(vis, layers) {
+      function(layer) {
         // store the map pluto tax lot sublayer
-        layer = layers[1];
-        // layer.getSubLayer(0).setCartoCSS(el.styles.regular);
-        //layer.getSubLayer(0).setSQL(el.sql.all);
+        layer.getSubLayer(0).setCartoCSS(el.styles.regular);
+        layer.getSubLayer(0).setSQL(el.sql.all);
         el.taxLots = layer.getSubLayer(0);
 
         // store the dob permits a1 sublayer
@@ -94,23 +95,26 @@ app.map = (function(w,d, $, _){
                  left:  e.pageX,
                  top:   e.pageY
               });
-          }; 
+          };
 
-        // vis.addOverlay({
-        //   type: 'tooltip',
-        //   position : 'top|center',
-        //   template : '<p>{{address}}</p>'
-        // });                      
+        el.dobPermitsA1.infowindow.set({
+          'template' : $('#infowindow_template').html()
+        })
+          .on('error', function(err){
+            console.log('infowindow error: ', err);
+          });                                 
 
         // hide sublayers for dob permits
         var num_sublayers = layer.getSubLayerCount();
         for (var i = 1; i < num_sublayers; i++) { 
           //console.log('sublayers: ', layer.getSubLayer(i)); 
           layer.getSubLayer(i).setInteraction(true);          
-          layer.getSubLayer(i).infowindow.set('template', $('#infowindow_template').html())
-            .on('error', function(err){
-              console.log('infowindow error: ', err);
-            });
+          // layer.getSubLayer(i).infowindow.set({
+          //   'template' : $('#infowindow_template').html()
+          // })
+          //   .on('error', function(err){
+          //     console.log('infowindow error: ', err);
+          //   });
           
           layer.getSubLayer(i).on('featureOver', function(e,pos,latlng,data){
             $('#tool-tip').html('<p>'  + data.address + '</p>');
@@ -128,7 +132,7 @@ app.map = (function(w,d, $, _){
 
         }
 
-      });//.addTo(el.map);    
+      }).addTo(el.map);    
   };
 
   // change the cartoCSS of a layer
@@ -175,18 +179,18 @@ app.map = (function(w,d, $, _){
       $('.button').removeClass('selected');
       $(this).addClass('selected');
       taxLotActions[$(this).attr('id')]();
-    });    
+    }); 
   }
 
   // change dob permit layer sql based on check box boolean
-  var initCheckboxesTwo = function() {
+  var initCheckboxes = function() {
     // checkboxes for dob permit layer
     var checkboxDOB = $('input.dob:checkbox'),
           $a1 = $('#a1'),
           $a2a3 = $('#a2a3'),
           $nb = $('#nb');
 
-    // toggle A1 major alterations
+    // toggle A1 major alterations layer
     $a1.change(function(){
       if ($a1.is(':checked')){
         el.dobPermitsA1.show();
@@ -197,7 +201,7 @@ app.map = (function(w,d, $, _){
       };
     });
 
-    // toggle A2, A3 minor alterations
+    // toggle A2, A3 minor alterations layer
     $a2a3.change(function(){
       if ($a2a3.is(':checked')){
         el.dobPermitsA2A3.show();
@@ -208,7 +212,7 @@ app.map = (function(w,d, $, _){
       };
     });    
 
-    // toggle NB new buildings
+    // toggle NB new buildings layer
     $nb.change(function(){
       if ($nb.is(':checked')){
         el.dobPermitsNB.show();
@@ -220,11 +224,57 @@ app.map = (function(w,d, $, _){
     });        
   }
 
+  // geocode search box text and create a marker on the map
+  var geocode = function(address) {
+    // bounding box for nyc to improve geocoder results
+    // 40.678685,-73.942451,40.710247,-73.890266
+    var bounds = new google.maps.LatLngBounds(
+          new google.maps.LatLng(40.678685,-73.942451), //sw
+          new google.maps.LatLng(40.710247,-73.890266) //ne
+          );    
+      el.geocoder.geocode({ 'address': address, 'bounds' : bounds }, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          var latlng = [results[0].geometry.location.k , results[0].geometry.location.B];
+          console.log('gecoder results: ', results);
+          // console.log('latlng: ', latlng);
+          
+          // remove geocoded marker if one already exists
+          if (el.geocoderMarker) { 
+            el.map.removeLayer(el.geocoderMarker);
+          }
+          // add a marker and pan and zoom the map to it
+          el.geocoderMarker = new L.marker(latlng).addTo(el.map);
+          el.geocoderMarker.bindPopup("<h4>" + results[0].formatted_address + "</h4>" ).openPopup();
+          el.map.setView(latlng, 20);
+          };
+      });
+  }
+
+  // search box interaction
+  var searchAddress = function() {
+
+    $('#search-box').focus(function(){
+      if ($(this).val()==="Search for a Bushwick address") {
+        $(this).val("");
+      }
+    });
+
+    $('#search-box').on('blur',function(){
+      // console.log($(this).val());
+      if ($(this).val()!=="") {
+        $address = $(this).val()
+        geocode($address);  
+        $(this).val("");
+      } 
+    });
+  }
+
   // get it going!
   var init = function() {
     initMap();
     initButtons();
-    initCheckboxesTwo();  
+    initCheckboxes();
+    searchAddress();
   }
 
   // only return init() and the stuff in the el object

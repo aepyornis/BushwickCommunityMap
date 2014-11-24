@@ -1,0 +1,36 @@
+{
+  "name": "BushwickCommunityMap",
+  "version": "1.0.0",
+  "homepage": "https://github.com/clhenrick/BushwickCommunityMap",
+  "authors": [
+    "(Ziggy Mintz)",
+    "(Chris Henrick)",
+    "(Gabriel Gianordoli)",
+    "(Namreta Kumar)",
+    "(Daniel Mastretta)"
+  ],
+  "description": "'Mapping data relating to gentrification and displacement in Bushwick, NYC'",
+  "main": "main.js",
+  "keywords": [
+    "'bushwick'",
+    "'leaflet'",
+    "'cartodb'",
+    "'mapbox'",
+    "'webmap'"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "cartodb.js": "~3.11.30",
+    "jquery": "~2.1.1",
+    "leaflet-plugins": "~1.2.0",
+    "mapbox.js": "~2.1.3"
+  }
+}

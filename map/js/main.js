@@ -47,10 +47,11 @@ app.map = (function(w,d, $, _){
       maxBounds : L.latLngBounds([40.670809,-73.952579],[40.713565,-73.870354]),
       zoomControl : false
     }
+
     // instantiate the Leaflet map
     el.map = L.map('map', params);
+    // stamen toner lite base layer
     el.tonerLite = new L.StamenTileLayer('toner-lite');
-    // add stamen toner layer as default base layer
     el.map.addLayer(el.tonerLite);
     // add the tax lot layer from cartodb
     getCDBData(params);
@@ -252,13 +253,11 @@ app.map = (function(w,d, $, _){
 
   // search box interaction
   var searchAddress = function() {
-
     $('#search-box').focus(function(){
       if ($(this).val()==="Search for a Bushwick address") {
         $(this).val("");
       }
     });
-
     $('#search-box').on('blur',function(){
       // console.log($(this).val());
       if ($(this).val()!=="") {
@@ -269,12 +268,23 @@ app.map = (function(w,d, $, _){
     });
   }
 
+  // set up custom zoom buttons
+  var initZoomButtons = function(){
+    $('#zoom-in').on('click', function(){
+      el.map.zoomIn();
+    });
+    $('#zoom-out').on('click', function(){
+      el.map.zoomOut();
+    });
+  }
+
   // get it going!
   var init = function() {
     initMap();
     initButtons();
     initCheckboxes();
     searchAddress();
+    initZoomButtons();
   }
 
   // only return init() and the stuff in the el object

@@ -19,8 +19,17 @@
 
   <input type="search" placeholder="Search for a Bushwick address" id="search-box" class="ui"/>
   <input type="button" id="search-button" />
+
+  <div id="ui-map-tiles" class="ui mini">
+    <a href="#" id="earth-tiles">&#9670;</a>
+    <a href="#" id="street-tiles">&#9708;</a>
+  </div>
+  <div id="ui-zoom" class="ui mini">
+    <a href="#" id="zoom-in">+</a><br/>
+    <a href="#" id="zoom-out">-</a>
+  </div>
+
   <div id="ui-container" class="ui">
-    
     <h4>Property Layers</h4><br/>
     <a href="#regular" id="regular" class="button">All Tax Lots</a>
     <a href="#availfar" id="availfar" class="button">Available FAR</a>
@@ -62,6 +71,7 @@
   <!-- libraries -->
   <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+
   <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.2.3"></script>
   <!-- plugins -->
   <!-- replacing Google Maps API with key -->

@@ -5,7 +5,7 @@ app.mapStyles = (function(){
   return {
   // default style, all lots are the same color
   regular : '#bushwick_pluto14v1 {' +
-                                'polygon-fill: hsl(200,50%,50%);' +
+                                'polygon-fill: hsl(200,40%,90%);' +
                                 'polygon-opacity: 0.75;' +
                                 'line-color: #000;' +
                                 'line-width: 0.2;' +

@@ -197,6 +197,7 @@ app.map = (function(w,d, $, _){
     availfar : function() {
       changeCartoCSS(el.taxLots, el.styles.availFAR);
       changeSQL(el.taxLots, el.sql.all);
+      renderLegend(el.testData);
       return true;
     },
     rentstab : function() {
@@ -296,13 +297,14 @@ app.map = (function(w,d, $, _){
   }
 
   // render choropleth legends
+  // TO DO: set up event listener to render and reveal legend
   var renderLegend = function(data) {
     var legendData = {
       title : data.title,
       items : data.items,// array of objects containing color and values
     };    
-    $("#ui-legend").html(template(legendData));
-    $("#ui-legend").removeClass('.hidden');
+    $("#ui-legend").html(el.template(legendData));
+    $("#ui-legend").removeClass('hidden');
   };
 
   // set up custom zoom buttons
@@ -314,6 +316,33 @@ app.map = (function(w,d, $, _){
       el.map.zoomOut();
     });
   }
+
+  // sample JSON to test renderLegend();
+  el.testData = {
+    title : "Available FAR",
+    items : [
+      {
+        color : "#FFFFB2",
+        label : "0 - 0.8"
+      },
+      {
+        color: "#FECC5C",
+        label : "0.9 - 1.6"
+      },
+      {
+        color : "#FD8D3C",
+        label : "1.7 - 2.4"
+      },
+      {
+        color : "#F03B20",
+        label : "2.5 - 3.2"
+      },
+      {
+        color : "#BD0026",
+        label : "3.3 - 4"        
+      }
+    ]
+  };
 
   // get it all going!
   var init = function() {

@@ -88,7 +88,7 @@
   <div id="ui-legend" class="ui hidden"></div>
   
   <!-- to delete later: sample legend -->
-  <div id="ui-legend" class='ui hidden'>
+<!--   <div id="ui-legend" class='ui hidden'>
     <h4>Legend Title</h4>
     <nav class="legend">
       <span style="background-color:#FFFFB2"></span>
@@ -102,18 +102,18 @@
       <label>2.4 - 3.2</label>
       <label>3.3 - 4</label>
     </nav>
-  </div>
+  </div> -->
   
   <!-- begin underscore template for dynamically rendering choropleth map legends -->
   <script type="text/template" class="template">    
-    <h4>
-      <%- legend.title %>
-    </h4>
-    <nav>
-      <% _.each( legend.colors, function(color){ %>
-        <span style="background-color: <%- span.color %> "></span>          
+    <h4><%- legend.title %></h4>
+    <nav class="legend">
+      <% _.each( legend.items, function(item){ %>
+        <span style="background-color:<%- item.color %>"></span>          
       <% }); %>
-
+      <% _.each( legend.items, function(item){ %>
+        <label><%- item.label %></label>          
+      <% }); %>      
     </nav>    
   </script>
   <!-- end underscore template for dynamically rendering choropleth legends -->

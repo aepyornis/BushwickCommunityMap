@@ -96,43 +96,8 @@ UPDATE bushwick_pluto14v1 SET lu_descript =
          WHEN landuse IS NULL THEN 'N/A'
          END 
 
---- DOB Permits layer ---
--- add a column to translate jobtype codes to human readable
-ALTER TABLE exp_codedjobs ADD COLUMN jt_description TEXT
-
-UPDATE exp_codedjobs SET jt_description = 
-    CASE WHEN jobtype = 'A1' THEN 'Major Alteration'
-             WHEN jobtype = 'A2' THEN 'Minor Alteration' 
-             WHEN jobtype = 'A3' THEN 'Minor Alteration'
-             WHEN jobtype = 'NB' THEN 'New Building'
-            END
-
--- SELECT jobtype,
---     CASE WHEN jobtype = 'A1' THEN 'Major Alteration'
---              WHEN jobtype = 'A2' THEN 'Minor Alteration' 
---              WHEN jobtype = 'A3' THEN 'Minor Alteration'
---              WHEN jobtype = 'NB' THEN 'New Building'
---             END
--- FROM exp_codedjobs
-
--- SELECT landuse,
---     CASE WHEN landuse = '01' THEN '1 & 2 Family Buildings'
---          WHEN landuse = '02' THEN 'Multi-Family Walkup'
---          WHEN landuse = '03' THEN 'Multi-Family with Elevator'
---          WHEN landuse = '04' THEN 'Mixed Residential & Commerical'
---          WHEN landuse = '05' THEN 'Commerical & Office'
---          WHEN landuse = '06' THEN 'Industrial & Manufacturing'
---          WHEN landuse = '07' THEN 'Transport & utility'
---          WHEN landuse = '08' THEN 'Public Facilities & Insitutions'
---          WHEN landuse = '09' THEN 'Open Space & Recreation'
---          WHEN landuse = '10' THEN 'Parking Facilities'
---          WHEN landuse = '11' THEN 'Vacant Land'
---          WHEN landuse IS NULL THEN 'N/A'
---          END
--- FROM bushwick_pluto14v1
-
-
-
+-- add a column for likely rent stabilized = yes or no
+ALTER TABLE bushwick_pluto14v1 ADD COLUMN rentstabl TEXT
 
 
 

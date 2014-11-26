@@ -9,11 +9,13 @@ app.map = (function(w,d, $, _){
     map : null,
     cdbURL : null,
     styles: null,
+    styleCur : null,
     sql : null,
     tonerLite : null,
     satellite : null,
     taxLots : null,
     baseLayers : null,
+    rentStabl : null,
     dobPermits : null,
     dobPermitsA1 : null,
     dobPermitsA2A3 : null,
@@ -31,7 +33,7 @@ app.map = (function(w,d, $, _){
   // sent to cartodb when layer buttons clicked
   el.sql = {
     all : "SELECT * FROM bushwick_pluto14v1",
-    rentStab : "SELECT * FROM bushwick_pluto14v1 WHERE yearbuilt < 1974 AND unitsres > 6",
+    rentStab : "SELECT a.* FROM bushwick_pluto14v1 a, bushwick_rent_stabl_merge_centroids b where st_intersects(a.the_geom, b.the_geom)",
     vacant : "SELECT * FROM bushwick_pluto14v1 WHERE landuse = '11'",
   };
 
@@ -76,11 +78,11 @@ app.map = (function(w,d, $, _){
     })   
 
     // add the tax lot layer from cartodb
-    getCDBData(params);
+    getCDBData();
   } 
 
   // function to load map pluto tax lot layer and dob permit layer from CartoDB
-  var getCDBData = function(mapOptions) {  
+  var getCDBData = function() {  
     cartodb.createLayer(el.map, el.cdbURL, {
         cartodb_logo: false, 
         legends: false
@@ -118,14 +120,13 @@ app.map = (function(w,d, $, _){
               });
           };                                
 
-        // set interactivity on the DOB permit layers
+        // hide and set interactivity on the DOB permit layers
         var num_sublayers = layer.getSubLayerCount();
         for (var i = 1; i < num_sublayers; i++) { 
           // turn on interactivity for mousing events
           layer.getSubLayer(i).setInteraction(true);
-          // tell cdb what columns to pass
-          layer.getSubLayer(i).setInteractivity('address, jt_description, ownername, ownerphone, ownerbusin, existingst, proposedst');          
-          
+          // tell cdb what columns to pass for interactivity
+          layer.getSubLayer(i).setInteractivity('address, jt_description, ownername, ownerphone, ownerbusin, existingst, proposedst');                    
           // when the user mouses over the dob permit display html & data in a tool tip
           layer.getSubLayer(i).on('featureOver', function(e, pos, latlng, data) {
             $('#tool-tip').html(
@@ -167,6 +168,8 @@ app.map = (function(w,d, $, _){
   // change the cartoCSS of a layer
   var changeCartoCSS = function(layer, css) {
     layer.setCartoCSS(css);
+    // store the current cartocss style for the time range slider
+    el.styleCur = css;
   };
 
   // change SQL query of a layer
@@ -271,15 +274,14 @@ app.map = (function(w,d, $, _){
       });
   }
 
-  // search box ui interaction
+  // search box ui interaction TO DO: do a check to see if point is outside of Bushwick bounds
   var searchAddress = function() {
     $('#search-box').focus(function(){
       if ($(this).val()==="Search for a Bushwick address") {
         $(this).val("");
       }
     });
-    $('#search-box').on('blur',function(){
-      // console.log($(this).val());
+    $('#search-box').on('blur',function(){      
       if ($(this).val()!=="") {
         $address = $(this).val()
         geocode($address);  
@@ -298,7 +300,7 @@ app.map = (function(w,d, $, _){
     });
   }
 
-  // get it going!
+  // get it all going!
   var init = function() {
     initMap();
     initButtons();
@@ -315,7 +317,7 @@ app.map = (function(w,d, $, _){
 
 })(window, document, jQuery, _);
 
-// call app.map.init() once the dom is loaded
+// call app.map.init() once the DOM is loaded
 window.addEventListener('DOMContentLoaded', function(){
   app.map.init();
   timerangeUI();

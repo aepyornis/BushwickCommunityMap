@@ -6,7 +6,6 @@
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
   <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/base/jquery-ui.css">
-  <!-- <link rel="stylesheet" href="css/style.css" type="text/css" /> -->
   <link rel="stylesheet" type="text/css" href="css/styles-new.css">
 </head>   
 <body>
@@ -66,7 +65,8 @@
   </div>
 
   <div id="map"></div>
-  <div id="tool-tip"></div>
+  <!-- empty div to render the DOB Permit layer info -->
+  <!-- <div id="tool-tip"></div> -->
 
   <!-- libraries -->
   <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
@@ -80,14 +80,13 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvc75lurezNSnEDDYzoz2grEBOHK7ToT8"></script>  
 
   <!-- dob permit layer info window template -->  
-  <script type="infowindow/html" id="infowindow_template">
+<!--  <script type="infowindow/html" id="infowindow_template">
     <div class="cartodb-popup">
       <a href="#close" class="cartodb-popup-close-button close">x</a>
        <div class="cartodb-popup-content-wrapper">
          <div class="cartodb-popup-header">
          </div>
          <div class="cartodb-popup-content">
-           <!-- content.data contains the field info -->
            <h4>Address: </h4>
            <p>{{content.data.address}}</p>
          </div>
@@ -95,6 +94,7 @@
        <div class="cartodb-popup-tip-container"></div>
     </div>
   </script>
+-->
   
   <script src="js/timerange_ui.js"></script>
   <script src="js/mapStyles.js"></script>

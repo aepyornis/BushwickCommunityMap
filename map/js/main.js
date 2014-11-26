@@ -4,7 +4,7 @@ var app = app || {};
 // keep our map stuff in a part of the app object as to not pollute the global name space
 app.map = (function(w,d, $, _){
 
-  // local variables for map parts and layers 
+  //  define all local variables for map parts and layers and store in an object called 'el' 
   var el = {
     map : null,
     cdbURL : null,
@@ -20,6 +20,7 @@ app.map = (function(w,d, $, _){
     dobPermitsA1 : null,
     dobPermitsA2A3 : null,
     dobPermitsNB : null,
+    template : null,
     geocoder : null,
     geocoderMarker : null
   };
@@ -37,6 +38,10 @@ app.map = (function(w,d, $, _){
     vacant : "SELECT * FROM bushwick_pluto14v1 WHERE landuse = '11'",
   };
 
+  // compile the underscore legend template for rendering map legends for choropleth layers
+  _.templateSettings.variable = "legend";
+  el.template = _.template($("script.template").html());
+
   // use google maps api geocoder
   el.geocoder = new google.maps.Geocoder();
                                                                            
@@ -46,7 +51,7 @@ app.map = (function(w,d, $, _){
     var params = {
       center : [40.6941, -73.9162],
       minZoom : 14,
-      maxZoom : 20,
+      maxZoom : 19,
       zoom : 15,
       maxBounds : L.latLngBounds([40.670809,-73.952579],[40.713565,-73.870354]),
       zoomControl : false
@@ -289,6 +294,16 @@ app.map = (function(w,d, $, _){
       } 
     });
   }
+
+  // render choropleth legends
+  var renderLegend = function(data) {
+    var legendData = {
+      title : data.title,
+      items : data.items,// array of objects containing color and values
+    };    
+    $("#ui-legend").html(template(legendData));
+    $("#ui-legend").removeClass('.hidden');
+  };
 
   // set up custom zoom buttons
   var initZoomButtons = function(){

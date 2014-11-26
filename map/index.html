@@ -2,32 +2,45 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Northwest Bushwick Community Map</title>  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Northwest Bushwick Community Map</title>
+
+  <!-- CSS libraries  -->
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
   <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/base/jquery-ui.css">
+  <!-- CSS for UI  -->
   <link rel="stylesheet" type="text/css" href="css/styles-new.css">
 </head>   
 <body>
-  <div id="menu"></div>
 
+  <!-- top menu bar -->
+  <div id="menu"></div>
+  
+  <!-- Map title and intro -->
   <div id="intro">
     <h1>Northwest Bushwick Community Map</h1>
     <p>The Bushwick Community Map is a mapping project that will provide local residents and community organizers with housing and urban planning data of our neighborhood to help track the changes happening in Bushwick, particularly the urban vices of gentrification and displacement.</p>
   </div>
-
+  
+  <!-- address search box -->
   <input type="search" placeholder="Search for a Bushwick address" id="search-box" class="ui"/>
   <input type="button" id="search-button" />
-
+  
+  <!-- buttons to toggle base map -->
   <div id="ui-map-tiles" class="ui mini">
     <a href="#" id="earth-tiles">&#9670;</a>
     <a href="#" id="street-tiles">&#9708;</a>
   </div>
+
+  <!-- buttons to toggle zoom -->
   <div id="ui-zoom" class="ui mini">
     <a href="#" id="zoom-in">+</a><br/>
     <a href="#" id="zoom-out">-</a>
   </div>
-
+  
+  <!-- container for toggling map layers -->
   <div id="ui-container" class="ui">
     <h4>Property Layers</h4><br/>
     <a href="#regular" id="regular" class="button">All Tax Lots</a>
@@ -53,8 +66,9 @@
       <label for="sites-of-gentrification"></label>Sites of Gentrification<br/>
     <input type="checkbox" name="stories" class="regular-checkbox" value="personal-stories" id="personal-stories"/>
       <label for="personal-stories"></label>Personal Stories
-  </div>  
-
+  </div>
+  
+  <!-- date range slider for year built -->
   <div id="history" class="ui">
   <h4>Year Built</h4>
     <div id="slider-container">      
@@ -63,44 +77,65 @@
       <p class="year" id="year-max"></p>      
     </div>
   </div>
-
+  
+  <!-- map is rendered here, all other html elements are positioned absolutely with a higher z-index -->
   <div id="map"></div>
-  <!-- empty div to render the DOB Permit layer info -->
+
+  <!-- an empty div to render the DOB Permit layer info on mouse hover -->
   <div id="tool-tip"></div>
 
-  <!-- libraries -->
+  <!-- empty div to render the legends template in -->
+  <div id="ui-legend" class="ui hidden"></div>
+  
+  <!-- to delete later: sample legend -->
+  <div id="ui-legend" class='ui hidden'>
+    <h4>Legend Title</h4>
+    <nav class="legend">
+      <span style="background-color:#FFFFB2"></span>
+      <span style="background-color:#FECC5C"></span>
+      <span style="background-color:#FD8D3C"></span>
+      <span style="background-color:#F03B20"></span>
+      <span style="background-color:#BD0026"></span>
+      <label>0 - 0.8</label>
+      <label>0.9 - 1.6</label>
+      <label>1.7 - 2.4</label>
+      <label>2.4 - 3.2</label>
+      <label>3.3 - 4</label>
+    </nav>
+  </div>
+  
+  <!-- begin underscore template for dynamically rendering choropleth map legends -->
+  <script type="text/template" class="template">    
+    <h4>
+      <%- legend.title %>
+    </h4>
+    <nav>
+      <% _.each( legend.colors, function(color){ %>
+        <span style="background-color: <%- span.color %> "></span>          
+      <% }); %>
+
+    </nav>    
+  </script>
+  <!-- end underscore template for dynamically rendering choropleth legends -->
+
+  <!-- JS libraries -->
   <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
   <script src="bower_components/leaflet-plugins/layer/tile/Bing.js"></script>
   <script src="bower_components/cartodb.js/dist/cartodb.noleaflet.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
   <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.2.3"></script>
-  <!-- plugins -->
-  <!-- replacing Google Maps API with key -->
+  <!-- replacing Google Maps API with key for geocoding -->
   <!--<script src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script> -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvc75lurezNSnEDDYzoz2grEBOHK7ToT8"></script>  
-
-  <!-- dob permit layer info window template -->  
-<!--  <script type="infowindow/html" id="infowindow_template">
-    <div class="cartodb-popup">
-      <a href="#close" class="cartodb-popup-close-button close">x</a>
-       <div class="cartodb-popup-content-wrapper">
-         <div class="cartodb-popup-header">
-         </div>
-         <div class="cartodb-popup-content">
-           <h4>Address: </h4>
-           <p>{{content.data.address}}</p>
-         </div>
-       </div>
-       <div class="cartodb-popup-tip-container"></div>
-    </div>
-  </script>
--->
   
+  <!-- JS code for map interaction  -->
   <script src="js/timerange_ui.js"></script>
   <script src="js/mapStyles.js"></script>
   <script src="js/main.js"></script>
 
-  <!--
+  
+  <!-- Google Analytics -->
+  <!--  
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -110,6 +145,7 @@
     ga('create', 'UA-53968131-1', 'auto');
     ga('send', 'pageview');
   </script>
--->
+  -->
+
 </body>
 </html>

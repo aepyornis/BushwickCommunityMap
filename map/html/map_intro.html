@@ -40,7 +40,50 @@
       <script src="http://cartodb.github.io/odyssey.js/dist/odyssey.js" charset="UTF-8"></script>
 
       <script>
-        var resizePID;
+
+        var resizePID,
+              slides;
+
+        // fire this each time the user changes a slide
+        function trackCurrentSlide() {
+          slides = $('#slides').children(); // creates an array of slides                 
+          slides.each(function(i){
+            if ($(this).hasClass('selected')) {
+              console.log('index: ', i);
+              checkIndex(i);
+            }
+          }); 
+        }
+
+        // check the index being returned by trackCurrentSlide()
+        function checkIndex(index) {
+          if (index === 0) {
+            console.log('first slide!');
+          } 
+          else if (index === 1) {
+            console.log('second slide!');
+          }
+        }
+
+        // test console.log function 
+        var logTest = function() {
+          console.log('window event listen test');
+        }
+
+        // trigger a custom event called SlideChange
+        var emitSlideChange = O.Action( function() {
+         $(document).trigger('slideChange', function() {
+          console.log(seq.current())
+         });
+        });
+
+        // listen for the slideChange event to be triggered
+        function listenSlideChange() {
+          $(document).on('slideChange', function() {
+            // logTest()
+            trackCurrentSlide();
+          });
+        }        
 
         function clearResize() {
           clearTimeout(resizePID);
@@ -99,12 +142,19 @@
           });
         });
 
+        // test Action
+        var test = O.Action(function() {
+          $('#test').append('<p>bla bla bla</p>');          
+          console.log('hey');
+        });    
+
         function click(el) {
           var element = O.Core.getElement(el);
           var t = O.Trigger();
 
           // TODO: clean properly
           function click() {
+            // console.log(el);
             t.trigger();
           }
 
@@ -113,9 +163,11 @@
           return t;
         }
 
+        listenSlideChange();
+
         O.Template({
           init: function() {
-            var seq = O.Triggers.Sequential();
+            var seq = O.Triggers.Sequential();   
 
             var baseurl = this.baseurl = 'http://{s}.api.cartocdn.com/base-light/{z}/{x}/{y}.png';
             var map = this.map = L.map('map').setView([40.6941, -73.9162], 14);
@@ -125,7 +177,7 @@
 
             // enanle keys to move
             O.Keys().on('map').left().then(seq.prev, seq)
-            O.Keys().on('map').right().then(seq.next, seq)
+            O.Keys().on('map').right().then(seq.next, seq)            
 
             click(document.querySelectorAll('.next')).then(seq.next, seq)
             click(document.querySelectorAll('.prev')).then(seq.prev, seq)
@@ -134,12 +186,15 @@
             var story = O.Story()
 
             this.story = story;
+
+            cur = O.Sequential().current();      
             this.seq = seq;
             this.slides = slides;
-            this.progress = O.UI.DotProgress('dots').count(0);
+            this.progress = O.UI.DotProgress('dots').count(0);        
           },
 
           update: function(actions) {
+
             var self = this;
 
             if (!actions.length) return;
@@ -186,8 +241,8 @@
               }
 
               return;
-            }
-
+            }            
+            
             this._resetActions(actions);
           },
 
@@ -206,7 +261,7 @@
             this.progress.count(sl.length);
 
             // create new story
-            for(var i = 0; i < sl.length; ++i) {
+            for (var i = 0; i < sl.length; ++i) {
               var slide = sl[i];
               var tmpl = "<div class='slide' style='diplay:none'>";
 
@@ -220,7 +275,9 @@
                 this.slides.activate(i),
                 slide(this),
                 this.progress.activate(i),
-                resizeAction
+                test,
+                emitSlideChange,
+                resizeAction                
               );
 
               actions.on("finish.app", function() {
@@ -230,15 +287,18 @@
               this.story.addState(
                 this.seq.step(i),
                 actions
-              )
-            }
+              );
 
-            this.story.go(this.seq.current());
+            } // end for loop
+
+            this.story.go(this.seq.current());            
+            // console.log(this.seq.current()); // only logs 0 when map loads
           },
 
-          changeSlide: function(n) {
-            this.seq.current(n);
+          changeSlide: function(n) {            
+            this.seq.current(n);            
           }
+
         });
       </script>
 
@@ -267,10 +327,16 @@ bla bla bla
 L.marker([40.7348, -73.9970]).actions.addRemove(S.map)
 ```
 
+##Bla Bla Bla
+
 Lorem Ipsum something bla bla bla  
 
-<script>alert("hi!");</script>
-
-#Bla Bla Bla
+#A third slide here!
+```
+- center: [40.6941, -73.9162]
+- zoom: 16
+```
+##More stuff and stories
+bla bla bla bla
 
 </script></body></html>

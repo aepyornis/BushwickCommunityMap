@@ -173,7 +173,7 @@ app.map = (function(w,d, $, _){
   // change the cartoCSS of a layer
   var changeCartoCSS = function(layer, css) {
     layer.setCartoCSS(css);
-    // store the current cartocss style for the time range slider
+    // store the current cartocss style for the time range slider?
     el.styleCur = css;
   };
 
@@ -183,6 +183,7 @@ app.map = (function(w,d, $, _){
   }
 
   // corresponding cartoCSS changes to tax lot layer buttons
+  // TO DO: have this trigger an event that will render legends appropriately
   var taxLotActions = {
     regular : function() {
       changeCartoCSS(el.taxLots, el.styles.regular);
@@ -208,6 +209,10 @@ app.map = (function(w,d, $, _){
     vacant : function() {
       changeCartoCSS(el.taxLots, el.styles.red);
       changeSQL(el.taxLots, el.sql.vacant);
+    },
+    yearbuilt : function(){
+      changeCartoCSS(el.taxLots, el.styles.yearbuilt);
+      changeSQL(el.taxLots, el.sql.all);
     }
   };
 

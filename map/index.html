@@ -48,6 +48,7 @@
     <a href="#rentstab" id="rentstab" class="button">Likely Rent Stabilized</a>
     <a href="#zoning" id="zoning" class="button">Zoning</a>
     <a href="#vacant" id="vacant" class="button">Vacant Land</a>
+    <a href="#yearbuilt" id="yearbuilt" class="button">Year Built</a>
     
     <hr/>
 
@@ -87,24 +88,7 @@
   <!-- empty div to render the legends template in -->
   <div id="ui-legend" class="ui hidden"></div>
   
-  <!-- to delete later: sample legend -->
-<!--   <div id="ui-legend" class='ui hidden'>
-    <h4>Legend Title</h4>
-    <nav class="legend">
-      <span style="background-color:#FFFFB2"></span>
-      <span style="background-color:#FECC5C"></span>
-      <span style="background-color:#FD8D3C"></span>
-      <span style="background-color:#F03B20"></span>
-      <span style="background-color:#BD0026"></span>
-      <label>0 - 0.8</label>
-      <label>0.9 - 1.6</label>
-      <label>1.7 - 2.4</label>
-      <label>2.4 - 3.2</label>
-      <label>3.3 - 4</label>
-    </nav>
-  </div> -->
-  
-  <!-- begin underscore template for dynamically rendering choropleth map legends -->
+  <!-- underscore template for dynamically rendering choropleth map legends -->
   <script type="text/template" class="template">    
     <h4><%- legend.title %></h4>
     <nav class="legend">
@@ -116,7 +100,6 @@
       <% }); %>      
     </nav>    
   </script>
-  <!-- end underscore template for dynamically rendering choropleth legends -->
 
   <!-- JS libraries -->
   <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>

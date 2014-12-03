@@ -126,6 +126,49 @@ app.mapStyles = (function(){
                   '}'+
                   '#bushwick_pluto14v1 {'+
                      'polygon-fill: #DDDDDD;'+
-                  "}"                      
+                  "}",
+  
+  // yearbuilt choropleth style;                  
+  yearbuilt : "@yearbuilt1: #feebe2;"+
+                  "@yearbuilt2: #fcc5c0;"+
+                  "@yearbuilt3: #fa9fb5;"+
+                  "@yearbuilt4: #f768a1;"+
+                  "@yearbuilt5: #dd3497;"+
+                  "@yearbuilt6: #ae017e;"+
+                  "@yearbuilt7: #7a0177;"+
+                  "@white:  #FFF;"+
+                  "@polyopacity:  0.8;"+
+                  "@linewidth:  0.2;"+
+                  "@lineopacity:  1;"+
+
+                  "#bushwick_pluto14v1{"+
+                    "polygon-fill: @white;"+
+                    "polygon-opacity: @polyopacity;"+
+                    "line-color: @white;"+
+                    "line-width: @linewidth;"+
+                    "line-opacity: @lineopacity;"+
+                  "}"+
+
+                  "#bushwick_pluto14v1 [ yearbuilt <= 2014] {"+
+                     "polygon-fill: @yearbuilt7;"+
+                  "}"+
+                  "#bushwick_pluto14v1 [ yearbuilt <= 2004] {"+
+                     "polygon-fill: @yearbuilt6;"+
+                  "}"+
+                  "#bushwick_pluto14v1 [ yearbuilt <= 2000] {"+
+                     "polygon-fill: @yearbuilt5;"+
+                  "}"+
+                  "#bushwick_pluto14v1 [ yearbuilt <= 1990] {"+
+                     "polygon-fill: @yearbuilt4;"+
+                  "}"+
+                  "#bushwick_pluto14v1 [ yearbuilt <= 1970] {"+
+                     "polygon-fill: @yearbuilt3;"+
+                  "}"+
+                  "#bushwick_pluto14v1 [ yearbuilt <= 1934] {"+
+                     "polygon-fill: @yearbuilt2;"+
+                  "}"+
+                  "#bushwick_pluto14v1 [ yearbuilt <= 1900] {"+
+                     "polygon-fill: @yearbuilt1;"+
+                  "}"                                        
   };
 })();

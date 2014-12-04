@@ -257,47 +257,69 @@ mimicks leaflet's zoom ui */
   z-index: 2100;
 }
 
-#ui-legend {
+.legend {
+  position: absolute;
   z-index: 200;
   right: 40px;
-  bottom: 40px;
-  /*width: 200px;*/
+  bottom: 20px;
+  width: 175px;
   padding: 12px;   
 }
 
-#ui-legend nav {
-  margin-top: 10px;
-  margin-bottom: 10px;
+.ui.legend h4 {
+  text-align: left;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
-#ui-legend.ui label,
-#ui-legend.ui span {
-  display: block;
-  position: relative;
+.legend .legend-scale ul {
+  margin: 0;
+  margin-bottom: 5px;
+  padding: 0;
   float: left;
-  height: 15px;
-  width: 20%;
-  text-align: center;
+  list-style: none;
+}
+
+.legend .legend-scale ul li {
+  font-size: 13px;
+  list-style: none;
+  margin-left: 0;
+  line-height: 18px;
+  margin-bottom: 0px;
+}
+
+.legend ul.legend-labels li span {
+  display: block;
+  float: left;
+  height: 16px;
+  width: 30px;
+  margin-right: 5px;
+  margin-left: 0;
+  border: 1px solid #999;
+}
+
+.legend .legend-source {
   font-size: 12px;
-  color: #000;
-  }
-
-#ui-legend.ui span {  
-  border-bottom: 1px solid #999;
-  border-top: 1px solid #999;
+  color: #999;
+  clear: both;
 }
 
-#ui-legend.ui span:first-child{
-  border-left: 1px solid #999;
+.ui.legend a {
+  color: #777;
+  width: 100%;
+  margin: inherit;
+  padding: 0 2px;
+  display: inline;
+  background-color: #fff;
+  box-shadow: 0;
+  border: 0;
+  border-radius: 0;
+  text-decoration: underline;  
 }
 
-#ui-legend.ui span:last-child{
-  border-right: 1px solid #999;
-}
-
-#ui-legend.ui label {
-  padding: 2px;
-  margin: 0 0 10px 0;
+.ui.legend a:hover {
+  color:#FFF;
+  background-color: #777;
 }
 
 /* for the leaflet / cartodb map */

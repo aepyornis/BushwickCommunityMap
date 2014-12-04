@@ -198,7 +198,7 @@ app.map = (function(w,d, $, _){
     availfar : function() {
       changeCartoCSS(el.taxLots, el.styles.availFAR);
       changeSQL(el.taxLots, el.sql.all);
-      renderLegend(el.testData);
+      renderLegend(el.legendData.availFAR);
       return true;
     },
     rentstab : function() {
@@ -213,6 +213,7 @@ app.map = (function(w,d, $, _){
     yearbuilt : function(){
       changeCartoCSS(el.taxLots, el.styles.yearbuilt);
       changeSQL(el.taxLots, el.sql.all);
+      renderLegend(el.legendData.yearBuilt);
     }
   };
 
@@ -322,31 +323,66 @@ app.map = (function(w,d, $, _){
     });
   }
 
-  // sample JSON to test renderLegend();
-  el.testData = {
-    title : "Available FAR",
-    items : [
+  // JSON to test renderLegend();
+  el.legendData = {
+    availFAR : {
+      title : "Available FAR",
+      items : [
+        {
+          color : "#FFFFB2",
+          label : "0 - 0.8"
+        },
+        {
+          color: "#FECC5C",
+          label : "0.9 - 1.6"
+        },
+        {
+          color : "#FD8D3C",
+          label : "1.7 - 2.4"
+        },
+        {
+          color : "#F03B20",
+          label : "2.5 - 3.2"
+        },
+        {
+          color : "#BD0026",
+          label : "3.3 - 4"        
+        }
+      ]
+    },
+    yearBuilt : {
+      title : "Year Built",
+      items : [
       {
-        color : "#FFFFB2",
-        label : "0 - 0.8"
+        color : "#7a0177",
+        label : "2014-2005"
       },
       {
-        color: "#FECC5C",
-        label : "0.9 - 1.6"
+        color : "#ae017e",
+        label : "2004-2001"
       },
       {
-        color : "#FD8D3C",
-        label : "1.7 - 2.4"
+        color : "#dd3497",
+        label : "2000-1991"
       },
       {
-        color : "#F03B20",
-        label : "2.5 - 3.2"
+        color : "#f768a1;",
+        label : "1990-1971"
       },
       {
-        color : "#BD0026",
-        label : "3.3 - 4"        
-      }
-    ]
+        color : "#fa9fb5",
+        label : "1970-1935"
+      },
+      {
+        color : "#fcc5c0",
+        label : "1934-1901"
+      },
+      {
+        color : "#feebe2",
+        label : "1900-1800"
+      },                                    
+      ]
+    }    
   };
 
   // get it all going!
@@ -369,5 +405,5 @@ app.map = (function(w,d, $, _){
 // call app.map.init() once the DOM is loaded
 window.addEventListener('DOMContentLoaded', function(){
   app.map.init();
-  timerangeUI();
+  // timerangeUI();
 });

@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/base/jquery-ui.css">
   <!-- CSS for UI  -->
   <link rel="stylesheet" type="text/css" href="css/styles-new.css">
+  <style type='text/css'></style>
 </head>   
 <body>
 
@@ -70,14 +71,14 @@
   </div>
   
   <!-- date range slider for year built -->
-  <div id="history" class="ui">
+ <!--  <div id="history" class="ui">
   <h4>Year Built</h4>
     <div id="slider-container">      
       <div id="slider-range"></div>
       <p class="year" id="year-min"></p>
       <p class="year" id="year-max"></p>      
     </div>
-  </div>
+  </div> -->
   
   <!-- map is rendered here, all other html elements are positioned absolutely with a higher z-index -->
   <div id="map"></div>
@@ -86,19 +87,35 @@
   <div id="tool-tip"></div>
 
   <!-- empty div to render the legends template in -->
-  <div id="ui-legend" class="ui hidden"></div>
-  
+  <div id="ui-legend" class="ui legend hidden"></div>
+ 
+  <script type="text/template" class="template">
+    <h4><%- legend.title %></h4>
+    <div class='legend-scale'>
+      <ul class='legend-labels'>
+        <% _.each( legend.items, function(item){ %>
+        <li><span style='background:<%-item.color %>;'></span><%-item.label%></li>
+        <% }); %>
+      </ul>
+    </div>
+    <div class='legend-source'>
+      Source: <a href="http://www.nyc.gov/html/dcp/html/bytes/dwn_pluto_mappluto.shtml">Map Pluto
+      </a>
+    </div>
+  </script>
+
   <!-- underscore template for dynamically rendering choropleth map legends -->
   <script type="text/template" class="template">    
-    <h4><%- legend.title %></h4>
-    <nav class="legend">
-      <% _.each( legend.items, function(item){ %>
-        <span style="background-color:<%- item.color %>"></span>          
-      <% }); %>
-      <% _.each( legend.items, function(item){ %>
-        <label><%- item.label %></label>          
-      <% }); %>      
-    </nav>    
+    // <h4><%- legend.title %></h4>
+    // <nav class="legend">
+    //   <% _.each( legend.items, function(item){ %>
+    //     <span style="background-color:<%- item.color %>"></span>          
+    //   <% }); %>
+    //   <br>
+    //   <% _.each( legend.items, function(item){ %>
+    //     <label><%- item.label %></label>          
+    //   <% }); %>      
+    // </nav>    
   </script>
 
   <!-- JS libraries -->
@@ -112,7 +129,6 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvc75lurezNSnEDDYzoz2grEBOHK7ToT8"></script>  
   
   <!-- JS code for map interaction  -->
-  <script src="js/timerange_ui.js"></script>
   <script src="js/mapStyles.js"></script>
   <script src="js/main.js"></script>
 

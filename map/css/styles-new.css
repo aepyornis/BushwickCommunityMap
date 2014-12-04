@@ -257,12 +257,12 @@ mimicks leaflet's zoom ui */
   z-index: 2100;
 }
 
-.legend {
+.ui.legend {
   position: absolute;
   z-index: 200;
   right: 40px;
   bottom: 20px;
-  width: 175px;
+  width: 200px;
   padding: 12px;   
 }
 
@@ -296,6 +296,7 @@ mimicks leaflet's zoom ui */
   margin-right: 5px;
   margin-left: 0;
   border: 1px solid #999;
+  opacity: 0.7;
 }
 
 .legend .legend-source {
@@ -359,3 +360,8 @@ mimicks leaflet's zoom ui */
   text-transform: uppercase;
 }
 
+@media screen and (max-height: 840px) {
+  .ui.legend {
+    left: 40px;
+  }
+}

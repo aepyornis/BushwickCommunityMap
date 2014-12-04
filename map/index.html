@@ -47,7 +47,7 @@
     <a href="#regular" id="regular" class="button">All Tax Lots</a>
     <a href="#availfar" id="availfar" class="button">Available FAR</a>
     <a href="#rentstab" id="rentstab" class="button">Likely Rent Stabilized</a>
-    <a href="#zoning" id="zoning" class="button">Zoning</a>
+    <a href="#landuse" id="landuse" class="button">landuse</a>
     <a href="#vacant" id="vacant" class="button">Vacant Land</a>
     <a href="#yearbuilt" id="yearbuilt" class="button">Year Built</a>
     
@@ -89,6 +89,7 @@
   <!-- empty div to render the legends template in -->
   <div id="ui-legend" class="ui legend hidden"></div>
  
+ <!-- underscore template for dynamically rendering choropleth map legends -->
   <script type="text/template" class="template">
     <h4><%- legend.title %></h4>
     <div class='legend-scale'>
@@ -102,20 +103,6 @@
       Source: <a href="http://www.nyc.gov/html/dcp/html/bytes/dwn_pluto_mappluto.shtml">Map Pluto
       </a>
     </div>
-  </script>
-
-  <!-- underscore template for dynamically rendering choropleth map legends -->
-  <script type="text/template" class="template">    
-    // <h4><%- legend.title %></h4>
-    // <nav class="legend">
-    //   <% _.each( legend.items, function(item){ %>
-    //     <span style="background-color:<%- item.color %>"></span>          
-    //   <% }); %>
-    //   <br>
-    //   <% _.each( legend.items, function(item){ %>
-    //     <label><%- item.label %></label>          
-    //   <% }); %>      
-    // </nav>    
   </script>
 
   <!-- JS libraries -->

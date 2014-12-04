@@ -190,9 +190,10 @@ app.map = (function(w,d, $, _){
       changeSQL(el.taxLots, el.sql.all);
       return true;
     },
-    zoning : function() {
-      changeCartoCSS(el.taxLots, el.styles.zoning);
+    landuse : function() {
+      changeCartoCSS(el.taxLots, el.styles.landuse);
       changeSQL(el.taxLots, el.sql.all);
+      renderLegend(el.legendData.landuse);
       return true;
     },
     availfar : function() {
@@ -323,7 +324,7 @@ app.map = (function(w,d, $, _){
     });
   }
 
-  // JSON to test renderLegend();
+  // JSON data passed to renderLegend();
   el.legendData = {
     availFAR : {
       title : "Available FAR",
@@ -381,6 +382,51 @@ app.map = (function(w,d, $, _){
         color : "#feebe2",
         label : "1900-1800"
       },                                    
+      ]
+    },
+    landuse: {
+      title: "Land Use",
+      items: [
+      {
+        color: "#A6CEE3",
+        label: "Multi-Family Walkup"
+      },
+      {
+        color: "#1F78B4",
+        label: "1 & 2 Family Bldgs"
+      },
+      {
+        color: "#B2DF8A",
+        label: "Mixed Resid & Comm"
+      },
+      {
+        color: "#33A02C",
+        label: "Parking Facilities"
+      },
+      {
+        color: "#FB9A99",
+        label: "Vacant Land"
+      },
+      {
+        color: "#E31A1C",
+        label: "Commerical & Office"
+      },
+      {
+        color: "#FDBF6F",
+        label: "Industrial & Mfg"
+      },
+      {
+        color: "#FF7F00",
+        label: "Public Fac & Instns"
+      },
+      {
+        color: "#6A3D9A;",
+        label: "Open Space & Rec"
+      },
+      {
+        color: "#CAB2D6",
+        label: "N/A"
+      },                                                        
       ]
     }    
   };

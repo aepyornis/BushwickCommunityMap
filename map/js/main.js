@@ -15,14 +15,13 @@ app.map = (function(w,d, $, _){
     satellite : null,
     taxLots : null,
     baseLayers : null,
-    rentStabl : null,
-    dobPermits : null,
     dobPermitsA1 : null,
     dobPermitsA2A3 : null,
     dobPermitsNB : null,
     template : null,
     geocoder : null,
-    geocoderMarker : null
+    geocoderMarker : null, 
+    legend: null
   };
 
   // reference cartocss styles from mapStyles.js
@@ -44,6 +43,8 @@ app.map = (function(w,d, $, _){
 
   // use google maps api geocoder
   el.geocoder = new google.maps.Geocoder();
+
+  el.legend = $('#ui-legend');
                                                                            
   // set up the map!
   var initMap = function() {
@@ -182,12 +183,13 @@ app.map = (function(w,d, $, _){
     layer.setSQL(sql);
   }
 
-  // corresponding cartoCSS changes to tax lot layer buttons
-  // TO DO: have this trigger an event that will render legends appropriately
+  // corresponding cartoCSS & SQL changes to tax lot layer buttons
+  // legends are displayed or hidden as needed
   var taxLotActions = {
     regular : function() {
       changeCartoCSS(el.taxLots, el.styles.regular);
       changeSQL(el.taxLots, el.sql.all);
+      renderLegend(null);
       return true;
     },
     landuse : function() {
@@ -205,11 +207,13 @@ app.map = (function(w,d, $, _){
     rentstab : function() {
       changeCartoCSS(el.taxLots, el.styles.red);
       changeSQL(el.taxLots, el.sql.rentStab);
+      renderLegend(null);
       return true;
     },
     vacant : function() {
       changeCartoCSS(el.taxLots, el.styles.red);
       changeSQL(el.taxLots, el.sql.vacant);
+      renderLegend(null);
     },
     yearbuilt : function(){
       changeCartoCSS(el.taxLots, el.styles.yearbuilt);
@@ -304,14 +308,17 @@ app.map = (function(w,d, $, _){
   }
 
   // render choropleth legends
-  // TO DO: set up event listener to render and reveal legend
   var renderLegend = function(data) {
+    if (data === null) { 
+      el.legend.addClass('hidden');
+      return;
+    }
     var legendData = {
       title : data.title,
       items : data.items,// array of objects containing color and values
     };    
-    $("#ui-legend").html(el.template(legendData));
-    $("#ui-legend").removeClass('hidden');
+    el.legend.html(el.template(legendData));
+    if (el.legend.hasClass('hidden')) el.legend.removeClass('hidden');
   };
 
   // set up custom zoom buttons
@@ -417,7 +424,7 @@ app.map = (function(w,d, $, _){
       },
       {
         color: "#FF7F00",
-        label: "Public Fac & Instns"
+        label: "Public Facil & Instns"
       },
       {
         color: "#6A3D9A;",
@@ -451,5 +458,4 @@ app.map = (function(w,d, $, _){
 // call app.map.init() once the DOM is loaded
 window.addEventListener('DOMContentLoaded', function(){
   app.map.init();
-  // timerangeUI();
 });

@@ -372,13 +372,17 @@ mimicks leaflet's zoom ui */
   background-image: url(../images/layers-2x.png);
 }*/
 
-
+.leaflet-retina .leaflet-control-layers-toggle,
 .leaflet-control-layers-toggle {
   background-image: url(../images/layers.png); 
-}
+  position: fixed;
+  top: 170px;
+  right: 250px;
+  z-index: 3000;  
+/*}
 
 .leaflet-retina .leaflet-control-layers,
-.leaflet-control-layers{
+.leaflet-control-layers{*/
 
   background-image: url(../images/layers.png);  
   background-repeat: no-repeat;
@@ -401,10 +405,19 @@ mimicks leaflet's zoom ui */
 
 .leaflet-retina .leaflet-control-layers-expanded,
 .leaflet-control-layers-expanded{
+  position: fixed;
+  top: 170px;
+  right: 250px;
+  z-index: 3000;
 
+  background-color: hsla(0, 0%, 100%, 0.92);  
+  border: 2px solid hsl(0, 100%, 35%);
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 0 0 black;  
+  border-radius: 4px;  
+    
   background-image: none;
-  /*width: 102px;
-  height: 40px;*/  
   font-family: Helvetica, Arial, sans-serif;
   font-size: 13px;
 }

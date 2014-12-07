@@ -371,18 +371,27 @@
       el.dobPermitsA2A3.hide();
     }
 
-    function slideTwo() {      
+    function slideTwo() {
+      if (!el.featureGroup.hasLayer(el.rheingoldJson)) {
+        el.featureGroup.addLayer(el.rheingoldJson);  
+      }          
       el.taxLots.setSQL(sql.all)
       el.taxLots.setCartoCSS(mapStyles.availFAR)      
       el.taxLots.show();      
     }
 
     function slideThree() {
+      if (!el.featureGroup.hasLayer(el.rheingoldJson)) {
+        el.featureGroup.addLayer(el.rheingoldJson);  
+      }      
       el.taxLots.hide();
       el.dobPermitsNB.show();      
     }
 
     function slideFour() {
+      if (!el.featureGroup.hasLayer(el.rheingoldJson)) {
+        el.featureGroup.addLayer(el.rheingoldJson);  
+      }      
       el.dobPermitsNB.hide();
       el.taxLots.setSQL(sql.rentStab);
       el.taxLots.setCartoCSS(mapStyles.red);
@@ -459,7 +468,8 @@
         )
         .addState(
           seq.step(3),
-          O.Parallel(                        
+          O.Parallel(
+            el.map.actions.panTo(el.rheingold),                        
             slides.activate(3),
             emitSlideChange
           )

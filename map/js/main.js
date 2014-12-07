@@ -68,7 +68,8 @@ app.map = (function(w,d, $, _){
     // instantiate the Leaflet map object
     el.map = new L.map('map', params);
     // tileLayer for mapbox basemap
-    el.mapboxTiles = L.mapbox.tileLayer('chenrick.map-3gzk4pem').addTo(el.map); 
+    el.mapboxTiles = L.mapbox.tileLayer('chenrick.map-3gzk4pem');
+    el.map.addLayer(el.mapboxTiles); 
     // lat lngs for locations of stories
     el.bushwick = new L.LatLng(40.6941, -73.9162);
     el.rheingold = new L.LatLng(40.700740, -73.934209);
@@ -79,7 +80,7 @@ app.map = (function(w,d, $, _){
     
     // add stamen toner lite base layer
     el.tonerLite = new L.StamenTileLayer('toner-lite');
-    el.map.addLayer(el.tonerLite);    
+    // el.map.addLayer(el.tonerLite);    
     
     // add Bing satelitte imagery layer
     el.satellite = new L.BingLayer('AkuX5_O7AVBpUN7ujcWGCf4uovayfogcNVYhWKjbz2Foggzu8cYBxk6e7wfQyBQW');
@@ -192,8 +193,7 @@ app.map = (function(w,d, $, _){
 
       // add the cdb layer to the map
       el.map.addLayer(layer, false);
-      // make sure the base layer stays below the cdb layer
-      el.tonerLite.bringToBack();
+      // make sure the base layer stays below the cdb layer      
       el.mapboxTiles.bringToBack();
 
       }).on('done', function() {

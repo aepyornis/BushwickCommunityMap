@@ -37,7 +37,7 @@ html, body {
   top: 40px;
   width: 360px;
   
-  padding: 12px;
+  padding: 12px 12px 12px 40px;
 
   background-color: hsla(0, 100%, 30%, 0.75);
   color: white;
@@ -49,9 +49,9 @@ html, body {
 
 #intro h1{
   margin: 0 0 12px 0;
-  font-size: 26px;
+  font-size: 30px;
   font-weight: bold;
-  line-height: 30px;
+  line-height: 34px;
 }
 
 input:focus,
@@ -323,13 +323,22 @@ mimicks leaflet's zoom ui */
 
 #slides_container {
   z-index: 1000;
-  top: 200px;
+  top: 151px;
   left: 0;
   width: 360px;
+  padding: 12px 12px 12px 40px;
 }
 
 #slides_container .slide {
-  max-height: 400px;  
+  max-height: 400px;
+  padding-right: 12px;  
+}
+
+#slides_container h1{
+  margin: 0 0 12px 0;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 30px;  
 }
 
 /*styles dob permit layer tool tip*/
@@ -416,7 +425,7 @@ mimicks leaflet's zoom ui */
   margin: 0;
   box-shadow: 0 0 0 black;  
   border-radius: 4px;  
-    
+
   background-image: none;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 13px;

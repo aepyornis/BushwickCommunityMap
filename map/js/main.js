@@ -12,12 +12,19 @@ app.map = (function(w,d, $, _){
     styleCur : null,
     sql : null,
     tonerLite : null,
+    mapboxTiles : null,
     satellite : null,
     taxLots : null,
     baseLayers : null,
     dobPermitsA1 : null,
     dobPermitsA2A3 : null,
     dobPermitsNB : null,
+    rheingoldJson : null,
+    bushwick : null,
+    rheingold : null,
+    colony : null,
+    linden : null,
+    featureGroup : null,
     template : null,
     geocoder : null,
     geocoderMarker : null, 
@@ -57,19 +64,29 @@ app.map = (function(w,d, $, _){
       maxBounds : L.latLngBounds([40.670809,-73.952579],[40.713565,-73.870354]),
       zoomControl : false
     }
-
+    L.mapbox.accessToken = 'pk.eyJ1IjoiY2hlbnJpY2siLCJhIjoiLVhZMUZZZyJ9.HcNi26J3P-MiOmBKYHIbxw';
     // instantiate the Leaflet map object
-    el.map = L.map('map', params);
+    el.map = new L.map('map', params);
+    // tileLayer for mapbox basemap
+    el.mapboxTiles = L.mapbox.tileLayer('chenrick.map-3gzk4pem').addTo(el.map); 
+    // lat lngs for locations of stories
+    el.bushwick = new L.LatLng(40.6941, -73.9162);
+    el.rheingold = new L.LatLng(40.700740, -73.934209);
+    el.colony = new L.LatLng(40.695867,-73.928153);
+    el.linden = new L.LatLng(40.692776,-73.919756);      
+    // feature group to store rheingold geoJSON
+    el.featureGroup = L.featureGroup().addTo(el.map);
+    
     // add stamen toner lite base layer
     el.tonerLite = new L.StamenTileLayer('toner-lite');
     el.map.addLayer(el.tonerLite);    
-
+    
     // add Bing satelitte imagery layer
     el.satellite = new L.BingLayer('AkuX5_O7AVBpUN7ujcWGCf4uovayfogcNVYhWKjbz2Foggzu8cYBxk6e7wfQyBQW');
 
     // object to pass Leaflet Control
      el.baseLayers = {
-        streets: el.tonerLite,
+        streets: el.mapboxTiles,
         satellite: el.satellite
     };
 
@@ -83,8 +100,19 @@ app.map = (function(w,d, $, _){
       e.layer.bringToBack();
     })   
 
+    // load the rheingold GeoJSON layer
+    loadRheingold();
     // add the tax lot layer from cartodb
     getCDBData();
+  }
+
+  // load the geoJSON boundary for the Rheingold development
+  function loadRheingold() {
+    $.getJSON('./data/rheingold_pluto_dissolved.geojson', function(json, textStatus) {
+        el.rheingoldJson = L.geoJson(json, {
+          style: { color: '#000', fill: false, dashArray: '5,10', lineCap: 'square', clickable: false }
+        });
+    });
   } 
 
   // function to load map pluto tax lot layer and dob permit layer from CartoDB
@@ -166,7 +194,11 @@ app.map = (function(w,d, $, _){
       el.map.addLayer(layer, false);
       // make sure the base layer stays below the cdb layer
       el.tonerLite.bringToBack();
+      el.mapboxTiles.bringToBack();
 
+      }).on('done', function() {
+        el.featureGroup.addLayer(el.rheingoldJson);
+        el.map.fitBounds(el.rheingoldJson);
       }); // end cartodb.createLayer
 
   };
@@ -174,8 +206,6 @@ app.map = (function(w,d, $, _){
   // change the cartoCSS of a layer
   var changeCartoCSS = function(layer, css) {
     layer.setCartoCSS(css);
-    // store the current cartocss style for the time range slider?
-    el.styleCur = css;
   };
 
   // change SQL query of a layer
@@ -445,6 +475,7 @@ app.map = (function(w,d, $, _){
     initCheckboxes();
     searchAddress();
     initZoomButtons();
+    app.intro.init();    
   }
 
   // only return init() and the stuff in the el object
@@ -457,5 +488,5 @@ app.map = (function(w,d, $, _){
 
 // call app.map.init() once the DOM is loaded
 window.addEventListener('DOMContentLoaded', function(){
-  app.map.init();
+  app.map.init();  
 });

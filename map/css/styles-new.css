@@ -330,6 +330,14 @@ mimicks leaflet's zoom ui */
   z-index: 0;
 }
 
+#slides_container {
+  z-index: 1000;
+}
+
+#slides_container .slide {
+  max-height: 600px;  
+}
+
 /*styles dob permit layer tool tip*/
 #tool-tip {
   position: absolute;

@@ -326,7 +326,7 @@ mimicks leaflet's zoom ui */
   top: 151px;
   left: 0;
   width: 360px;
-  padding: 12px 12px 12px 40px;
+  padding: 0 12px 12px 40px;
 }
 
 #slides_container .slide {
@@ -339,6 +339,20 @@ mimicks leaflet's zoom ui */
   font-size: 24px;
   font-weight: bold;
   line-height: 30px;  
+}
+
+/*#slides_container #navButtons{
+  display: inline-block;
+  vertical-align: -80%;
+}*/
+
+#toggle_slides{
+  display: inline-block;
+  width: 100%;
+  height: 34px;
+  border: 0 0 1px 0;
+  border-style: solid;
+  border-color: black;
 }
 
 /*styles dob permit layer tool tip*/

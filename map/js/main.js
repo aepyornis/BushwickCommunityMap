@@ -19,16 +19,18 @@ app.map = (function(w,d, $, _){
     dobPermitsA1 : null,
     dobPermitsA2A3 : null,
     dobPermitsNB : null,
-    rheingoldJson : null,
+    rheingoldPoly : null,
     bushwick : null,
     rheingold : null,
     colony : null,
     linden : null,
+    groveSt : null,
     featureGroup : null,
     template : null,
     geocoder : null,
     geocoderMarker : null, 
-    legend: null
+    legend : null,
+    story : null
   };
 
   // reference cartocss styles from mapStyles.js
@@ -53,7 +55,7 @@ app.map = (function(w,d, $, _){
 
   el.legend = $('#ui-legend');
                                                                            
-  // set up the map!
+  // set up the map and map layers!
   var initMap = function() {
     // map paramaters to pass to Leaflet
     var params = {
@@ -74,7 +76,14 @@ app.map = (function(w,d, $, _){
     el.bushwick = new L.LatLng(40.6941, -73.9162);
     el.rheingold = new L.LatLng(40.700740, -73.934209);
     el.colony = new L.LatLng(40.695867,-73.928153);
-    el.linden = new L.LatLng(40.692776,-73.919756);      
+    el.linden = new L.LatLng(40.692776,-73.919756);
+    el.groveSt = new L.LatLng(40.700082, -73.913740);
+
+    el.sitesGent = [
+      new L.marker(el.colony).bindPopup("<b>Colony 1209</b>"),
+      new L.marker(el.groveSt).bindPopup("<b>358 Grove St. Condos</b>")
+      ];
+
     // feature group to store rheingold geoJSON
     el.featureGroup = L.featureGroup().addTo(el.map);
     
@@ -110,8 +119,14 @@ app.map = (function(w,d, $, _){
   // load the geoJSON boundary for the Rheingold development
   function loadRheingold() {
     $.getJSON('./data/rheingold_pluto_dissolved.geojson', function(json, textStatus) {
-        el.rheingoldJson = L.geoJson(json, {
-          style: { color: '#000', fill: false, dashArray: '5,10', lineCap: 'square', clickable: false }
+        el.rheingoldPoly = L.geoJson(json, {
+          style: function(feature){
+            return { color: '#000', dashArray: '5,10', lineCap: 'square' }
+          },
+          onEachFeature: function(feature, layer) {
+            popupOptions = {maxWidth: 200};
+            layer.bindPopup("<b>Rheingold Rezoning</b>");
+          }
         });
     });
   } 
@@ -266,7 +281,8 @@ app.map = (function(w,d, $, _){
     var checkboxDOB = $('input.dob:checkbox'),
           $a1 = $('#a1'),
           $a2a3 = $('#a2a3'),
-          $nb = $('#nb');
+          $nb = $('#nb'),
+          $sg = $('#sites-of-gentrification');
 
     // toggle A1 major alterations layer
     $a1.change(function(){
@@ -292,6 +308,22 @@ app.map = (function(w,d, $, _){
         el.dobPermitsNB.show();        
       } else {
         el.dobPermitsNB.hide();
+      };
+    });
+
+    $sg.change(function(){
+      if ($sg.is(':checked')) {
+        for (i=0; i<el.sitesGent.length; i++) {
+          el.featureGroup.addLayer(el.sitesGent[i]);  
+        }
+        el.featureGroup.addLayer(el.rheingoldPoly);
+        el.map.fitBounds(el.featureGroup);
+        
+      } else {
+        for (i=0; i<el.sitesGent.length; i++) {
+          el.featureGroup.removeLayer(el.sitesGent[i]);  
+        }
+        el.featureGroup.removeLayer(el.rheingoldPoly);
       };
     });        
   }

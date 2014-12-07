@@ -75,17 +75,17 @@ app.intro = (function(w,d,$,O) {
   }
 
   function slideOne() {
-    if (!el.featureGroup.hasLayer(el.rheingoldJson)) {
-      el.featureGroup.addLayer(el.rheingoldJson);  
+    if (!el.featureGroup.hasLayer(el.rheingoldPoly)) {
+      el.featureGroup.addLayer(el.rheingoldPoly);  
     }
-    el.map.fitBounds(el.rheingoldJson);    
+    el.map.fitBounds(el.rheingoldPoly);    
     el.dobPermitsA1.hide();
     el.dobPermitsA2A3.hide();
   }
 
   function slideTwo() {
-    if (!el.featureGroup.hasLayer(el.rheingoldJson)) {
-      el.featureGroup.addLayer(el.rheingoldJson);  
+    if (!el.featureGroup.hasLayer(el.rheingoldPoly)) {
+      el.featureGroup.addLayer(el.rheingoldPoly);  
     }          
     el.taxLots.setSQL(el.sql.all);
     el.taxLots.setCartoCSS(el.styles.availFAR);      
@@ -93,16 +93,16 @@ app.intro = (function(w,d,$,O) {
   }
 
   function slideThree() {
-    if (!el.featureGroup.hasLayer(el.rheingoldJson)) {
-      el.featureGroup.addLayer(el.rheingoldJson);  
+    if (!el.featureGroup.hasLayer(el.rheingoldPoly)) {
+      el.featureGroup.addLayer(el.rheingoldPoly);  
     }      
     el.taxLots.hide();
     el.dobPermitsNB.show();      
   }
 
   function slideFour() {
-    if (!el.featureGroup.hasLayer(el.rheingoldJson)) {
-      el.featureGroup.addLayer(el.rheingoldJson);  
+    if (!el.featureGroup.hasLayer(el.rheingoldPoly)) {
+      el.featureGroup.addLayer(el.rheingoldPoly);  
     }      
     el.dobPermitsNB.hide();
     el.taxLots.setSQL(el.sql.rentStab);
@@ -112,8 +112,8 @@ app.intro = (function(w,d,$,O) {
 
   function slideFive() {
     el.taxLots.hide();      
-    if (el.featureGroup.hasLayer(el.rheingoldJson)) {
-      el.featureGroup.removeLayer(el.rheingoldJson);
+    if (el.featureGroup.hasLayer(el.rheingoldPoly)) {
+      el.featureGroup.removeLayer(el.rheingoldPoly);
     }
   }
 
@@ -128,8 +128,8 @@ app.intro = (function(w,d,$,O) {
   }
 
   function slideTen() {
-    if (el.featureGroup.hasLayer(el.rheingoldJson)) {
-      el.featureGroup.removeLayer(el.rheingoldJson);
+    if (el.featureGroup.hasLayer(el.rheingoldPoly)) {
+      el.featureGroup.removeLayer(el.rheingoldPoly);
     }
     el.dobPermitsNB.hide();      
     el.dobPermitsA1.hide();
@@ -152,7 +152,7 @@ app.intro = (function(w,d,$,O) {
     click(document.querySelectorAll('.prev')).then(seq.prev, seq)  
 
     var slides = O.Actions.Slides('slides');
-    var story = O.Story()
+    el.story = O.Story()
       .addState(
         seq.step(0),
         O.Parallel(                        
@@ -245,7 +245,7 @@ app.intro = (function(w,d,$,O) {
         )          
       );
 
-    story.go(0);
+    el.story.go(0);
   }
 
   function init() {

@@ -197,8 +197,7 @@ app.map = (function(w,d, $, _){
       el.mapboxTiles.bringToBack();
 
       }).on('done', function() {
-        el.featureGroup.addLayer(el.rheingoldJson);
-        el.map.fitBounds(el.rheingoldJson);
+        
       }); 
       // end cartodb.createLayer!
   };

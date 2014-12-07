@@ -224,8 +224,8 @@ mimicks leaflet's zoom ui */
   border-radius: 0;
   
   background-color: rgba(0, 0, 0, 0);
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
   display: inline-block;
 
   box-shadow: 0 0 0 black; 
@@ -240,18 +240,18 @@ mimicks leaflet's zoom ui */
   color: black;
 }
 
-#ui-map-tiles{
+/*#ui-map-tiles{
   position: absolute;
   top: 108px;
   right: 250px;
   
   z-index: 2000;
-}
+}*/
 
 #ui-zoom{
   position: absolute;
 
-  top: 153px;
+  top: 108px;
   right: 250px;
 
   z-index: 2100;
@@ -364,4 +364,40 @@ mimicks leaflet's zoom ui */
   .ui.legend {
     left: 40px;
   }
+}
+
+/*.leaflet-retina .leaflet-control-layers{
+  background-image: url(../images/layers-2x.png);
+}*/
+
+.leaflet-retina .leaflet-control-layers,
+.leaflet-control-layers{
+
+  background-image: url(../images/layers.png);  
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: hsla(0, 0%, 100%, 0.92);  
+  border: 2px solid hsl(0, 100%, 35%);
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 0 0 black;  
+  border-radius: 4px;  
+
+  position: fixed;
+  top: 170px;
+  right: 250px;
+  z-index: 3000;
+
+  /*width: 34px;
+  height: 34px;*/
+}
+
+.leaflet-retina .leaflet-control-layers-expanded,
+.leaflet-control-layers-expanded{
+
+  background-image: none;
+  /*width: 102px;
+  height: 40px;*/  
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
 }

@@ -78,21 +78,6 @@ input{
   z-index: 85;
 }
 
-.year{
-  position: absolute;
-  border: 0 none;
-  text-align: center;
-  color: hsl(0, 0%, 50%);
-}
-
-#slider-container{
-  position: relative;
-  width: 85%;
-  /*height: 40px;*/
-  margin: 0 24px 0 24px;
-  display: inline-block;
-}
-
 #search-button{
   position: absolute;
   top: 65px;
@@ -332,10 +317,13 @@ mimicks leaflet's zoom ui */
 
 #slides_container {
   z-index: 1000;
+  top: 200px;
+  left: 0;
+  width: 360px;
 }
 
 #slides_container .slide {
-  max-height: 600px;  
+  max-height: 400px;  
 }
 
 /*styles dob permit layer tool tip*/
@@ -345,7 +333,7 @@ mimicks leaflet's zoom ui */
   height: auto;
   background-color: #FFF;
   opacity: .8;
-  z-index: 150;
+  z-index: 50;
   border-radius: 15px;
   text-align: left;
   vertical-align: bottom;

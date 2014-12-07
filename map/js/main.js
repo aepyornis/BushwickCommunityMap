@@ -177,7 +177,7 @@ app.map = (function(w,d, $, _){
                                 '<p><strong>Proposed Building Stories:</strong> '  + data.proposedst + '</p>'
                                 );
             $(document).bind('mousemove', event);
-            $('#tool-tip').show();
+            $('#tool-tip').show();            
           });
           
           // when the user mouses out remove the tool tip
@@ -199,8 +199,8 @@ app.map = (function(w,d, $, _){
       }).on('done', function() {
         el.featureGroup.addLayer(el.rheingoldJson);
         el.map.fitBounds(el.rheingoldJson);
-      }); // end cartodb.createLayer
-
+      }); 
+      // end cartodb.createLayer!
   };
 
   // change the cartoCSS of a layer

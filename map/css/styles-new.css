@@ -36,6 +36,7 @@ html, body {
   position: absolute;
   top: 40px;
   width: 360px;
+  height: 110px;
   
   padding: 12px 12px 12px 40px;
 
@@ -323,36 +324,46 @@ mimicks leaflet's zoom ui */
 
 #slides_container {
   z-index: 1000;
-  top: 151px;
+  top: 150px;
   left: 0;
   width: 360px;
-  padding: 0 12px 12px 40px;
+  /*padding: 0 12px 12px 40px;*/
+  padding: 0;
 }
 
 #slides_container .slide {
   max-height: 400px;
-  padding-right: 12px;  
+  padding: 12px 12px 12px 40px;
 }
 
 #slides_container h1{
-  margin: 0 0 12px 0;
+  /*margin: 0 0 12px 0;*/
   font-size: 24px;
   font-weight: bold;
   line-height: 30px;  
 }
 
-/*#slides_container #navButtons{
-  display: inline-block;
-  vertical-align: -80%;
-}*/
+#slides_container #navButtons{
+  padding: 0 0 12px 40px;
+}
 
-#toggle_slides{
+#toggle_slides a{
   display: inline-block;
   width: 100%;
   height: 34px;
+  padding: 12px 12px 12px 40px;
+  text-align: left;
   border-width: 0 0 1px 0;
   border-style: solid;
-  border-color: black;
+  border-color: hsla(0, 0%, 0%, 0.2);
+  color: hsl(0, 100%, 40%);
+  text-decoration: none;  
+}
+
+#toggle_slides a:hover{
+  color: hsl(0, 100%, 40%);
+  text-decoration: none;
+  background-color: hsla(0, 0%, 0%, 0.05);
 }
 
 /*styles dob permit layer tool tip*/

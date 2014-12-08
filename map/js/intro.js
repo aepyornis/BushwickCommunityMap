@@ -1,9 +1,11 @@
 var app = app || {};
 
+// all odyssey.js related code is in here
 app.intro = (function(w,d,$,O) {
 
   el = null;
 
+  // creates the arrow clicking interaction for the slides
   function click(el) {
     var element = O.Core.getElement(el);
     var t = O.Trigger();
@@ -255,13 +257,7 @@ app.intro = (function(w,d,$,O) {
   } 
 
   return {
-    init : init,
-    el : el
+    init : init
   }
 
 })(window, document, jQuery, O);
-
-// call app.intro.init() once the DOM is loaded
-window.addEventListener('DOMContentLoaded', function(){
-  // app.intro.init();  
-});

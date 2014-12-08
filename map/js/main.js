@@ -4,7 +4,8 @@ var app = app || {};
 // keep our map stuff in a part of the app object as to not pollute the global name space
 app.map = (function(w,d, $, _){
 
-  //  define all local variables for map parts and layers and store in an object called 'el' 
+  //  define all local variables for map parts and layers 
+  //  store in an object called 'el' that can be accessed elsewhere
   var el = {
     map : null,
     cdbURL : null,
@@ -64,14 +65,22 @@ app.map = (function(w,d, $, _){
       maxZoom : 19,
       zoom : 15,
       maxBounds : L.latLngBounds([40.670809,-73.952579],[40.713565,-73.870354]),
-      zoomControl : false
+      zoomControl : false,
+      infoControl: false,
+      attributionControl: true
     }
+    
     L.mapbox.accessToken = 'pk.eyJ1IjoiY2hlbnJpY2siLCJhIjoiLVhZMUZZZyJ9.HcNi26J3P-MiOmBKYHIbxw';
     // instantiate the Leaflet map object
     el.map = new L.map('map', params);
     // tileLayer for mapbox basemap
     el.mapboxTiles = L.mapbox.tileLayer('chenrick.map-3gzk4pem');
     el.map.addLayer(el.mapboxTiles); 
+
+    // add mapbox and osm attribution
+    var attr = "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a>"
+    el.map.attributionControl.addAttribution(attr);
+
     // lat lngs for locations of stories
     el.bushwick = new L.LatLng(40.6941, -73.9162);
     el.rheingold = new L.LatLng(40.700740, -73.934209);
@@ -80,8 +89,8 @@ app.map = (function(w,d, $, _){
     el.groveSt = new L.LatLng(40.700082, -73.913740);
 
     el.sitesGent = [
-      new L.marker(el.colony).bindPopup("<b>Colony 1209</b>"),
-      new L.marker(el.groveSt).bindPopup("<b>358 Grove St. Condos</b>")
+      new L.marker(el.colony).bindPopup("<b>Colony 1209</b>").openPopup(),
+      new L.marker(el.groveSt).bindPopup("<b>358 Grove St. Condos</b>").openPopup()
       ];
 
     // feature group to store rheingold geoJSON
@@ -275,14 +284,15 @@ app.map = (function(w,d, $, _){
     }); 
   }
 
-  // change dob permit layer sql based on check box boolean
+  // toggle additional layers based on check box boolean value
   var initCheckboxes = function() {
     // checkboxes for dob permit layer
     var checkboxDOB = $('input.dob:checkbox'),
           $a1 = $('#a1'),
           $a2a3 = $('#a2a3'),
           $nb = $('#nb'),
-          $sg = $('#sites-of-gentrification');
+          $sg = $('#sites-of-gentrification'),
+          $ps = $('#personal-stories');
 
     // toggle A1 major alterations layer
     $a1.change(function(){
@@ -311,6 +321,7 @@ app.map = (function(w,d, $, _){
       };
     });
 
+    // toggle sites of gentrification
     $sg.change(function(){
       if ($sg.is(':checked')) {
         for (i=0; i<el.sitesGent.length; i++) {
@@ -326,6 +337,16 @@ app.map = (function(w,d, $, _){
         el.featureGroup.removeLayer(el.rheingoldPoly);
       };
     });        
+
+    // toggle personal stories
+    // to do: add stories!
+    $ps.change(function(){
+      if ($ps.is(':checked')) {
+        console.log('show stories');
+      } else {
+        console.log('hide stories');
+      }
+    });
   }
 
   // geocode search box text and create a marker on the map
@@ -352,7 +373,7 @@ app.map = (function(w,d, $, _){
       });
   }
 
-  // search box ui interaction TO DO: do a check to see if point is outside of Bushwick bounds
+  // search box ui interaction TO DO: check to see if point is outside of Bushwick bounds
   var searchAddress = function() {
     $('#search-box').focus(function(){
       if ($(this).val()==="Search for a Bushwick address") {
@@ -392,7 +413,7 @@ app.map = (function(w,d, $, _){
     });
   }
 
-  // JSON data passed to renderLegend();
+  // data passed to renderLegend();
   el.legendData = {
     availFAR : {
       title : "Available FAR",

@@ -446,7 +446,7 @@ mimicks leaflet's zoom ui */
 
   background-color: hsla(0, 0%, 100%, 0.92);  
   border: 2px solid hsl(0, 100%, 35%);
-  padding: 0;
+  padding: 5px;
   margin: 0;
   box-shadow: 0 0 0 black;  
   border-radius: 4px;  

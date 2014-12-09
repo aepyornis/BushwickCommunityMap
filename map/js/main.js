@@ -36,7 +36,7 @@ app.map = (function(w,d, $, _){
   // reference cartocss styles from mapStyles.js
   el.styles = app.mapStyles;
   // url to cartodb bushwick community map viz json
-  el.cdbURL = "//bushwick.cartodb.com/api/v2/viz/64ceb582-71e2-11e4-b052-0e018d66dc29/viz.json";
+  el.cdbURL = "https://bushwick.cartodb.com/api/v2/viz/64ceb582-71e2-11e4-b052-0e018d66dc29/viz.json";
 
   // queries for map pluto tax lots
   // sent to cartodb when layer buttons clicked

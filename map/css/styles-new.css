@@ -232,14 +232,6 @@ mimicks leaflet's zoom ui */
   color: black;
 }
 
-/*#ui-map-tiles{
-  position: absolute;
-  top: 108px;
-  right: 250px;
-  
-  z-index: 2000;
-}*/
-
 #ui-zoom{
   position: absolute;
 

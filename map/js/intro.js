@@ -1,6 +1,6 @@
 var app = app || {};
 
-// all odyssey.js related code is in here
+// all odyssey.js related code for the introduction is in here
 app.intro = (function(w,d,$,O) {
 
   el = null;
@@ -250,10 +250,34 @@ app.intro = (function(w,d,$,O) {
     el.story.go(0);
   }
 
+  // init button that hides / shows the intro slides
+  function hideShow() {
+    $('#toggle_slides a').bind('mouseup', function(){
+      if($('#slides').css('display') != 'none'){
+        $('#slides').css({
+          display: 'none'
+        });
+        $('#navButtons').css({
+          display: 'none'
+        }); 
+        $(this).html('Show intro');
+      }else{
+        $('#slides').css({
+          display: 'block'
+        });
+        $('#navButtons').css({
+          display: 'block'
+        }); 
+        $(this).html('Hide intro');   
+      }
+    });    
+  }
+
   function init() {
     el = app.map.el;      
     initOdyssey(O);
-    listenSlideChange();            
+    listenSlideChange();
+    hideShow();            
   } 
 
   return {

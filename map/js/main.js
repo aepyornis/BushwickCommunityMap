@@ -60,19 +60,35 @@ app.map = (function(w,d, $, _){
   var initMap = function() {
     // map paramaters to pass to Leaflet
     var params = {
-      center : [40.6941, -73.9162],
+      center : [40.694631,-73.925028],
       minZoom : 14,
       maxZoom : 19,
       zoom : 15,
-      maxBounds : L.latLngBounds([40.670809,-73.952579],[40.713565,-73.870354]),
+      maxBounds : L.latLngBounds([40.675496,-73.957987],[40.714216,-73.877306]), 
       zoomControl : false,
       infoControl: false,
       attributionControl: true
     }
+
+    // lat lngs for locations of stories
+    el.bushwick = new L.LatLng(40.694631,-73.925028);
+    el.rheingold = new L.LatLng(40.700740, -73.934209);
+    el.colony = new L.LatLng(40.695867,-73.928153);
+    el.linden = new L.LatLng(40.692776,-73.919756);
+    el.groveSt = new L.LatLng(40.700082, -73.913740);    
+
+    // array to store sites of gentrification
+    el.sitesGent = [
+      new L.marker(el.colony).bindPopup("<b>Colony 1209</b>").openPopup(),
+      new L.marker(el.groveSt).bindPopup("<b>358 Grove St. Condos</b>").openPopup()
+      ];
     
-    L.mapbox.accessToken = 'pk.eyJ1IjoiY2hlbnJpY2siLCJhIjoiLVhZMUZZZyJ9.HcNi26J3P-MiOmBKYHIbxw';
     // instantiate the Leaflet map object
     el.map = new L.map('map', params);
+    
+    // api key for mapbox tiles
+    L.mapbox.accessToken = 'pk.eyJ1IjoiY2hlbnJpY2siLCJhIjoiLVhZMUZZZyJ9.HcNi26J3P-MiOmBKYHIbxw';
+
     // tileLayer for mapbox basemap
     el.mapboxTiles = L.mapbox.tileLayer('chenrick.map-3gzk4pem');
     el.map.addLayer(el.mapboxTiles); 
@@ -80,18 +96,6 @@ app.map = (function(w,d, $, _){
     // add mapbox and osm attribution
     var attr = "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a>"
     el.map.attributionControl.addAttribution(attr);
-
-    // lat lngs for locations of stories
-    el.bushwick = new L.LatLng(40.6941, -73.9162);
-    el.rheingold = new L.LatLng(40.700740, -73.934209);
-    el.colony = new L.LatLng(40.695867,-73.928153);
-    el.linden = new L.LatLng(40.692776,-73.919756);
-    el.groveSt = new L.LatLng(40.700082, -73.913740);
-
-    el.sitesGent = [
-      new L.marker(el.colony).bindPopup("<b>Colony 1209</b>").openPopup(),
-      new L.marker(el.groveSt).bindPopup("<b>358 Grove St. Condos</b>").openPopup()
-      ];
 
     // feature group to store rheingold geoJSON
     el.featureGroup = L.featureGroup().addTo(el.map);
@@ -222,8 +226,7 @@ app.map = (function(w,d, $, _){
 
       }).on('done', function() {
         
-      }); 
-      // end cartodb.createLayer!
+      }); // end cartodb.createLayer!      
   };
 
   // change the cartoCSS of a layer
@@ -286,7 +289,7 @@ app.map = (function(w,d, $, _){
 
   // toggle additional layers based on check box boolean value
   var initCheckboxes = function() {
-    // checkboxes for dob permit layer
+    // checkboxes for dob permit layer & stories
     var checkboxDOB = $('input.dob:checkbox'),
           $a1 = $('#a1'),
           $a2a3 = $('#a2a3'),
@@ -389,7 +392,7 @@ app.map = (function(w,d, $, _){
     });
   }
 
-  // render choropleth legends
+  // function to render choropleth legends
   var renderLegend = function(data) {
     if (data === null) { 
       el.legend.addClass('hidden');
@@ -414,6 +417,7 @@ app.map = (function(w,d, $, _){
   }
 
   // data passed to renderLegend();
+  // to do: generate this dynamically from cartocss
   el.legendData = {
     availFAR : {
       title : "Available FAR",

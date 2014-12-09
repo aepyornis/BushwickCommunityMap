@@ -12,7 +12,6 @@ app.map = (function(w,d, $, _){
     styles: null,
     styleCur : null,
     sql : null,
-    tonerLite : null,
     mapboxTiles : null,
     satellite : null,
     taxLots : null,
@@ -98,11 +97,7 @@ app.map = (function(w,d, $, _){
     el.map.attributionControl.addAttribution(attr);
 
     // feature group to store rheingold geoJSON
-    el.featureGroup = L.featureGroup().addTo(el.map);
-    
-    // add stamen toner lite base layer
-    el.tonerLite = new L.StamenTileLayer('toner-lite');
-    // el.map.addLayer(el.tonerLite);    
+    el.featureGroup = L.featureGroup().addTo(el.map);    
     
     // add Bing satelitte imagery layer
     el.satellite = new L.BingLayer('AkuX5_O7AVBpUN7ujcWGCf4uovayfogcNVYhWKjbz2Foggzu8cYBxk6e7wfQyBQW');

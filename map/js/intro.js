@@ -81,8 +81,6 @@ app.intro = (function(w,d,$,O) {
       el.featureGroup.addLayer(el.rheingoldPoly);  
     }
     el.map.fitBounds(el.rheingoldPoly);    
-    el.dobPermitsA1.hide();
-    el.dobPermitsA2A3.hide();
   }
 
   function slideTwo() {

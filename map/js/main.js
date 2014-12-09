@@ -127,10 +127,10 @@ app.map = (function(w,d, $, _){
 
   // load the geoJSON boundary for the Rheingold development
   function loadRheingold() {
-    $.getJSON('./data/rheingold_pluto_dissolved.geojson', function(json, textStatus) {
+    $.getJSON('./data/rheingold_rezoning_area.geojson', function(json, textStatus) {
         el.rheingoldPoly = L.geoJson(json, {
           style: function(feature){
-            return { color: '#000', dashArray: '5,10', lineCap: 'square' }
+            return { color: '#000', fillColor: '#fff', fillOpacity: 0.2, dashArray: '5,10', lineCap: 'square' }
           },
           onEachFeature: function(feature, layer) {
             popupOptions = {maxWidth: 200};

@@ -32,23 +32,26 @@ html, body {
   z-index: 100;
 }
 
-#intro{
+#intro {
   position: absolute;
   top: 40px;
   width: 360px;
   height: 110px;
-  
   padding: 12px 12px 12px 40px;
-
   background-color: hsla(0, 100%, 30%, 0.75);
-  color: white;
+  color: #fff;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 13px;
   line-height: 18px;
   z-index: 95;
 }
 
-#intro h1{
+#intro a {
+  text-decoration: none;
+  color: #fff;
+}
+
+#intro h1 {
   margin: 0 0 12px 0;
   font-size: 30px;
   font-weight: bold;

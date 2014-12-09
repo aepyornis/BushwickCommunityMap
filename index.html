@@ -1,30 +1,37 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Northwest Bushwick Community Map</title>
-
   <!-- CSS libraries  -->
+  <link href="css/normalize.css" rel="stylesheet">
   <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
   <link rel="stylesheet" href="//libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
   <link rel="stylesheet" href="//cartodb.github.io/odyssey.js/sandbox/css/slides.css">
-  <!-- Mapbox JS and CSS -->
+  <!-- Mapbox JS -->
   <script src='//api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
-  <!-- <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet'/> -->
-  <!-- CSS for UI  -->
+  <!-- CSS for UI  -->  
+  <link href="css/main.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/styles-new.css">
   <style type='text/css'></style>
 </head>   
 <body>
-
-  <!-- top menu bar -->
-  <div id="menu"></div>
-  
   <!-- Map title and intro -->
   <div id="intro">
-    <h1>Northwest Bushwick Community Map</h1>
+    <h1><a href="index.html">Northwest Bushwick Community Map</a></h1>
+  </div>
+
+  <!-- top menu bar -->
+  <div class="navigation">
+    <ul class="navbar">
+      <li><a href="html/about.html">About</a></li>
+      <li><a href="html/references.html">Get Help</a></li>
+      <li><a href="html/volunteer.html">Get Involved</a></li>
+      <li><a href="html/glossary.html">Research</a></li>
+      <li><a href="html/contact.html">Contact</a></li>
+    </ul>
   </div>
   
   <!-- address search box -->

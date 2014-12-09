@@ -315,6 +315,7 @@ mimicks leaflet's zoom ui */
 }
 
 #slides_container {
+  background-color: hsla(0, 100%, 100%, 0.9);
   z-index: 1000;
   top: 150px;
   left: 0;

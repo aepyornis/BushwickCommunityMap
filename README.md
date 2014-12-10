@@ -53,7 +53,4 @@ Tested successfully on modern versions of the following browsers:
 - Safari
 - Firefox
 
-Have not yet tested on Internet Explorer.
-
-
-**note:** the Chrome extension `HTTPS Everywhere` will break the map.
+Not yet tested on Internet Explorer.

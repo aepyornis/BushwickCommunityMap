@@ -47,14 +47,16 @@ html, body {
 .copy {
   width: 100%;
   height: 100%;
+  margin: 0;
     font-family: AleoRegular, Serif;
     /*margin: 50px;*/
     text-align: center;
-    padding: 130px 40px 40px 40px;
+    padding: 110px 40px 40px 40px;
 }
 
 .es {
     width: 720px;
+    margin: 0;
     /*visibility: hidden;*/
     display: none;
     font-family: AleoRegular, Serif;
@@ -65,9 +67,11 @@ html, body {
 
 .en {
     width: 720px;
-    visibility: visible;    
-    position: absolute;
-    margin-top: 2px;
+    margin: 0;
+    display: inline-block;
+    /*visibility: visible;    */
+    /*position: absolute;
+    margin-top: 2px;*/
     font-family: AleoRegular, Serif;
     font-size: 16px;
     line-height: 21px;
@@ -91,7 +95,7 @@ html, body {
   top: 0;
   width: 360px;
   height: 110px;
-  padding: 12px 12px 12px 40px;
+  padding: 8px 12px 12px 40px;
   background-color: hsla(0, 100%, 30%, 0.75);
   color: #fff;
   font-family: ProximaNovaBold, Helvetica, Arial, sans-serif;
@@ -103,6 +107,17 @@ html, body {
 #intro a {
   text-decoration: none;
   color: #fff;
+}
+
+#intro a#language {
+  display: inline-block;
+  font-size: 12px;
+  padding: 0 4px 0 4px;
+  border: 1px solid white;
+}
+
+#intro a:hover#language {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 #intro h1 {
@@ -124,29 +139,34 @@ html, body {
 }
 
 .navbar {
-    position: absolute;
     list-style-type: none;
-    padding: 10px 0 10px 20px;
+    /*padding: 10px;*/
 }
 
 .navbar li {
     display: inline-block;
-    margin-right: 45px;
 }
 
 .navbar li a{
+    display: inline-block;
+    text-align: center;
+    /*vertical-align: middle;    */
+    height: 40px;
+    padding: 10px;   
     font-size: 16px;
     letter-spacing: 1px;
     text-decoration: none;
-    color: #fff;
+    color: #fff;   
 }
 
 .navbar li a:hover{
-    color: #999;
+    background-color: rgba(255, 255, 255, 0.1);
+    /*border: 1px solid #FFFFFF;*/
 }
 
-.navbar li a.select {
-    color: #000;
+.navbar li a.selected {
+    background-color: white;
+    color: hsla(0, 100%, 30%, 0.75);
 }
 
 input:focus,

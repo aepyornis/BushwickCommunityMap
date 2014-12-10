@@ -44,20 +44,34 @@ html, body {
 }
 
 /*---------- WEBSITE ----------*/
-.es {
-    visibility: hidden;
+.copy {
+  width: 100%;
+  height: 100%;
     font-family: AleoRegular, Serif;
-    font-size: 15px;
-    line-height: 21px;    
+    /*margin: 50px;*/
+    text-align: center;
+    padding: 130px 40px 40px 40px;
+}
+
+.es {
+    width: 720px;
+    /*visibility: hidden;*/
+    display: none;
+    font-family: AleoRegular, Serif;
+    font-size: 16px;
+    line-height: 21px; 
+    text-align: left;   
 }
 
 .en {
+    width: 720px;
     visibility: visible;    
     position: absolute;
     margin-top: 2px;
     font-family: AleoRegular, Serif;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 21px;
+    text-align: left;    
 } 
 
 .en h2,
@@ -65,7 +79,7 @@ html, body {
   font-family: ProximaNovaBold, Helvetica, Arial, sans-serif;
   font-size: 24px;
   font-weight: bold;
-  line-height: 30px;    
+  line-height: 30px;
 }
 /*-----------------------------*/
 
@@ -74,7 +88,7 @@ html, body {
 /* title */
 #intro {
   position: absolute;
-  top: 40px;
+  top: 0;
   width: 360px;
   height: 110px;
   padding: 12px 12px 12px 40px;
@@ -102,7 +116,7 @@ html, body {
     font-family: ProximaNovaBold, Helvetica, Arial, sans-serif;
     position: absolute;
     top: 0;
-    left: 0;
+    left: 360px;
     width: 100%;
     height: 40px;
     background-color: hsla(0, 100%, 30%, 0.75);
@@ -110,10 +124,9 @@ html, body {
 }
 
 .navbar {
-    position: relative;
+    position: absolute;
     list-style-type: none;
-    left: 405px;
-    top: 12px;
+    padding: 10px 0 10px 20px;
 }
 
 .navbar li {
@@ -134,12 +147,6 @@ html, body {
 
 .navbar li a.select {
     color: #000;
-}
-
-.copy {
-    font-family: AleoRegular, Serif;
-    margin: 50px;
-    padding-top: 10px;
 }
 
 input:focus,
@@ -409,7 +416,7 @@ mimicks leaflet's zoom ui */
 #slides_container {
   background-color: hsla(0, 100%, 100%, 0.9);
   z-index: 1000;
-  top: 150px;
+  top: 110px;
   left: 0;
   width: 360px;
   /*padding: 0 12px 12px 40px;*/

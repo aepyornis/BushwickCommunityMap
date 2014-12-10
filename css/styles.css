@@ -1,5 +1,26 @@
 /* new styles */
 
+@import url("http://fast.fonts.net/t/1.css?apiType=css&projectid=3af16084-ba56-49ca-b37d-0b49b59e1927");
+@font-face{
+  font-family:"AleoRegular";
+  src:url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.eot);
+  src:url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.eot?#iefix) format('embedded-opentype'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.woff) format('woff'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.ttf) format('truetype'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.svg) format('svg')
+}
+@font-face{
+  font-family:"AleoBold";
+  src:url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.eot);
+  src:url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.eot?#iefix) format('embedded-opentype'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.woff) format('woff'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.ttf) format('truetype'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.svg) format('svg')
+}
+@font-face{
+  font-family:"ProximaNovaBold";
+  src:url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/fbc6b03a-b3a1-427c-a884-053deca3a53c.eot);
+  src:url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/fbc6b03a-b3a1-427c-a884-053deca3a53c.eot?#iefix) format('embedded-opentype'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/d999c07b-a049-4eb5-b8a6-4f36ae25e67e.woff) format('woff'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/4d4a75f5-d32a-4a09-8665-133afd39cc37.ttf) format('truetype'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/8152bc4e-d700-4c78-b6be-326893e6f53f.svg) format('svg')
+}
+@font-face{
+  font-family:"ProximaNovaBold";
+  src:url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/fbc6b03a-b3a1-427c-a884-053deca3a53c.eot);
+  src:url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/fbc6b03a-b3a1-427c-a884-053deca3a53c.eot?#iefix) format('embedded-opentype'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/d999c07b-a049-4eb5-b8a6-4f36ae25e67e.woff) format('woff'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/4d4a75f5-d32a-4a09-8665-133afd39cc37.ttf) format('truetype'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/8152bc4e-d700-4c78-b6be-326893e6f53f.svg) format('svg')
+}
 html, body {
 /*  height: 100%;
   width: 100%;*/
@@ -7,7 +28,7 @@ html, body {
   border: 0;
   padding: 0;
   
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: ProximaNovaBold, Helvetica, Arial, sans-serif;
   font-size: 13px;
   background: white;
 }
@@ -22,16 +43,34 @@ html, body {
   display: none;
 }
 
+/*---------- WEBSITE ----------*/
 .es {
     visibility: hidden;
+    font-family: AleoRegular, Serif;
+    font-size: 15px;
+    line-height: 21px;    
 }
 
 .en {
     visibility: visible;    
     position: absolute;
     margin-top: 2px;
+    font-family: AleoRegular, Serif;
+    font-size: 15px;
+    line-height: 21px;
 } 
 
+.en h2,
+.es h2{
+  font-family: ProximaNovaBold, Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 30px;    
+}
+/*-----------------------------*/
+
+
+/*------------ MAP ------------*/
 /* title */
 #intro {
   position: absolute;
@@ -41,7 +80,7 @@ html, body {
   padding: 12px 12px 12px 40px;
   background-color: hsla(0, 100%, 30%, 0.75);
   color: #fff;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: ProximaNovaBold, Helvetica, Arial, sans-serif;
   font-size: 13px;
   line-height: 18px;
   z-index: 95;
@@ -60,7 +99,7 @@ html, body {
 }
 
 .navigation {
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: ProximaNovaBold, Helvetica, Arial, sans-serif;
     position: absolute;
     top: 0;
     left: 0;
@@ -98,7 +137,7 @@ html, body {
 }
 
 .copy {
-    font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+    font-family: AleoRegular, Serif;
     margin: 50px;
     padding-top: 10px;
 }
@@ -111,7 +150,7 @@ button:focus {
 }
 
 input{
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: ProximaNovaBold, Helvetica, Arial, sans-serif;
   font-size: 13px;
 }
 

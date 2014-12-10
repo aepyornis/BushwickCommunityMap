@@ -22,16 +22,17 @@ html, body {
   display: none;
 }
 
-#menu{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 40px;
-  background-color: hsla(0, 100%, 30%, 0.75);
-  z-index: 100;
+.es {
+    visibility: hidden;
 }
 
+.en {
+    visibility: visible;    
+    position: absolute;
+    margin-top: 2px;
+} 
+
+/* title */
 #intro {
   position: absolute;
   top: 40px;
@@ -56,6 +57,50 @@ html, body {
   font-size: 30px;
   font-weight: bold;
   line-height: 34px;
+}
+
+.navigation {
+    font-family: Helvetica, Arial, sans-serif;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background-color: hsla(0, 100%, 30%, 0.75);
+    z-index: 1000;
+}
+
+.navbar {
+    position: relative;
+    list-style-type: none;
+    left: 405px;
+    top: 12px;
+}
+
+.navbar li {
+    display: inline-block;
+    margin-right: 45px;
+}
+
+.navbar li a{
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.navbar li a:hover{
+    color: #999;
+}
+
+.navbar li a.select {
+    color: #000;
+}
+
+.copy {
+    font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+    margin: 50px;
+    padding-top: 10px;
 }
 
 input:focus,
@@ -343,7 +388,7 @@ mimicks leaflet's zoom ui */
   padding: 0 0 12px 40px;
 }
 
-#toggle_slides a{
+#toggle_slides a {
   display: inline-block;
   width: 100%;
   height: 34px;
@@ -356,7 +401,7 @@ mimicks leaflet's zoom ui */
   text-decoration: none;  
 }
 
-#toggle_slides a:hover{
+#toggle_slides a:hover {
   color: hsl(0, 100%, 40%);
   text-decoration: none;
   background-color: hsla(0, 0%, 0%, 0.05);

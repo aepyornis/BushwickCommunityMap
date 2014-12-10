@@ -74,6 +74,9 @@ app.intro = (function(w,d,$,O) {
 
   function slideZero() {
     el.map.setView(el.bushwick,15);
+    if (el.featureGroup.hasLayer(el.rheingoldPoly)) {
+      el.featureGroup.removeLayer(el.rheingoldPoly);
+    }    
   }
 
   function slideOne() {

@@ -143,7 +143,8 @@ app.map = (function(w,d, $, _){
   var getCDBData = function() {  
     cartodb.createLayer(el.map, el.cdbURL, {
         cartodb_logo: false, 
-        legends: false
+        legends: false,
+        https: true 
       }, 
       function(layer) {
         // store the map pluto tax lot sublayer

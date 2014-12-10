@@ -1,6 +1,6 @@
 /* new styles */
 
-@import url("http://fast.fonts.net/t/1.css?apiType=css&projectid=3af16084-ba56-49ca-b37d-0b49b59e1927");
+@import url("//fast.fonts.net/t/1.css?apiType=css&projectid=3af16084-ba56-49ca-b37d-0b49b59e1927");
 @font-face{
   font-family:"AleoRegular";
   src:url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.eot);
@@ -21,6 +21,7 @@
   src:url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/fbc6b03a-b3a1-427c-a884-053deca3a53c.eot);
   src:url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/fbc6b03a-b3a1-427c-a884-053deca3a53c.eot?#iefix) format('embedded-opentype'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/d999c07b-a049-4eb5-b8a6-4f36ae25e67e.woff) format('woff'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/4d4a75f5-d32a-4a09-8665-133afd39cc37.ttf) format('truetype'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/8152bc4e-d700-4c78-b6be-326893e6f53f.svg) format('svg')
 }
+
 html, body {
 /*  height: 100%;
   width: 100%;*/
@@ -85,10 +86,7 @@ html, body {
   font-weight: bold;
   line-height: 30px;
 }
-/*-----------------------------*/
 
-
-/*------------ MAP ------------*/
 /* title */
 #intro {
   position: absolute;
@@ -140,7 +138,11 @@ html, body {
 
 .navbar {
     list-style-type: none;
-    /*padding: 10px;*/
+    margin: 0;
+}
+
+ul.navbar  {
+  padding: 0;
 }
 
 .navbar li {
@@ -168,6 +170,11 @@ html, body {
     background-color: white;
     color: hsla(0, 100%, 30%, 0.75);
 }
+/*-----------------------------*/
+
+
+/*------------ MAP ------------*/
+
 
 input:focus,
 select:focus,
@@ -186,6 +193,7 @@ input{
   background-color: hsla(0, 0%, 100%, 0.92);  
   border: 2px solid hsl(0, 100%, 35%);
   border-radius: 7px;  
+  font-family: Helvetica, sans-serif;
 }
 
 #history{
@@ -228,6 +236,7 @@ input{
   width: 200px;
   padding: 12px; 
   z-index: 60;
+  font-family: Helvetica, sans-serif;
 }
 
 .ui h4 {
@@ -235,6 +244,7 @@ input{
   margin: 0;
   color: hsl(0, 100%, 35%);
   font-size: 16px;
+  font: inherit;
   display: inline-block;
 }
 

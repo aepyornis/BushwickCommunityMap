@@ -5,6 +5,48 @@ app.intro = (function(w,d,$,O) {
 
   el = null;
 
+  $('.rheingold').bind('mouseup', function(){
+      el.story.go(1);
+    });
+  $('.colony1209').bind('mouseup', function(){
+      el.story.go(5);
+    });
+  $('.98linden').bind('mouseup', function(){
+      el.story.go(8);
+    });
+
+  //   if($(value).id == 'rheingold'){
+      
+  //   }else{
+  //     el.story.go(5);
+  //   }else{
+  //     el.story.go(8);
+  //   }
+
+  // $.each($('#navStories a'), function(index, value){
+  //   // console.log(value);
+  //       $(value).bind('mouseup', function(){
+  //         console.log(this);
+          
+  //       });    
+  // });
+
+
+  //   switch(index){
+  //     case 0: 
+  //       $(value).bind('mouseup', slideOne);
+  //       break;
+      
+  //     case 1: 
+  //       $(value).bind('mouseup', slideEight);
+  //       break;        
+
+  //     default:
+
+
+  //   }
+  // });
+
   // creates the arrow clicking interaction for the slides
   function click(el) {
     var element = O.Core.getElement(el);
@@ -121,6 +163,7 @@ app.intro = (function(w,d,$,O) {
   }
 
   function slideEight() {
+    console.log('called eight');
     el.dobPermitsA1.hide();
     el.dobPermitsA2A3.hide();      
   }

@@ -36,13 +36,7 @@
   
   <!-- address search box -->
   <input type="search" placeholder="Search for a Bushwick address" id="search-box" class="ui"/>
-  <input type="button" id="search-button" />
-  
-  <!-- buttons to toggle base map -->
-  <!-- <div id="ui-map-tiles" class="ui mini">
-    <a href="#" id="earth-tiles">&#9670;</a>
-    <a href="#" id="street-tiles">&#9708;</a>
-  </div> -->
+  <input type="button" id="search-button" />  
 
   <!-- buttons to toggle zoom -->
   <div id="ui-zoom" class="ui mini">
@@ -78,17 +72,7 @@
     <input type="checkbox" name="stories" class="regular-checkbox" value="personal-stories" id="personal-stories"/>
       <label for="personal-stories"></label>Personal Stories
   </div>
-  
-  <!-- date range slider for year built -->
- <!--  <div id="history" class="ui">
-  <h4>Year Built</h4>
-    <div id="slider-container">      
-      <div id="slider-range"></div>
-      <p class="year" id="year-min"></p>
-      <p class="year" id="year-max"></p>      
-    </div>
-  </div> -->
-  
+   
   <!-- map is rendered here, all other html elements are positioned absolutely with a higher z-index -->
   <div id="map"></div>   
 
@@ -98,8 +82,7 @@
    <div id="slides_container" style="display:block;">
     <div id="toggle_slides">
       <a href="#">Hide intro</a>
-    </div>
-    <!-- <div id="dots"></div> -->
+    </div>    
     <div id="slides">
       <div class="slide">
         <h1 id="about">About NWB</h1>
@@ -117,7 +100,7 @@
         </p>
       </div>
       <div class="slide">
-        <h1 id="rheingold">The Rheingold Development</h1>
+        <h1 id="rheingoldStory">The Rheingold Development</h1>
         <p>
           The North West Bushwick Community Group began in reaction to the Rheingold Rezoning in Bushwick in September, 2013. New and old residents came together to form a group that would advocate against the displacement of Bushwick's longtime working-class and low-income residents and for accountability from developers.
         </p>
@@ -276,6 +259,7 @@
   <!-- JS code for map interaction  -->
   <script src="js/mapStyles.js"></script>  
   <script src="js/intro.js"></script> 
+  <script src="js/stories.js"></script>
   <script src="js/main.js"></script>    
 
   <!-- Google Analytics -->  

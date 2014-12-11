@@ -155,7 +155,7 @@ app.intro = (function(w,d,$,O) {
     click(document.querySelectorAll('.prev')).then(seq.prev, seq)  
 
     var slides = O.Actions.Slides('slides');
-    el.story = O.Story()
+    el.story = new O.Story()
       .addState(
         seq.step(0),
         O.Parallel(                        

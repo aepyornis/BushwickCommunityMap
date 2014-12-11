@@ -69,17 +69,34 @@ app.map = (function(w,d, $, _){
       attributionControl: true
     }
 
+    // tell Leaflet to allow multiple popups to be open simultaneously
+    L.Map = L.Map.extend({
+        openPopup: function(popup) {
+            //this.closePopup();
+            this._popup = popup;
+
+            return this.addLayer(popup).fire('popupopen', {
+                popup: this._popup
+            });
+        }
+    });    
+
     // lat lngs for locations of stories
     el.bushwick = new L.LatLng(40.694631,-73.925028);
     el.rheingold = new L.LatLng(40.700740, -73.934209);
     el.colony = new L.LatLng(40.695867,-73.928153);
     el.linden = new L.LatLng(40.692776,-73.919756);
-    el.groveSt = new L.LatLng(40.700082, -73.913740);    
+    el.groveSt = new L.LatLng(40.700082, -73.913740);
 
+    var colonyMarker = new L.marker(el.colony).bindPopup('<a class="colony1209" href="#">Colony 1209</a>');
+    var groveStMarker = new L.marker(el.groveSt).bindPopup('<a class="98linden" href="#">358 Grove St. Condos</a>');
+    var rheingoldMarker = new L.marker(el.rheingold).bindPopup('<a class="rheingold" href="#">Rheingold Rezoning</a>');
+    
     // array to store sites of gentrification
     el.sitesGent = [
-      new L.marker(el.colony).bindPopup("<b>Colony 1209</b>").openPopup(),
-      new L.marker(el.groveSt).bindPopup("<b>358 Grove St. Condos</b>").openPopup()
+        colonyMarker,
+        groveStMarker,
+        rheingoldMarker
       ];
     
     // instantiate the Leaflet map object
@@ -130,10 +147,6 @@ app.map = (function(w,d, $, _){
         el.rheingoldPoly = L.geoJson(json, {
           style: function(feature){
             return { color: '#000', fillColor: '#fff', fillOpacity: 0.2, dashArray: '5,10', lineCap: 'square' }
-          },
-          onEachFeature: function(feature, layer) {
-            popupOptions = {maxWidth: 200};
-            layer.bindPopup("<b>Rheingold Rezoning</b>");
           }
         });
     });
@@ -328,6 +341,11 @@ app.map = (function(w,d, $, _){
         }
         el.featureGroup.addLayer(el.rheingoldPoly);
         el.map.fitBounds(el.featureGroup);
+
+        el.featureGroup.eachLayer(function(layer) {
+          console.log('feature group layer: ', layer);
+          layer.openPopup();
+        });
         
       } else {
         for (i=0; i<el.sitesGent.length; i++) {

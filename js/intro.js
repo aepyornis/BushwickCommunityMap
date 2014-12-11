@@ -121,6 +121,7 @@ app.intro = (function(w,d,$,O) {
   }
 
   function slideEight() {
+    console.log('called eight');
     el.dobPermitsA1.hide();
     el.dobPermitsA2A3.hide();      
   }
@@ -254,31 +255,46 @@ app.intro = (function(w,d,$,O) {
   // init button that hides / shows the intro slides
   function hideShow() {
     $('#toggle_slides a').bind('mouseup', function(){
+      
       if($('#slides').css('display') != 'none'){
-        $('#slides').css({
+        
+        $('#slides, #navButtons, #navStories').css({
           display: 'none'
         });
-        $('#navButtons').css({
-          display: 'none'
-        }); 
         $(this).html('Show intro');
+
       }else{
-        $('#slides').css({
+
+        $('#slides, #navButtons, #navStories').css({
           display: 'block'
         });
-        $('#navButtons').css({
-          display: 'block'
-        }); 
+
         $(this).html('Hide intro');   
       }
     });    
+  }
+
+  // Links to the first slide of each story
+  function storiesNavigation(){
+    // Links to stories
+    $('.rheingold').bind('mouseup', function(){
+        el.story.go(1);
+      });
+    $('.colony1209').bind('mouseup', function(){
+        el.story.go(5);
+      });
+    $('.98linden').bind('mouseup', function(){
+        el.story.go(8);
+      });
   }
 
   function init() {
     el = app.map.el;      
     initOdyssey(O);
     listenSlideChange();
-    hideShow();            
+    hideShow(); 
+    storiesNavigation();
+    languageToggle();           
   } 
 
   return {

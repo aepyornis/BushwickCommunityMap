@@ -56,13 +56,17 @@ html, body {
     padding: 40px 40px 40px 380px;
 }
 
+.copy a{
+  color: hsl(0, 100%, 30%);  
+}
+
 .es {
     width: 720px;
     margin: 0;
     /*visibility: hidden;*/
     display: none;
     font-family: AleoRegular, Serif;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 21px; 
     text-align: left;   
 }
@@ -75,7 +79,7 @@ html, body {
     /*position: absolute;
     margin-top: 2px;*/
     font-family: AleoRegular, Serif;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 21px;
     text-align: left;    
 } 
@@ -85,6 +89,15 @@ html, body {
   margin-top: 20px;
   font-family: ProximaNovaBold, Helvetica, Arial, sans-serif;
   font-size: 24px;
+  font-weight: bold;
+  line-height: 30px;
+}
+
+.en h3,
+.es h3 {
+  margin-top: 20px;
+  font-family: ProximaNovaBold, Helvetica, Arial, sans-serif;
+  font-size: 18px;
   font-weight: bold;
   line-height: 30px;
 }

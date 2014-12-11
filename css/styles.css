@@ -165,7 +165,7 @@ ul.navbar  {
 }
 
 .navbar li a:hover{
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.2);
     /*border: 1px solid #FFFFFF;*/
 }
 
@@ -646,15 +646,18 @@ mimicks leaflet's zoom ui */
     height: auto;
     position: static;
   }
+
   .navigation{
     width: 100%;
     height: auto;
     padding: 0 0 0 40px;
     position: static;
   }
+
   .copy {
       padding: 0 40px 40px 40px;
-  }  
+  }
+    
   .es,
   .en{
     width: 100%;

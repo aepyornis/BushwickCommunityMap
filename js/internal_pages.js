@@ -27,4 +27,19 @@ function languageToggle() {
   });    
 }
 
+var initNavBarButtons = function() {
+  var currentPage = document.URL.substring(document.URL.lastIndexOf('/') + 1, document.URL.lastIndexOf('.'));
+  var buttons = [];
+
+  $.each($('.button'), function(index, value){
+    var label = $(value).html();
+    label = label.toLowerCase().replace(' ', '_');
+    // buttons.push(label);
+    if(label == currentPage){
+      $(value).addClass('selected');
+    }
+  });
+}
+
 languageToggle();
+initNavBarButtons();

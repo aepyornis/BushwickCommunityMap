@@ -1,6 +1,5 @@
 // Language toggle
 function languageToggle() {
-  console.log('hey');
   $('#language').bind('mouseup', function(){
     
     if($('.en').css('display') == 'none'){

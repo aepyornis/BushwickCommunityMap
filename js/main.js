@@ -69,7 +69,7 @@ app.map = (function(w,d, $, _){
       attributionControl: true
     }
 
-    // tell Leaflet to allow multiple popups to be open simultaneously
+    // coerce Leaflet into allowing multiple popups to be open simultaneously
     L.Map = L.Map.extend({
         openPopup: function(popup) {
             //this.closePopup();

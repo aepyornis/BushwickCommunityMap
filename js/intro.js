@@ -5,18 +5,6 @@ app.intro = (function(w,d,$,O) {
 
   el = null;
 
-  // Links to stories
-  $('.rheingold').bind('mouseup', function(){
-      el.story.go(1);
-    });
-  $('.colony1209').bind('mouseup', function(){
-      el.story.go(5);
-    });
-  $('.98linden').bind('mouseup', function(){
-      el.story.go(8);
-    });
-
-
   // creates the arrow clicking interaction for the slides
   function click(el) {
     var element = O.Core.getElement(el);
@@ -286,11 +274,27 @@ app.intro = (function(w,d,$,O) {
     });    
   }
 
+  // Links to the first slide of each story
+  function storiesNavigation(){
+    // Links to stories
+    $('.rheingold').bind('mouseup', function(){
+        el.story.go(1);
+      });
+    $('.colony1209').bind('mouseup', function(){
+        el.story.go(5);
+      });
+    $('.98linden').bind('mouseup', function(){
+        el.story.go(8);
+      });
+  }
+
   function init() {
     el = app.map.el;      
     initOdyssey(O);
     listenSlideChange();
-    hideShow();            
+    hideShow(); 
+    storiesNavigation();
+    languageToggle();           
   } 
 
   return {

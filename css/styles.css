@@ -112,6 +112,7 @@ html, body {
   font-size: 12px;
   padding: 0 4px 0 4px;
   border: 1px solid white;
+  outline: none;
 }
 
 #intro a:hover#language {

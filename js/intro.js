@@ -5,6 +5,7 @@ app.intro = (function(w,d,$,O) {
 
   el = null;
 
+  // Links to stories
   $('.rheingold').bind('mouseup', function(){
       el.story.go(1);
     });
@@ -15,37 +16,6 @@ app.intro = (function(w,d,$,O) {
       el.story.go(8);
     });
 
-  //   if($(value).id == 'rheingold'){
-      
-  //   }else{
-  //     el.story.go(5);
-  //   }else{
-  //     el.story.go(8);
-  //   }
-
-  // $.each($('#navStories a'), function(index, value){
-  //   // console.log(value);
-  //       $(value).bind('mouseup', function(){
-  //         console.log(this);
-          
-  //       });    
-  // });
-
-
-  //   switch(index){
-  //     case 0: 
-  //       $(value).bind('mouseup', slideOne);
-  //       break;
-      
-  //     case 1: 
-  //       $(value).bind('mouseup', slideEight);
-  //       break;        
-
-  //     default:
-
-
-  //   }
-  // });
 
   // creates the arrow clicking interaction for the slides
   function click(el) {
@@ -297,21 +267,20 @@ app.intro = (function(w,d,$,O) {
   // init button that hides / shows the intro slides
   function hideShow() {
     $('#toggle_slides a').bind('mouseup', function(){
+      
       if($('#slides').css('display') != 'none'){
-        $('#slides').css({
+        
+        $('#slides, #navButtons, #navStories').css({
           display: 'none'
         });
-        $('#navButtons').css({
-          display: 'none'
-        }); 
         $(this).html('Show intro');
+
       }else{
-        $('#slides').css({
+
+        $('#slides, #navButtons, #navStories').css({
           display: 'block'
         });
-        $('#navButtons').css({
-          display: 'block'
-        }); 
+
         $(this).html('Hide intro');   
       }
     });    

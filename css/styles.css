@@ -170,6 +170,40 @@ ul.navbar  {
     background-color: white;
     color: hsla(0, 100%, 30%, 0.75);
 }
+
+
+#navStories{
+  padding-left: 40px;
+  margin: 0;
+  width: 100%;
+  height: 34px;
+}
+
+#navStories li {
+    display: inline-block;
+}
+
+#navStories li a{
+    display: inline-block;
+    text-align: center;
+    /*vertical-align: middle;    */
+    padding: 10px 20px 10px 0;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: hsl(0, 100%, 40%);
+    outline: none;
+}
+
+/*#navStories li a:hover{
+    border: 1px solid #FFFFFF;
+    border-color: hsl(0, 100%, 40%);
+}
+
+#navStories li a.selected{
+    background-color: white;
+    color: hsla(0, 100%, 30%, 0.75);
+}*/
 /*-----------------------------*/
 
 
@@ -449,13 +483,15 @@ mimicks leaflet's zoom ui */
   top: 110px;
   left: 0;
   width: 360px;
-  /*padding: 0 12px 12px 40px;*/
+  /*height: 100%;*/
   padding: 0;
+  /*padding-top: 110px;*/
+  /*padding: 0;*/
 }
 
 #slides_container .slide {
   max-height: 400px;
-  padding: 12px 12px 12px 40px;
+  padding: 12px 20px 12px 40px;
 }
 
 #slides_container h1{
@@ -466,7 +502,17 @@ mimicks leaflet's zoom ui */
 }
 
 #slides_container #navButtons{
-  padding: 0 0 12px 40px;
+  padding: 10px 20px 10px 40px;
+  margin: 0;
+  border: 0;
+  width: 100%;
+  /*height: 34px;*/
+}
+
+#slides{
+  border-width: 1px 0 1px 0;
+  border-style: solid;
+  border-color: hsla(0, 0%, 0%, 0.2);
 }
 
 #toggle_slides a {
@@ -475,18 +521,16 @@ mimicks leaflet's zoom ui */
   height: 34px;
   padding: 12px 12px 12px 40px;
   text-align: left;
-  border-width: 0 0 1px 0;
-  border-style: solid;
-  border-color: hsla(0, 0%, 0%, 0.2);
   color: hsl(0, 100%, 40%);
   text-decoration: none;  
+  outline: none;
 }
 
-#toggle_slides a:hover {
+/*#toggle_slides a:hover {
   color: hsl(0, 100%, 40%);
   text-decoration: none;
-  background-color: hsla(0, 0%, 0%, 0.05);
-}
+  background-color: hsla(0, 0%, 0%, 0.04);
+}*/
 
 /*styles dob permit layer tool tip*/
 #tool-tip {

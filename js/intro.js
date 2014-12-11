@@ -4,6 +4,7 @@ var app = app || {};
 app.intro = (function(w,d,$,O) {
 
   el = null;
+  var cur = 0;
 
   // creates the arrow clicking interaction for the slides
   function click(el) {
@@ -37,6 +38,7 @@ app.intro = (function(w,d,$,O) {
       if ($(this).hasClass('selected')) {
         console.log('index: ', i);
         checkIndex(i);
+        cur = i;  
       }
     }); 
   }
@@ -150,8 +152,8 @@ app.intro = (function(w,d,$,O) {
     O.Triggers.Keys().left().then(seq.prev, seq.step(i))
     O.Triggers.Keys().right().then(seq.next, seq)
     // set up triggers for slide arrows 
-    click(document.querySelectorAll('.next')).then(seq.next, seq)
-    click(document.querySelectorAll('.prev')).then(seq.prev, seq)  
+    click(document.querySelectorAll('.next')).then(seq.next, seq.current(cur));
+    click(document.querySelectorAll('.prev')).then(seq.prev, seq.current(cur));  
 
     var slides = O.Actions.Slides('slides');
     el.story = new O.Story()

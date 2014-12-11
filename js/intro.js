@@ -19,15 +19,13 @@ app.intro = (function(w,d,$,O) {
 
   // trigger a custom event called SlideChange
   var emitSlideChange = O.Action( function() {
-   $(document).trigger('slideChange', function() {
-    console.log(seq.current())
-   });
+   $(document).trigger('slideChange');
   });
 
   // listen for the slideChange event to be triggered
   function listenSlideChange() {
     $(document).on('slideChange', function() {
-      console.log('listened to slidechange');
+      console.log('listened to slidechange, story.state: ', el.story.state());
       trackCurrentSlide();
     });
   }    
@@ -147,9 +145,9 @@ app.intro = (function(w,d,$,O) {
     var map = el.map;
 
     var seq = O.Triggers.Sequential();
-
+    var i = 1;
     // enable keys to move slides
-    O.Triggers.Keys().left().then(seq.prev, seq)
+    O.Triggers.Keys().left().then(seq.prev, seq.step(i))
     O.Triggers.Keys().right().then(seq.next, seq)
     // set up triggers for slide arrows 
     click(document.querySelectorAll('.next')).then(seq.next, seq)
@@ -284,6 +282,18 @@ app.intro = (function(w,d,$,O) {
         el.story.go(5);
       });
     $('.98linden').bind('mouseup', function(){
+        el.story.go(8);
+      });
+
+    // bind events to popup links
+    $('#map').on('click', 'a.rheingold', function(){
+        el.story.go(1);
+        console.log('story state: ', el.story.state());
+      });
+    $('#map').on('click', 'a.colony1209', function(){
+        el.story.go(5);
+      });
+    $('#map').on('click', 'a.98linden', function(){
         el.story.go(8);
       });
   }

@@ -19,7 +19,8 @@ function languageToggle(language) {
         display: 'inline-block'
       });        
       
-      $(this).html('in English');
+      // Change button label
+      $('#language').html('in English');
 
       // Add language parameter to buttons href
       $.each($('.button'), function(index, value){      
@@ -42,6 +43,9 @@ function languageToggle(language) {
       $('.es').css({
         display: 'none'
       });        
+
+    // Change button label
+      $('#language').html('en Español');
 
       // Add language parameter to buttons href
       $.each($('.button'), function(index, value){      

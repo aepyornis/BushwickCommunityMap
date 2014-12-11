@@ -53,7 +53,14 @@ html, body {
     font-family: AleoRegular, Serif;
     /*margin: 50px;*/
     /*text-align: center;*/
-    padding: 40px 40px 40px 380px;
+    padding: 60px 40px 40px 380px;
+}
+
+.copy p{
+  margin: 0;
+  /*padding-top: 10px;*/
+  padding: 0 0 20px 0;
+  border: 0;  
 }
 
 .copy a{
@@ -86,7 +93,9 @@ html, body {
 
 .en h2,
 .es h2 {
-  margin-top: 20px;
+  margin: 0;
+  padding: 0;
+  border 0;
   font-family: ProximaNovaBold, Helvetica, Arial, sans-serif;
   font-size: 24px;
   font-weight: bold;
@@ -95,7 +104,9 @@ html, body {
 
 .en h3,
 .es h3 {
-  margin-top: 20px;
+  margin: 0;
+  padding: 0;
+  border 0;
   font-family: ProximaNovaBold, Helvetica, Arial, sans-serif;
   font-size: 18px;
   font-weight: bold;
@@ -649,7 +660,7 @@ mimicks leaflet's zoom ui */
 
 @media (max-width: 1140px) {
   .copy {
-      padding: 110px 40px 40px 40px;
+      padding: 130px 40px 0 40px;
   }
 }
 
@@ -668,7 +679,7 @@ mimicks leaflet's zoom ui */
   }
 
   .copy {
-      padding: 0 40px 40px 40px;
+      padding: 20px 40px 0 20px;
   }
     
   .es,

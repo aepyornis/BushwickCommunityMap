@@ -23,8 +23,12 @@ function languageToggle(language) {
       $('#language').html('in English');
 
       // Add language parameter to buttons href
-      $.each($('.button'), function(index, value){      
-        $(value).attr('href', $(value).attr('href') + '?language=es');
+      $.each($('.button'), function(index, value){  
+        if($(value).attr('href').indexOf('language') == -1){    
+          $(value).attr('href', $(value).attr('href') + '?language=es');
+        }else{
+          $(value).attr('href', $(value).attr('href').replace('language=en', 'language=es'));
+        }
       });
 
       // Toggle bt
@@ -48,8 +52,12 @@ function languageToggle(language) {
       $('#language').html('en Español');
 
       // Add language parameter to buttons href
-      $.each($('.button'), function(index, value){      
-        $(value).attr('href', $(value).attr('href') + '?language=en');
+      $.each($('.button'), function(index, value){
+        if($(value).attr('href').indexOf('language') == -1){
+          $(value).attr('href', $(value).attr('href') + '?language=en');  
+        }else{
+          $(value).attr('href', $(value).attr('href').replace('language=es', 'language=en'));          
+        }
       });    
 
       // Toggle bt

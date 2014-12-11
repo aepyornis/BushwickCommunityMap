@@ -80,16 +80,6 @@ html, body {
     text-align: left;    
 } 
 
-@media (max-width: 768px) {
-  .copy {
-      padding: 120px 40px 40px 40px;
-  }
-  .es,
-  .en{
-    width: 100%;
-  }
-}
-
 .en h2,
 .es h2 {
   margin-top: 20px;
@@ -578,11 +568,7 @@ mimicks leaflet's zoom ui */
   text-transform: uppercase;
 }
 
-@media screen and (max-height: 840px) {
-  .ui.legend {
-    left: 40px;
-  }
-}
+/*---------- LEAFLET HACK ----------*/
 
 /*.leaflet-retina .leaflet-control-layers{
   background-image: url(../images/layers-2x.png);
@@ -637,3 +623,30 @@ mimicks leaflet's zoom ui */
   font-family: Helvetica, Arial, sans-serif;
   font-size: 13px;
 }
+
+/*---------- RESPONSIVE ----------*/
+
+@media screen and (max-height: 840px) {
+  .ui.legend {
+    right: 250px;
+    top: 212px;
+    bottom: auto;
+  }
+}
+
+/*@media (max-width: 1140px) {
+  .copy {
+      padding: 120px 40px 40px 40px;
+  }
+  #intro{
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .es,
+  .en{
+    width: 100%;
+  }
+}
+*/

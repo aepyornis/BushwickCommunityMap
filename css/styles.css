@@ -634,19 +634,28 @@ mimicks leaflet's zoom ui */
   }
 }
 
-/*@media (max-width: 1140px) {
+@media (max-width: 1140px) {
   .copy {
       padding: 120px 40px 40px 40px;
   }
-  #intro{
-    width: 100%;
-  }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 840px) {
+  #intro{
+    width: 100%;
+    position: static;
+  }
+  .navigation{
+    width: 100%;
+    height: auto;
+    padding: 0 0 0 40px;
+    position: static;
+  }
+  .copy {
+      padding: 0 40px 40px 40px;
+  }  
   .es,
   .en{
     width: 100%;
   }
 }
-*/

@@ -475,15 +475,15 @@ app.map = (function(w,d, $, _){
       },
       {
         color : "#f768a1;",
-        label : "1990-1971"
+        label : "1990-1974"
       },
       {
         color : "#fa9fb5",
-        label : "1970-1935"
+        label : "1973-1934"
       },
       {
         color : "#fcc5c0",
-        label : "1934-1901"
+        label : "1933-1901"
       },
       {
         color : "#feebe2",

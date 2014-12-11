@@ -161,14 +161,17 @@ app.mapStyles = (function(){
                   "#bushwick_pluto14v1 [ yearbuilt <= 1990] {"+
                      "polygon-fill: @yearbuilt4;"+
                   "}"+
-                  "#bushwick_pluto14v1 [ yearbuilt <= 1970] {"+
+                  "#bushwick_pluto14v1 [ yearbuilt <= 1973] {"+
                      "polygon-fill: @yearbuilt3;"+
                   "}"+
-                  "#bushwick_pluto14v1 [ yearbuilt <= 1934] {"+
+                  "#bushwick_pluto14v1 [ yearbuilt <= 1933] {"+
                      "polygon-fill: @yearbuilt2;"+
                   "}"+
                   "#bushwick_pluto14v1 [ yearbuilt <= 1900] {"+
                      "polygon-fill: @yearbuilt1;"+
-                  "}"                                        
+                  "}" +
+                  "#bushwick_pluto14v1 [ yearbuilt = 0] {"+
+                     "polygon-opacity: 0;"+
+                  "}"                                                                               
   };
 })();

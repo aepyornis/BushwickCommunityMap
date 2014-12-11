@@ -643,6 +643,7 @@ mimicks leaflet's zoom ui */
 @media (max-width: 840px) {
   #intro{
     width: 100%;
+    height: auto;
     position: static;
   }
   .navigation{

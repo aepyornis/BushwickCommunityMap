@@ -53,7 +53,18 @@ html, body {
     font-family: AleoRegular, Serif;
     /*margin: 50px;*/
     /*text-align: center;*/
-    padding: 40px 40px 40px 380px;
+    padding: 60px 40px 40px 380px;
+}
+
+.copy p{
+  margin: 0;
+  /*padding-top: 10px;*/
+  padding: 0 0 20px 0;
+  border: 0;  
+}
+
+.copy a{
+  color: hsl(0, 100%, 30%);  
 }
 
 .es {
@@ -62,7 +73,7 @@ html, body {
     /*visibility: hidden;*/
     display: none;
     font-family: AleoRegular, Serif;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 21px; 
     text-align: left;   
 }
@@ -75,16 +86,29 @@ html, body {
     /*position: absolute;
     margin-top: 2px;*/
     font-family: AleoRegular, Serif;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 21px;
     text-align: left;    
 } 
 
 .en h2,
 .es h2 {
-  margin-top: 20px;
+  margin: 0;
+  padding: 0;
+  border 0;
   font-family: ProximaNovaBold, Helvetica, Arial, sans-serif;
   font-size: 24px;
+  font-weight: bold;
+  line-height: 30px;
+}
+
+.en h3,
+.es h3 {
+  margin: 0;
+  padding: 0;
+  border 0;
+  font-family: ProximaNovaBold, Helvetica, Arial, sans-serif;
+  font-size: 18px;
   font-weight: bold;
   line-height: 30px;
 }
@@ -165,7 +189,7 @@ ul.navbar  {
 }
 
 .navbar li a:hover{
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.2);
     /*border: 1px solid #FFFFFF;*/
 }
 
@@ -636,7 +660,7 @@ mimicks leaflet's zoom ui */
 
 @media (max-width: 1140px) {
   .copy {
-      padding: 110px 40px 40px 40px;
+      padding: 130px 40px 0 40px;
   }
 }
 
@@ -646,15 +670,18 @@ mimicks leaflet's zoom ui */
     height: auto;
     position: static;
   }
+
   .navigation{
     width: 100%;
     height: auto;
     padding: 0 0 0 40px;
     position: static;
   }
+
   .copy {
-      padding: 0 40px 40px 40px;
-  }  
+      padding: 20px 40px 0 20px;
+  }
+    
   .es,
   .en{
     width: 100%;

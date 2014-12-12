@@ -66,8 +66,7 @@ function languageToggle(language) {
         languageToggle('es');
       });          
     }
-  }  
-
+  }
 
 
 var initNavBarButtons = function() {
@@ -75,9 +74,8 @@ var initNavBarButtons = function() {
   var buttons = [];
 
   $.each($('.button'), function(index, value){
-    var label = $(value).html();
-    label = label.toLowerCase().replace(' ', '_');
-    // buttons.push(label);
+    var label = $(value).attr('href');
+    label = label.substring(label.indexOf('/') + 1, label.lastIndexOf('.'));
     if(label == currentPage){
       $(value).addClass('selected');
     }

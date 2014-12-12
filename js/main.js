@@ -465,31 +465,31 @@ app.map = (function(w,d, $, _){
       items : [
       {
         color : "#7a0177",
-        label : "2014-2005"
+        label : "2005-2014"
       },
       {
         color : "#ae017e",
-        label : "2004-2001"
+        label : "2001-2004"
       },
       {
         color : "#dd3497",
-        label : "2000-1991"
+        label : "1991-2000"
       },
       {
         color : "#f768a1;",
-        label : "1990-1974"
+        label : "1974-1990"
       },
       {
         color : "#fa9fb5",
-        label : "1973-1934"
+        label : "1934-1973"
       },
       {
         color : "#fcc5c0",
-        label : "1933-1901"
+        label : "1901-1933"
       },
       {
         color : "#feebe2",
-        label : "1900-1800"
+        label : "1800-1900"
       },                                    
       ]
     },

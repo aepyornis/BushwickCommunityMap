@@ -259,7 +259,14 @@ app.intro = (function(w,d,$,O) {
         el.story.go(i);
         seq.current(i);
         return false;
-      });      
+      });
+      $('#map').on('click', '.story', function(){        
+        var i = $(this).data('slide');
+        console.log('slide data: ', i);
+        el.story.go(i);
+        seq.current(i);
+        return false;
+      });        
     } 
 
     navStories();    

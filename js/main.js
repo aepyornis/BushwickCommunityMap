@@ -88,10 +88,10 @@ app.map = (function(w,d, $, _){
     el.linden = new L.LatLng(40.692776,-73.919756);
     el.groveSt = new L.LatLng(40.700082, -73.913740);
 
-    var colonyMarker = new L.marker(el.colony).bindPopup('<a class="colony1209" href="#">Colony 1209</a>');
+    var colonyMarker = new L.marker(el.colony).bindPopup('<a class="colony1209 story" href="#" data-slide="5">Colony 1209</a>');
     var groveStMarker = new L.marker(el.groveSt).bindPopup('<a class="358grove" href="#">358 Grove St. Condos</a>');
-    var rheingoldMarker = new L.marker(el.rheingold).bindPopup('<a class="rheingold" href="#">Rheingold Rezoning</a>');
-    var lindenMarker = new L.marker(el.linden).bindPopup('<a class="98linden" href="#">98 Linden</a>' );
+    var rheingoldMarker = new L.marker(el.rheingold).bindPopup('<a class="rheingold story" href="#" data-slide="1">Rheingold Rezoning</a>');
+    var lindenMarker = new L.marker(el.linden).bindPopup('<a class="98linden story" href="#" data-slide="8">98 Linden</a>' );
     
     // array to store sites of gentrification
     el.sitesGent = [

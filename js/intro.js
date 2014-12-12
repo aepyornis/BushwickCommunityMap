@@ -250,6 +250,19 @@ app.intro = (function(w,d,$,O) {
       );
 
     el.story.go(0);
+
+    // Links to the first slide of each story
+    function navStories() {
+      $('.story').on('click', function(){        
+        var i = $(this).data('slide');
+        console.log('slide data: ', i);
+        el.story.go(i);
+        seq.current(i);
+        return false;
+      });      
+    } 
+
+    navStories();    
   }
 
   // init button that hides / shows the intro slides
@@ -274,39 +287,12 @@ app.intro = (function(w,d,$,O) {
     });    
   }
 
-  // Links to the first slide of each story
-  function storiesNavigation(){
-    // Links to stories
-    $('.rheingold').bind('mouseup', function(){
-        el.story.go(1);
-      });
-    $('.colony1209').bind('mouseup', function(){
-        el.story.go(5);
-      });
-    $('.98linden').bind('mouseup', function(){
-        el.story.go(8);
-      });
-
-    // bind events to popup links
-    $('#map').on('click', 'a.rheingold', function(){
-        el.story.go(1);
-        console.log('story state: ', el.story.state());
-      });
-    $('#map').on('click', 'a.colony1209', function(){
-        el.story.go(5);
-      });
-    $('#map').on('click', 'a.98linden', function(){
-        el.story.go(8);
-      });
-  }
 
   function init() {
     el = app.map.el;      
     initOdyssey(O);
     listenSlideChange();
-    hideShow(); 
-    storiesNavigation();
-    languageToggle();           
+    hideShow();            
   } 
 
   return {

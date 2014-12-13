@@ -47,7 +47,8 @@
     </div>
   
   <!-- address search box -->
-  <input type="search" placeholder="Search for a Bushwick address" id="search-box" class="ui"/>
+  <input type="search" placeholder="Search for a Bushwick address" id="search-box" class="ui en"/>
+  <input type="search" placeholder="Busca una dirección en Bushwick" id="search-box" class="ui es"/>
   <input type="button" id="search-button" />  
 
   <!-- buttons to toggle zoom -->
@@ -56,8 +57,8 @@
     <a href="#" id="zoom-out"><img src="images/zoom-out.png"/></a>
   </div>
   
-  <!-- container for toggling map layers -->
-  <div id="ui-container" class="ui">
+  <!-- container for toggling map layers ENGLISH-->
+  <div id="ui-container" class="ui en">
     <h4>Property Layers</h4><br/>
     <a href="#regular" id="regular" class="button">All Tax Lots</a>
     <a href="#availfar" id="availfar" class="button">Available FAR</a>
@@ -84,6 +85,35 @@
     <input type="checkbox" name="stories" class="regular-checkbox" value="personal-stories" id="personal-stories"/>
       <label for="personal-stories"></label>Personal Stories
   </div>
+
+  <!-- container for toggling map layers SPANISH-->
+  <div id="ui-container" class="ui es">
+    <h4>Capas de propiedad</h4><br/>
+    <a href="#regular" id="regular" class="button">Todos los Predios</a>
+    <a href="#availfar" id="availfar" class="button">FAR Disponible</a>
+    <a href="#rentstab" id="rentstab" class="button">Posible Renta Estabilizada</a>
+    <a href="#landuse" id="landuse" class="button">Uso del Suelo</a>
+    <a href="#vacant" id="vacant" class="button">Tierra Disponible</a>
+    <a href="#yearbuilt" id="yearbuilt" class="button">Año de Construcción</a>
+    
+    <hr/>
+
+    <h4>Permisos DOB</h4><br/>
+    <input type="checkbox" name="dob" class="regular-checkbox dob" value="a1" id="a1" />
+      <label for="a1"></label>A1: Alteraciones Mayores<br/>
+    <input type="checkbox" name="dob" class="regular-checkbox dob" value="a2a3" id="a2a3" />
+      <label for="a2a3"></label>A2, A3: Alteraciones Menores<br/>
+    <input type="checkbox" name="dob" class="regular-checkbox dob" value="new-buildings" id="nb"/>
+      <label for="nb"></label>Nuevos Edificios
+    
+    <hr/>
+    
+    <h4>Historias</h4><br/>
+    <input type="checkbox" name="stories" class="regular-checkbox" value="sites-of-gentrification" id="sites-of-gentrification"/>
+      <label for="sites-of-gentrification"></label>Sitios de Gentrificación<br/>
+    <input type="checkbox" name="stories" class="regular-checkbox" value="personal-stories" id="personal-stories"/>
+      <label for="personal-stories"></label>Historias Personales
+  </div>  
    
   <!-- map is rendered here, all other html elements are positioned absolutely with a higher z-index -->
   <div id="map"></div>   

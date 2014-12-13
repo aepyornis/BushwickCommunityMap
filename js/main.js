@@ -378,7 +378,7 @@ app.map = (function(w,d, $, _){
       el.geocoder.geocode({ 'address': address, 'bounds' : bounds }, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
           var latlng = [results[0].geometry.location.k , results[0].geometry.location.B];
-          // console.log('gecoder results: ', results);
+          console.log('gecoder results: ', results);
           
           // remove geocoded marker if one already exists
           if (el.geocoderMarker) { 

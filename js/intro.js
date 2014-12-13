@@ -281,15 +281,23 @@ app.intro = (function(w,d,$,O) {
         $('#slides, #navButtons, #navStories').css({
           display: 'none'
         });
-        $(this).html('Show intro');
+        if($(this).hasClass('en')){
+          $(this).html('Show intro');
+        }else{
+          $(this).html('Muestra intro');
+        }
 
       }else{
 
         $('#slides, #navButtons, #navStories').css({
           display: 'block'
         });
-
-        $(this).html('Hide intro');   
+        if($(this).hasClass('en')){
+          $(this).html('Hide intro');   
+        }else{
+          $(this).html('Sin intro');
+        }
+        
       }
     });    
   }

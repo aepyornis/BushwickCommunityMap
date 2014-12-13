@@ -390,6 +390,7 @@ app.map = (function(w,d, $, _){
           el.map.setView(latlng, 20);          
           } else {
             console.log('geocode unsuccesful: ', status);
+          }
       });
   }
 

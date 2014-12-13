@@ -384,7 +384,7 @@ app.map = (function(w,d, $, _){
           if (el.geocoderMarker) { 
             el.map.removeLayer(el.geocoderMarker);
           }
-          add a marker and pan and zoom the map to it
+          // add a marker and pan and zoom the map to it
           el.geocoderMarker = new L.marker(latlng).addTo(el.map);
           el.geocoderMarker.bindPopup("<h4>" + results[0].formatted_address + "</h4>" ).openPopup();
           el.map.setView(latlng, 20);          

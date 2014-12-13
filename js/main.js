@@ -377,17 +377,17 @@ app.map = (function(w,d, $, _){
           );    
       el.geocoder.geocode({ 'address': address, 'bounds' : bounds }, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
-          var latlng = [results[0].geometry.location[1] , results[0].geometry.location[0]];
-          console.log('gecoder results: ', results);
+          var latlng = results[0].geometry.location;
+          console.log('gecoder results: ', results, ' latlng: ', latlng);
           
           // remove geocoded marker if one already exists
           if (el.geocoderMarker) { 
             el.map.removeLayer(el.geocoderMarker);
           }
           // add a marker and pan and zoom the map to it
-          el.geocoderMarker = new L.marker(latlng).addTo(el.map);
-          el.geocoderMarker.bindPopup("<h4>" + results[0].formatted_address + "</h4>" ).openPopup();
-          el.map.setView(latlng, 20);          
+          // el.geocoderMarker = new L.marker(latlng).addTo(el.map);
+          // el.geocoderMarker.bindPopup("<h4>" + results[0].formatted_address + "</h4>" ).openPopup();
+          // el.map.setView(latlng, 20);          
           } else {
             console.log('geocode unsuccesful: ', status);
           }

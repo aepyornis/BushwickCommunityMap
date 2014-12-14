@@ -99,7 +99,7 @@ app.intro = (function(w,d,$,O) {
     if (el.featureGroup.hasLayer(el.colonyMarker)) {
       el.featureGroup.removeLayer(el.colonyMarker);
     }                
-    el.taxLots.hide();    
+    el.taxLots.setCartoCSS(el.styles.landuse);    
   }
 
   function slideTwo() {
@@ -344,14 +344,15 @@ app.intro = (function(w,d,$,O) {
     });    
   }
 
-  function detectMobile(){
-    $.browser.device = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
-    console.log("Mobile: " + $.browser.device);
-    if($.browser.device){
-      $('.ui, #map, #slides_container').css('display', 'none');
-      $('#mobile_alert').css('display', 'block');
-    }
-  }
+   //  we can do this with CSS media queries and should leave ipad as an option anyway
+  // function detectMobile(){
+  //   $.browser.device = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
+  //   console.log("Mobile: " + $.browser.device);
+  //   if($.browser.device){
+  //     $('.ui, #map, #slides_container').css('display', 'none');
+  //     $('#mobile_alert').css('display', 'block');
+  //   }
+  // }
 
 
   function init() {

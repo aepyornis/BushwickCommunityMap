@@ -156,7 +156,7 @@ app.map = (function(w,d, $, _){
     $.getJSON('./data/rheingold_rezoning_area.geojson', function(json, textStatus) {
         el.rheingoldPoly = L.geoJson(json, {
           style: function(feature){
-            return { color: '#000', fillColor: '#fff', fillOpacity: 0.2, dashArray: '5,10', lineCap: 'square' }
+            return { color: '#000', fill: false, fillOpacity: 0.2, dashArray: '5,10', lineCap: 'square' }
           }
         });
     });
@@ -289,17 +289,20 @@ app.map = (function(w,d, $, _){
       changeCartoCSS(el.taxLots, el.styles.red);
       changeSQL(el.taxLots, el.sql.vacant);
       renderLegend(null);
+      return true;
     },
     yearbuilt : function(){
       changeCartoCSS(el.taxLots, el.styles.yearbuilt);
       changeSQL(el.taxLots, el.sql.all);
       renderLegend(el.legendData.yearBuilt);
+      return true;
     }
   };
 
   // add tax lot layer button event listeners
   var initButtons = function() {
-    $('.button').click(function() {
+    $('.button').click(function(e) {
+      e.preventDefault();
       $('.button').removeClass('selected');
       $(this).addClass('selected');
       taxLotActions[$(this).attr('id')]();
@@ -352,8 +355,8 @@ app.map = (function(w,d, $, _){
         el.featureGroup.addLayer(el.rheingoldPoly);
         el.map.fitBounds(el.featureGroup, {padding: [200, 200]});
 
-        el.featureGroup.eachLayer(function(layer) {
-          console.log('feature group layer: ', layer);
+        // open popups of markers on load
+        el.featureGroup.eachLayer(function(layer) {          
           layer.openPopup();
         });
         

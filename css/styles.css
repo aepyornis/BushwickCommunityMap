@@ -707,10 +707,31 @@ mimicks leaflet's zoom ui */
     padding: 20px 35px 0 35px;
     margin: 0;
   }
+
+  .far-diagrams p {
+    max-width: 300px;
+  }
 }
 
 @media screen and (max-width: 480px) {
   .copy img {
     max-width: 80%;
   }
+
+  .far-diagrams p {
+    position: relative;
+    bottom: 0px;
+    display: inline-block;
+    margin-left: 0px;
+    max-width: 300px;
+  }
+
+  .far-diagrams p.f2 {
+    bottom: 0px;
+  }
+
+  .far-diagrams p.f3 {
+    bottom: 0px;
+  }
+
 }

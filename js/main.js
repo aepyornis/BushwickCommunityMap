@@ -79,6 +79,14 @@ app.map = (function(w,d, $, _){
                 popup: this._popup
             });
         }
+    });
+
+    var gentIcon = L.icon({
+      iconUrl: '../images/gentrification.png',
+      iconRetinaUrl: '../images/gentrification-2x.png',
+      iconSize: [30, 30],
+      iconAnchor: [15, 15],
+      popupAnchor: [0, -15],
     });    
 
     // lat lngs for locations of stories
@@ -88,17 +96,17 @@ app.map = (function(w,d, $, _){
     el.linden = new L.LatLng(40.692776,-73.919756);
     el.groveSt = new L.LatLng(40.700082, -73.913740);
 
-    var colonyMarker = new L.marker(el.colony).bindPopup('<a class="colony1209 story" href="#" data-slide="5">Colony 1209</a>');
-    var groveStMarker = new L.marker(el.groveSt).bindPopup('358 Grove St. Condos');
-    var rheingoldMarker = new L.marker(el.rheingold).bindPopup('<a class="rheingold story" href="#" data-slide="1">Rheingold Rezoning</a>');
-    var lindenMarker = new L.marker(el.linden).bindPopup('<a class="98linden story" href="#" data-slide="8">98 Linden</a>' );
+    el.colonyMarker = new L.marker(el.colony, {icon: gentIcon}).bindPopup('<a class="colony1209 story" href="#" data-slide="5">Colony 1209</a>');
+    el.groveStMarker = new L.marker(el.groveSt, {icon: gentIcon}).bindPopup('358 Grove St. Condos');
+    el.rheingoldMarker = new L.marker(el.rheingold, {icon: gentIcon}).bindPopup('<a class="rheingold story" href="#" data-slide="1">Rheingold Rezoning</a>');
+    el.lindenMarker = new L.marker(el.linden, {icon: gentIcon}).bindPopup('<a class="98linden story" href="#" data-slide="8">98 Linden</a>' );
     
     // array to store sites of gentrification
     el.sitesGent = [
-        colonyMarker,
-        groveStMarker,
-        rheingoldMarker,
-        lindenMarker
+        el.colonyMarker,
+        el.groveStMarker,
+        el.rheingoldMarker,
+        el.lindenMarker
       ];
     
     // instantiate the Leaflet map object

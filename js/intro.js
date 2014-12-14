@@ -60,7 +60,7 @@ app.intro = (function(w,d,$,O) {
       break;
       case 6: console.log('seventh slide');
       break;
-      case 7: console.log('eigth slide');
+      case 7: console.log('eigth slide'), slideSeven();
       break;
       case 8: console.log('nineth slide'), slideEight();
       break;
@@ -79,7 +79,13 @@ app.intro = (function(w,d,$,O) {
     el.taxLots.setCartoCSS(el.styles.regular);
     if (el.featureGroup.hasLayer(el.rheingoldPoly)) {
       el.featureGroup.removeLayer(el.rheingoldPoly);
-    }    
+    }
+    if (el.featureGroup.hasLayer(el.lindenMarker)) {
+      el.featureGroup.removeLayer(el.lindenMarker);
+    }
+    if (el.featureGroup.hasLayer(el.colonyMarker)) {
+      el.featureGroup.removeLayer(el.colonyMarker);
+    }        
   }
 
   function slideOne() {
@@ -87,6 +93,12 @@ app.intro = (function(w,d,$,O) {
       el.featureGroup.addLayer(el.rheingoldPoly);
       el.map.fitBounds(el.rheingoldPoly, {paddingTopLeft: [125, 35]});  
     }
+    if (el.featureGroup.hasLayer(el.lindenMarker)) {
+      el.featureGroup.removeLayer(el.lindenMarker);
+    }
+    if (el.featureGroup.hasLayer(el.colonyMarker)) {
+      el.featureGroup.removeLayer(el.colonyMarker);
+    }                
     el.taxLots.hide();    
   }
 
@@ -111,7 +123,7 @@ app.intro = (function(w,d,$,O) {
     if (!el.featureGroup.hasLayer(el.rheingoldPoly)) {
       el.featureGroup.addLayer(el.rheingoldPoly); 
       el.map.fitBounds(el.rheingoldPoly, {paddingTopLeft: [125, 35]});
-    }      
+    }          
     el.dobPermitsNB.hide();
     el.taxLots.setSQL(el.sql.rentStab);
     el.taxLots.setCartoCSS(el.styles.red);
@@ -123,10 +135,31 @@ app.intro = (function(w,d,$,O) {
     if (el.featureGroup.hasLayer(el.rheingoldPoly)) {
       el.featureGroup.removeLayer(el.rheingoldPoly);
     }
+    if (el.featureGroup.hasLayer(el.lindenMarker)) {
+      el.featureGroup.removeLayer(el.lindenMarker);
+    }    
+    if (!el.featureGroup.hasLayer(el.colonyMarker)) {
+      el.featureGroup.addLayer(el.colonyMarker);
+    }
+  }
+
+  function slideSeven() {
+    if (el.featureGroup.hasLayer(el.lindenMarker)) {
+      el.featureGroup.removeLayer(el.lindenMarker);
+    }    
+    if (!el.featureGroup.hasLayer(el.colonyMarker)) {
+      el.featureGroup.addLayer(el.colonyMarker);
+    }    
   }
 
   function slideEight() {
     console.log('called eight');
+    if (el.featureGroup.hasLayer(el.colonyMarker)) {
+      el.featureGroup.removeLayer(el.colonyMarker);
+    }    
+    if (!el.featureGroup.hasLayer(el.lindenMarker)) {
+      el.featureGroup.addLayer(el.lindenMarker);
+    }
     el.dobPermitsA1.hide();
     el.dobPermitsA2A3.hide();      
   }
@@ -140,6 +173,12 @@ app.intro = (function(w,d,$,O) {
   function slideTen() {
     if (el.featureGroup.hasLayer(el.rheingoldPoly)) {
       el.featureGroup.removeLayer(el.rheingoldPoly);
+    }
+    if (el.featureGroup.hasLayer(el.colonyMarker)) {
+      el.featureGroup.removeLayer(el.colonyMarker);
+    }
+    if (el.featureGroup.hasLayer(el.lindenMarker)) {
+      el.featureGroup.removeLayer(el.lindenMarker);
     }
     el.dobPermitsNB.hide();      
     el.dobPermitsA1.hide();
@@ -208,8 +247,7 @@ app.intro = (function(w,d,$,O) {
         seq.step(5),
         O.Parallel(            
           el.map.actions.panTo(el.colony),                  
-          slides.activate(5),
-          L.marker(el.colony).actions.addRemove(el.map),
+          slides.activate(5),          
           emitSlideChange         
         )
       )
@@ -217,7 +255,6 @@ app.intro = (function(w,d,$,O) {
         seq.step(6),
         O.Parallel(            
           slides.activate(6),
-          L.marker(el.colony).actions.addRemove(el.map),
           emitSlideChange         
         )
       )
@@ -226,7 +263,6 @@ app.intro = (function(w,d,$,O) {
         O.Parallel(         
         el.map.actions.panTo(el.colony),   
           slides.activate(7),
-          L.marker(el.colony).actions.addRemove(el.map),
           emitSlideChange         
         )
       )                
@@ -234,8 +270,7 @@ app.intro = (function(w,d,$,O) {
         seq.step(8),
         O.Parallel(
           el.map.actions.panTo(el.linden),
-          slides.activate(8),
-          L.marker(el.linden).actions.addRemove(el.map),
+          slides.activate(8),          
           emitSlideChange 
         )
       )
@@ -243,8 +278,7 @@ app.intro = (function(w,d,$,O) {
         seq.step(9),
         O.Parallel(            
           el.map.actions.setView(el.linden, 17),
-          slides.activate(9),
-          L.marker(el.linden).actions.addRemove(el.map),
+          slides.activate(9),          
           emitSlideChange 
         )          
       )

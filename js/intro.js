@@ -347,11 +347,11 @@ app.intro = (function(w,d,$,O) {
   function detectMobile(){
     $.browser.device = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
     console.log("Mobile: " + $.browser.device);
-    if(!$.browser.device){
+    if($.browser.device){
       $('.ui, #map, #slides_container').css('display', 'none');
+      $('#mobile_alert').css('display', 'block');
     }
   }
-
 
 
   function init() {

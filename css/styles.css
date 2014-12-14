@@ -755,5 +755,9 @@ mimicks leaflet's zoom ui */
   .far-diagrams p.f3 {
     bottom: 0px;
   }
+}
 
+/*---------- MOBILE ----------*/
+#mobile_alert{
+  display: none;
 }

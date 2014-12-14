@@ -677,7 +677,7 @@ mimicks leaflet's zoom ui */
 
 /*---------- RESPONSIVE ----------*/
 
-@media screen and (max-height: 840px) {
+@media screen and (max-height: 710px) {
   .ui.legend {
     right: 250px;
     top: 212px;

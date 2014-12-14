@@ -35,6 +35,7 @@ function languageToggle(language) {
       $('#language').bind('mouseup', function(){
         $(this).html('en Español');
         languageToggle('en');
+        return false;
       });           
 
     }else{
@@ -64,6 +65,7 @@ function languageToggle(language) {
       $('#language').bind('mouseup', function(){
         $(this).html('in English');
         languageToggle('es');
+        return false;
       });          
     }
   }

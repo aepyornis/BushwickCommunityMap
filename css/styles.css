@@ -621,10 +621,18 @@ mimicks leaflet's zoom ui */
 
 /*---------- LEAFLET HACK ----------*/
 
-/*.leaflet-retina .leaflet-control-layers{
-  background-image: url(../images/layers-2x.png);
-}*/
+/* story pop-ups*/
+.leaflet-container a.story {
+  color: hsl(0, 100%, 40%);
+  font-family: ProximaNovaBold, Helvetica, Arial, sans-serif;
+  text-decoration: none;
+}
 
+.leaflet-container a.story:hover {  
+  text-decoration: underline;
+}
+
+/*custom controls*/
 .leaflet-retina .leaflet-control-layers-toggle,
 .leaflet-control-layers-toggle {
   background-image: url(../images/layers.png); 

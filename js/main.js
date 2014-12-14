@@ -302,7 +302,7 @@ app.map = (function(w,d, $, _){
   // add tax lot layer button event listeners
   var initButtons = function() {
     $('.button').click(function(e) {
-      // e.preventDefault();
+      // e.preventDefault(); 
       $('.button').removeClass('selected');
       $(this).addClass('selected');
       taxLotActions[$(this).attr('id')]();

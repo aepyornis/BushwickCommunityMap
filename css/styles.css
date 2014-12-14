@@ -68,6 +68,11 @@ img {
   border: 0;  
 }
 
+.copy p em {
+  font-style: italic;
+  font-weight: 600;
+}
+
 .copy a{
   color: hsl(0, 100%, 30%);  
 }
@@ -76,6 +81,28 @@ img {
   display: block;
   margin: 0 auto;
   margin-bottom: 20px;
+}
+
+.copy img.far {
+  display: inline-block;
+  margin: 0;
+  /*float: left;*/
+}
+
+.far-diagrams p {
+  position: relative;
+  bottom: 60px;
+  display: inline-block;
+  margin-left: 50px;
+  max-width: 400px;
+}
+
+.far-diagrams p.f2 {
+  bottom: 220px;
+}
+
+.far-diagrams p.f3 {
+  bottom: 530px;
 }
 
 .es {

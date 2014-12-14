@@ -342,7 +342,7 @@ app.map = (function(w,d, $, _){
           el.featureGroup.addLayer(el.sitesGent[i]);  
         }
         el.featureGroup.addLayer(el.rheingoldPoly);
-        el.map.fitBounds(el.featureGroup);
+        el.map.fitBounds(el.featureGroup, {padding: [200, 200]});
 
         el.featureGroup.eachLayer(function(layer) {
           console.log('feature group layer: ', layer);

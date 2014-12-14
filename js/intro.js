@@ -3,8 +3,8 @@ var app = app || {};
 // all odyssey.js related code for the introduction is in here
 app.intro = (function(w,d,$,O) {
 
-  el = null;
-  var cur = 0;
+  // to store the public variables from the main.js file
+  var el = null;
 
   // creates the arrow clicking interaction for the slides
   function click(el) {
@@ -74,6 +74,9 @@ app.intro = (function(w,d,$,O) {
 
   function slideZero() {
     el.map.setView(el.bushwick,15);
+    el.taxLots.show();
+    el.dobPermitsNB.hide();
+    el.taxLots.setCartoCSS(el.styles.regular);
     if (el.featureGroup.hasLayer(el.rheingoldPoly)) {
       el.featureGroup.removeLayer(el.rheingoldPoly);
     }    
@@ -81,9 +84,10 @@ app.intro = (function(w,d,$,O) {
 
   function slideOne() {
     if (!el.featureGroup.hasLayer(el.rheingoldPoly)) {
-      el.featureGroup.addLayer(el.rheingoldPoly);  
+      el.featureGroup.addLayer(el.rheingoldPoly);
+      el.map.fitBounds(el.rheingoldPoly, {paddingTopLeft: [125, 35]});  
     }
-    el.map.fitBounds(el.rheingoldPoly);    
+    el.taxLots.hide();    
   }
 
   function slideTwo() {
@@ -105,7 +109,8 @@ app.intro = (function(w,d,$,O) {
 
   function slideFour() {
     if (!el.featureGroup.hasLayer(el.rheingoldPoly)) {
-      el.featureGroup.addLayer(el.rheingoldPoly);  
+      el.featureGroup.addLayer(el.rheingoldPoly); 
+      el.map.fitBounds(el.rheingoldPoly, {paddingTopLeft: [125, 35]});
     }      
     el.dobPermitsNB.hide();
     el.taxLots.setSQL(el.sql.rentStab);
@@ -129,6 +134,7 @@ app.intro = (function(w,d,$,O) {
   function slideNine() {
     el.dobPermitsA1.show();
     el.dobPermitsA2A3.show();
+    el.taxLots.hide();
   }
 
   function slideTen() {
@@ -146,16 +152,20 @@ app.intro = (function(w,d,$,O) {
   function initOdyssey(O) {
     var map = el.map;
 
+    // Sequential() is the method for using click through slides with Odyssey
     var seq = O.Triggers.Sequential();
-    var i = 1;
-    // enable keys to move slides
-    O.Triggers.Keys().left().then(seq.prev, seq.step(i))
-    O.Triggers.Keys().right().then(seq.next, seq)
-    // set up triggers for slide arrows 
-    click(document.querySelectorAll('.next')).then(seq.next, seq.current(cur));
-    click(document.querySelectorAll('.prev')).then(seq.prev, seq.current(cur));  
 
+    // enable left and right arrow keys to move slides
+    O.Triggers.Keys().left().then(seq.prev, seq)
+    O.Triggers.Keys().right().then(seq.next, seq)
+
+    // set up triggers for slide arrows 
+    click(document.querySelectorAll('.next')).then(seq.next, seq);
+    click(document.querySelectorAll('.prev')).then(seq.prev, seq);  
+
+    // grab the slides div from the index.html page
     var slides = O.Actions.Slides('slides');
+
     el.story = new O.Story()
       .addState(
         seq.step(0),
@@ -190,7 +200,6 @@ app.intro = (function(w,d,$,O) {
       .addState(
         seq.step(4),
         O.Parallel(
-          el.map.actions.panTo(el.rheingold),                        
           slides.activate(4),
           emitSlideChange
         )
@@ -233,7 +242,7 @@ app.intro = (function(w,d,$,O) {
       .addState(
         seq.step(9),
         O.Parallel(            
-          el.map.actions.panTo(el.linden),
+          el.map.actions.setView(el.linden, 17),
           slides.activate(9),
           L.marker(el.linden).actions.addRemove(el.map),
           emitSlideChange 
@@ -242,8 +251,7 @@ app.intro = (function(w,d,$,O) {
       .addState(
         seq.step(10),
         O.Parallel(            
-          el.map.actions.panTo(el.bushwick),
-          el.map.actions.setZoom(15),
+          el.map.actions.setView(el.bushwick, 15),
           slides.activate(10),            
           emitSlideChange 
         )          
@@ -272,7 +280,7 @@ app.intro = (function(w,d,$,O) {
     navStories();    
   }
 
-  // init button that hides / shows the intro slides
+  // button that hides / shows the intro slides
   function hideShow() {
     $('#toggle_slides a').bind('mouseup', function(){
       

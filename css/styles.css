@@ -295,26 +295,33 @@ input{
   z-index: 85;
 }*/
 
-#search-button{
-  position: absolute;
-  top: 65px;
-  right: 46px;
-  width: 24px;
-  height: 24px;  
-  border: 0;
-  background: url('../images/search_button.svg') no-repeat;
-  z-index: 80;
-}
 
-#search-box{
+
+#search-container{
   position: absolute;
   top: 60px;
   right: 40px;
   width: 280px;
   height: 28px;
-  padding: 0 36px 0 12px;
-
+  padding: 0 0 0 10px;
   z-index: 70; 
+}
+
+#search-box{
+  margin: 0;
+  border: 0;
+  padding: 0;
+  width: 230px;
+  /*height: 20px;*/
+  font-family: Helvetica, sans-serif;
+}
+
+#search-button{
+  width: 24px;
+  height: 24px;  
+  border: 0;
+  margin-top: 2px;
+  background: url('../images/search_button.svg') no-repeat;
 }
 
 #ui-container {

@@ -82,8 +82,8 @@ app.map = (function(w,d, $, _){
     });
 
     var gentIcon = L.icon({
-      iconUrl: '../images/gentrification.png',
-      iconRetinaUrl: '../images/gentrification-2x.png',
+      iconUrl: 'https://raw.githubusercontent.com/clhenrick/BushwickCommunityMap/gh-pages/images/gentrification.png',
+      iconRetinaUrl: 'https://raw.githubusercontent.com/clhenrick/BushwickCommunityMap/gh-pages/images/gentrification-2x.png',
       iconSize: [30, 30],
       iconAnchor: [15, 15],
       popupAnchor: [0, -15],

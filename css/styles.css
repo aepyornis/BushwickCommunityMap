@@ -54,14 +54,14 @@ img {
     width: 720px;
     margin: 0;
     font-family: AleoRegular, Serif;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 21px; 
     text-align: left;  
     margin-top: 60px;
     margin-left: 380px;      
 }
 
-.copy p{
+.copy p {
   margin: 0;
   /*padding-top: 10px;*/
   padding: 0 0 20px 0;
@@ -294,8 +294,6 @@ input{
 
   z-index: 85;
 }*/
-
-
 
 #search-container{
   position: absolute;

@@ -30,6 +30,7 @@ app.map = (function(w,d, $, _){
     geocoder : null,
     geocoderMarker : null, 
     legend : null,
+    taxLotActions : null,
     story : null
   };
 
@@ -260,7 +261,7 @@ app.map = (function(w,d, $, _){
 
   // corresponding cartoCSS & SQL changes to tax lot layer buttons
   // legends are displayed or hidden as needed
-  var taxLotActions = {
+  el.taxLotActions = {
     regular : function() {
       changeCartoCSS(el.taxLots, el.styles.regular);
       changeSQL(el.taxLots, el.sql.all);
@@ -305,7 +306,8 @@ app.map = (function(w,d, $, _){
       // e.preventDefault(); 
       $('.button').removeClass('selected');
       $(this).addClass('selected');
-      taxLotActions[$(this).attr('id')]();
+      el.taxLotActions[$(this).attr('id')]();
+      el.taxLots.show();
     }); 
   }
 

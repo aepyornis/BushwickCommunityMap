@@ -73,41 +73,26 @@ app.intro = (function(w,d,$,O) {
   }
 
   function slideZero() {
-    el.map.setView(el.bushwick,15);
-    el.taxLots.show();
+    el.map.setView(el.bushwick,15);    
     el.dobPermitsNB.hide();
-    el.taxLots.setCartoCSS(el.styles.regular);
-    if (el.featureGroup.hasLayer(el.rheingoldPoly)) {
-      el.featureGroup.removeLayer(el.rheingoldPoly);
-    }
-    if (el.featureGroup.hasLayer(el.lindenMarker)) {
-      el.featureGroup.removeLayer(el.lindenMarker);
-    }
-    if (el.featureGroup.hasLayer(el.colonyMarker)) {
-      el.featureGroup.removeLayer(el.colonyMarker);
-    }        
+    el.taxLotActions['regular']();
+    el.taxLots.show();
+    el.featureGroup.clearLayers();
   }
 
   function slideOne() {
-    if (!el.featureGroup.hasLayer(el.rheingoldPoly)) {
-      el.featureGroup.addLayer(el.rheingoldPoly);
-      el.map.fitBounds(el.rheingoldPoly, {paddingTopLeft: [125, 35]});  
-    }
-    if (el.featureGroup.hasLayer(el.lindenMarker)) {
-      el.featureGroup.removeLayer(el.lindenMarker);
-    }
-    if (el.featureGroup.hasLayer(el.colonyMarker)) {
-      el.featureGroup.removeLayer(el.colonyMarker);
-    }                
-    el.taxLots.setCartoCSS(el.styles.landuse);    
+    el.featureGroup.clearLayers();
+    el.featureGroup.addLayer(el.rheingoldPoly);
+    el.map.fitBounds(el.rheingoldPoly, {paddingTopLeft: [125, 35]});  
+    el.taxLotActions['landuse']();
+    el.taxLots.show();    
   }
 
   function slideTwo() {
     if (!el.featureGroup.hasLayer(el.rheingoldPoly)) {
       el.featureGroup.addLayer(el.rheingoldPoly);  
     }          
-    el.taxLots.setSQL(el.sql.all);
-    el.taxLots.setCartoCSS(el.styles.availFAR);      
+    el.taxLotActions['availfar']();      
     el.taxLots.show();      
   }
 
@@ -125,22 +110,14 @@ app.intro = (function(w,d,$,O) {
       el.map.fitBounds(el.rheingoldPoly, {paddingTopLeft: [125, 35]});
     }          
     el.dobPermitsNB.hide();
-    el.taxLots.setSQL(el.sql.rentStab);
-    el.taxLots.setCartoCSS(el.styles.red);
+    el.taxLotActions['rentstab']();
     el.taxLots.show();
   }
 
   function slideFive() {
     el.taxLots.hide();      
-    if (el.featureGroup.hasLayer(el.rheingoldPoly)) {
-      el.featureGroup.removeLayer(el.rheingoldPoly);
-    }
-    if (el.featureGroup.hasLayer(el.lindenMarker)) {
-      el.featureGroup.removeLayer(el.lindenMarker);
-    }    
-    if (!el.featureGroup.hasLayer(el.colonyMarker)) {
-      el.featureGroup.addLayer(el.colonyMarker);
-    }
+    el.featureGroup.clearLayers();   
+    el.featureGroup.addLayer(el.colonyMarker);
   }
 
   function slideSeven() {
@@ -152,8 +129,7 @@ app.intro = (function(w,d,$,O) {
     }    
   }
 
-  function slideEight() {
-    console.log('called eight');
+  function slideEight() {    
     if (el.featureGroup.hasLayer(el.colonyMarker)) {
       el.featureGroup.removeLayer(el.colonyMarker);
     }    
@@ -171,20 +147,11 @@ app.intro = (function(w,d,$,O) {
   }
 
   function slideTen() {
-    if (el.featureGroup.hasLayer(el.rheingoldPoly)) {
-      el.featureGroup.removeLayer(el.rheingoldPoly);
-    }
-    if (el.featureGroup.hasLayer(el.colonyMarker)) {
-      el.featureGroup.removeLayer(el.colonyMarker);
-    }
-    if (el.featureGroup.hasLayer(el.lindenMarker)) {
-      el.featureGroup.removeLayer(el.lindenMarker);
-    }
+    el.featureGroup.clearLayers();
     el.dobPermitsNB.hide();      
     el.dobPermitsA1.hide();
     el.dobPermitsA2A3.hide();
-    el.taxLots.setSQL(el.sql.all);
-    el.taxLots.setCartoCSS(el.styles.regular);
+    el.taxLotActions['regular']();
     el.taxLots.show();  
   }   
 
@@ -277,7 +244,7 @@ app.intro = (function(w,d,$,O) {
       .addState(
         seq.step(9),
         O.Parallel(            
-          el.map.actions.setView(el.linden, 17),
+          el.map.actions.setView(el.linden, 19),
           slides.activate(9),          
           emitSlideChange 
         )          
@@ -344,23 +311,11 @@ app.intro = (function(w,d,$,O) {
     });    
   }
 
-   //  we can do this with CSS media queries and should leave ipad as an option anyway
-  // function detectMobile(){
-  //   $.browser.device = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
-  //   console.log("Mobile: " + $.browser.device);
-  //   if($.browser.device){
-  //     $('.ui, #map, #slides_container').css('display', 'none');
-  //     $('#mobile_alert').css('display', 'block');
-  //   }
-  // }
-
-
   function init() {
     el = app.map.el;      
     initOdyssey(O);
     listenSlideChange();
     hideShow();
-    detectMobile();
   } 
 
   return {

@@ -688,6 +688,11 @@ mimicks leaflet's zoom ui */
   font-size: 13px;
 }
 
+/*---------- MOBILE ----------*/
+#mobile_alert {
+  display: none;
+}
+
 /*---------- RESPONSIVE ----------*/
 
 @media screen and (max-height: 710px) {
@@ -761,9 +766,4 @@ mimicks leaflet's zoom ui */
   #mobile_alert {
     display: block;
   }
-}
-
-/*---------- MOBILE ----------*/
-#mobile_alert {
-  display: none;
 }

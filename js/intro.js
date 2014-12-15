@@ -26,17 +26,18 @@ app.intro = (function(w,d,$,O) {
   // listen for the slideChange event to be triggered
   function listenSlideChange() {
     $(document).on('slideChange', function() {
-      console.log('listened to slidechange, story.state: ', el.story.state());
+      // console.log('listened to slidechange, story.state: ', el.story.state());
       trackCurrentSlide();
     });
   }    
 
   // fire this each time the user changes a slide
   function trackCurrentSlide() {
-    slides = $('#slides').children(); // creates an array of slides                 
+    slides = $('#slides').children(); // creates an array of slides 
+    // grabs the index value (order) of the current slide                
     slides.each(function(i){
       if ($(this).hasClass('selected')) {
-        console.log('index: ', i);
+        // console.log('index: ', i);
         checkIndex(i);
         cur = i;  
       }
@@ -46,27 +47,27 @@ app.intro = (function(w,d,$,O) {
   // check the index being returned by trackCurrentSlide()
   function checkIndex(index) {
     switch(index){
-      case 0: console.log('first slide!'), slideZero(); 
+      case 0 : slideZero(); 
       break;
-      case 1: console.log('second slide!'), slideOne(); 
+      case 1 : slideOne(); 
       break;
-      case 2: console.log('third slide!'), slideTwo();
+      case 2 : slideTwo();
       break;
-      case 3: console.log('fourth slide'), slideThree(); 
+      case 3 : slideThree(); 
       break;
-      case 4: console.log('fifth slide'), slideFour(); 
+      case 4 : slideFour(); 
       break;
-      case 5: console.log('sixth slide'), slideFive();;
+      case 5 : slideFive();
       break;
-      case 6: console.log('seventh slide');
+      case 6 : slideSix();
       break;
-      case 7: console.log('eigth slide'), slideSeven();
+      case 7 : slideSeven();
       break;
-      case 8: console.log('nineth slide'), slideEight();
+      case 8 : slideEight();
       break;
-      case 9: console.log('tenth slide'), slideNine();
+      case 9 : slideNine();
       break;
-      case 10: console.log('elevnth slide'), slideTen();
+      case 10 : slideTen();
       break;        
       default: console.log('out of slide counters');  
     }
@@ -118,6 +119,10 @@ app.intro = (function(w,d,$,O) {
     el.taxLots.hide();      
     el.featureGroup.clearLayers();   
     el.featureGroup.addLayer(el.colonyMarker);
+  }
+
+  function slideSix() {
+    return;
   }
 
   function slideSeven() {
@@ -213,7 +218,7 @@ app.intro = (function(w,d,$,O) {
       .addState(
         seq.step(5),
         O.Parallel(            
-          el.map.actions.panTo(el.colony),                  
+          el.map.actions.setView(el.colony,16),                  
           slides.activate(5),          
           emitSlideChange         
         )
@@ -221,14 +226,14 @@ app.intro = (function(w,d,$,O) {
       .addState(
         seq.step(6),
         O.Parallel(            
-          slides.activate(6),
+          slides.activate(6),          
           emitSlideChange         
         )
       )
       .addState(
         seq.step(7),
         O.Parallel(         
-        el.map.actions.panTo(el.colony),   
+          el.map.actions.setView(el.colony,16),   
           slides.activate(7),
           emitSlideChange         
         )
@@ -236,7 +241,7 @@ app.intro = (function(w,d,$,O) {
       .addState(
         seq.step(8),
         O.Parallel(
-          el.map.actions.panTo(el.linden),
+          el.map.actions.setView(el.linden, 19),
           slides.activate(8),          
           emitSlideChange 
         )

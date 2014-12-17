@@ -17,41 +17,6 @@
 </head>   
 <body>
   
-  <!-- Map title and intro -->
-  <div id="intro">
-    <a id="language" href="#">en Español</a><br>
-    <h1 class="en"><a href="http://clhenrick.github.io/BushwickCommunityMap/" class="button">Northwest Bushwick Community Map</a></h1>
-    <h1 class="es"><a href="http://clhenrick.github.io/BushwickCommunityMap/" class="button">Mapa Comunitario de Northwest Bushwick</a></h1>
-  </div>
-
-  <!-- top menu bar ENGLISH-->
-  <div class="navigation en">
-    <ul class="navbar">        
-      <li><a href="html/about.html" class="button">About</a></li>
-      <li><a href="html/get_help.html" class="button">Get Help</a></li>
-      <li><a href="html/get_involved.html" class="button">Get Involved</a></li>
-      <li><a href="html/research.html" class="button">Research</a></li>
-      <li><a href="html/contact.html" class="button">Contact</a></li>
-    </ul>
-  </div>
-
-  <!-- top menu bar SPANISH-->
-  <div class="navigation es">
-    <ul class="navbar">
-      <li><a href="html/about.html" class="button">Sobre el Mapa</a></li>
-      <li><a href="html/get_help.html" class="button">Obtén ayuda</a></li>
-      <li><a href="html/get_involved.html" class="button">Participa</a></li>
-      <li><a href="html/research.html" class="button">Investigación</a></li>
-      <li><a href="html/contact.html" class="button">Contacto</a></li>
-    </ul>
-  </div>
-
-  <!-- IF MOBILE display message -->
-  <div id="mobile_alert" class="copy">
-    <h3 class="en">Please visit the map on a device with a larger screen when you have time. Feel free to explore the rest of the site on your mobile device.</h3>
-    <h3 class="es">Para visualizar el mapa, visite el sitio en un dispositivo con una pantalla más grande. Siéntase libre de explorar el resto de la información con su móvil.</h3>
-  </div>
-  
   <!-- address search box -->
   <div id="search-container" class="ui">
     <input type="search" placeholder="Search for a Bushwick address" id="search-box" class="en"/>
@@ -131,10 +96,45 @@
   </div>  
    
   <!-- map is rendered here, all other html elements are positioned absolutely with a higher z-index -->
-  <div id="map"></div>   
+  <div id="map"></div>
 
   <!-- empty div to render the legends template in -->
   <div id="ui-legend" class="ui legend hidden"></div>
+
+  <!-- Map title and intro -->
+  <div id="intro">
+    <a id="language" href="#">en Español</a><br>
+    <h1 class="en"><a href="http://clhenrick.github.io/BushwickCommunityMap/" class="button">Northwest Bushwick Community Map</a></h1>
+    <h1 class="es"><a href="http://clhenrick.github.io/BushwickCommunityMap/" class="button">Mapa Comunitario de Northwest Bushwick</a></h1>
+  </div>
+
+  <!-- top menu bar ENGLISH-->
+  <div class="navigation en">
+    <ul class="navbar">        
+      <li><a href="html/about.html" class="button">About</a></li>
+      <li><a href="html/get_help.html" class="button">Get Help</a></li>
+      <li><a href="html/get_involved.html" class="button">Get Involved</a></li>
+      <li><a href="html/research.html" class="button">Research</a></li>
+      <li><a href="html/contact.html" class="button">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- top menu bar SPANISH-->
+  <div class="navigation es">
+    <ul class="navbar">
+      <li><a href="html/about.html" class="button">Sobre el Mapa</a></li>
+      <li><a href="html/get_help.html" class="button">Obtén ayuda</a></li>
+      <li><a href="html/get_involved.html" class="button">Participa</a></li>
+      <li><a href="html/research.html" class="button">Investigación</a></li>
+      <li><a href="html/contact.html" class="button">Contacto</a></li>
+    </ul>
+  </div>  
+
+  <!-- IF MOBILE display message -->
+  <div id="mobile_alert" class="copy">
+    <h3 class="en">Please visit the map on a device with a larger screen when you have time. Feel free to explore the rest of the site on your mobile device.</h3>
+    <h3 class="es">Para visualizar el mapa, visite el sitio en un dispositivo con una pantalla más grande. Siéntase libre de explorar el resto de la información con su móvil.</h3>
+  </div>
 
   <!-- SLIDES CONTAINER -->
    <div id="slides_container" style="display:block;">

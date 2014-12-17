@@ -65,64 +65,69 @@
     <a href="#" id="zoom-out"><img src="images/zoom-out.png"/></a>
   </div>
   
-  <!-- container for toggling map layers ENGLISH-->
+  <!-- GUI -->
   <div id="ui-container" class="ui">
-    <div class="en">
-      <h4>Property Layers</h4><br/>
-      <a href="#regular" id="regular" class="button">All Tax Lots</a>
-      <a href="#availfar" id="availfar" class="button">Available FAR</a>
-      <a href="#rentstab" id="rentstab" class="button">Likely Rent Stabilized</a>
-      <a href="#landuse" id="landuse" class="button">Land Use</a>
-      <a href="#vacant" id="vacant" class="button">Vacant Land</a>
-      <a href="#yearbuilt" id="yearbuilt" class="button">Year Built</a>
+
+      <h4 class="en">Property Layers</h4>
+      <h4 class="es">Capas de Propiedad</h4>
+      <br/>
+      <a href="#regular" id="regular" class="button">
+        <span class="en">All Tax Lots</span>
+        <span class="es">Todos los Predios</span>
+      </a>
+      <a href="#availfar" id="availfar" class="button">
+        <span class="en">Available FAR</span>
+        <span class="es">FAR Disponible</span>
+      </a>
+      <a href="#rentstab" id="rentstab" class="button">
+        <span class="en">Likely Rent Stabilized</span>
+        <span class="es">Posible Renta Estabilizada</span>
+      </a>
+      <a href="#landuse" id="landuse" class="button">
+        <span class="en">Land Use</span>
+        <span class="es">Uso del Suelo</span>
+      </a>
+      <a href="#vacant" id="vacant" class="button">
+        <span class="en">Vacant Land</span>
+        <span class="es">Tierra Disponible</span>
+      </a>
+      <a href="#yearbuilt" id="yearbuilt" class="button">
+        <span class="en">Year Built</span>
+        <span class="es">Año de Construcción</span>
+      </a>
       
       <hr/>
 
-      <h4>DOB Permits</h4><br/>
+      <h4 class="en">DOB Permits</h4>
+      <h4 class="es">Permisos DOB</h4>
+      <br/>
+      
       <input type="checkbox" name="dob" class="regular-checkbox dob" value="new-buildings" id="nb"/>
-        <label for="nb"></label>New Buildings<br/>      
+        <label for="nb"></label><span class="en">New Buildings</span>
+        <label for="nb"></label><span class="es">Nuevos Edificios</span>
+      <br/>
+      
       <input type="checkbox" name="dob" class="regular-checkbox dob" value="a1" id="a1" />
-        <label for="a1"></label>A1: Major Alteration<br/>
-      <input type="checkbox" name="dob" class="regular-checkbox dob" value="a2a3" id="a2a3" />
-        <label for="a2a3"></label>A2, A3: Minor Alteration
-      
-      <hr/>
-      
-      <h4>Stories</h4><br/>
-      <input type="checkbox" name="stories" class="regular-checkbox" value="sites-of-gentrification" id="sites-of-gentrification"/>
-        <label for="sites-of-gentrification"></label>Sites of Gentrification<br/>
-      <!-- <input type="checkbox" name="stories" class="regular-checkbox" value="personal-stories" id="personal-stories"/>
-        <label for="personal-stories"></label>Personal Stories -->
-    </div>
+        <label for="a1"></label><span class="en">A1: Major Alteration</span>
+        <label for="a1"></label><span class="es">A1: Alteraciones Mayores</span>
+      <br/>
 
-  <!-- container for toggling map layers SPANISH-->
-    <div class="es">
-      <h4>Capas de Propiedad</h4><br/>
-      <a href="#regular" id="regular" class="button">Todos los Predios</a>
-      <a href="#availfar" id="availfar" class="button">FAR Disponible</a>
-      <a href="#rentstab" id="rentstab" class="button">Posible Renta Estabilizada</a>
-      <a href="#landuse" id="landuse" class="button">Uso del Suelo</a>
-      <a href="#vacant" id="vacant" class="button">Tierra Disponible</a>
-      <a href="#yearbuilt" id="yearbuilt" class="button">Año de Construcción</a>
-      
-      <hr/>
-
-      <h4>Permisos DOB</h4><br/>
-      <input type="checkbox" name="dob" class="regular-checkbox dob" value="new-buildings" id="nb"/>
-        <label for="nb"></label>Nuevos Edificios<br/>      
-      <input type="checkbox" name="dob" class="regular-checkbox dob" value="a1" id="a1" />
-        <label for="a1"></label>A1: Alteraciones Mayores<br/>
       <input type="checkbox" name="dob" class="regular-checkbox dob" value="a2a3" id="a2a3" />
-        <label for="a2a3"></label>A2, A3: Alteraciones Menores
+        <label for="a2a3"></label><span class="en">A2, A3: Minor Alteration</span>
+        <label for="a2a3"></label><span class="es">A2, A3: Alteraciones Menores</span>
       
       <hr/>
       
-      <h4>Historias</h4><br/>
+      <h4 class="en">Stories</h4>
+      <h4 class="es">Historias</h4>
+      <br/>
       <input type="checkbox" name="stories" class="regular-checkbox" value="sites-of-gentrification" id="sites-of-gentrification"/>
-        <label for="sites-of-gentrification"></label>Sitios de Gentrificación<br/>
+        <label for="sites-of-gentrification"></label><span class="en">Sites of Gentrification</span>
+        <span class="es">Sitios de Gentrificación</span>
+        <br/>
       <!-- <input type="checkbox" name="stories" class="regular-checkbox" value="personal-stories" id="personal-stories"/>
-        <label for="personal-stories"></label>Historias Personales -->
-    </div>
+        <label for="personal-stories"></label><span class="en">Personal Stories</span>
+        <span class="es">Historias Personales</span> -->
   </div>  
    
   <!-- map is rendered here, all other html elements are positioned absolutely with a higher z-index -->

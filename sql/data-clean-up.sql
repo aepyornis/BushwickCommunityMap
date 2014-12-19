@@ -102,7 +102,7 @@ ALTER TABLE bushwick_pluto14v1 ADD COLUMN acris_link TEXT;
 -- set the column to have a hyperlink to the ACRIS URL for the tax lot:
 UPDATE bushwick_pluto14v1 SET acris_link = 
 '<a href="http://a836-acris.nyc.gov/bblsearch/bblsearch.asp?borough=3&block=' 
-|| block::text || '&lot=' || lot::text || '">Click here for ACRIS information</a>' ;
+|| block::text || '&lot=' || lot::text || '" target="_blank">Click here for ACRIS information</a>' ;
 
 
 

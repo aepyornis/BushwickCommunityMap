@@ -78,7 +78,7 @@ UPDATE bushwick_pluto14v1 SET availablefar = 0 WHERE availablefar IS NULL;
 --SELECT a.* FROM bushwick_pluto14v1 a, vacant_596acres b WHERE ST_Intersects(a.the_geom, b.the_geom)
 
 -- add a column for landuse descriptions
-ALTER TABLE bushwick_pluto14v1 ADD COLUMN lu_descript TEXT
+ALTER TABLE bushwick_pluto14v1 ADD COLUMN lu_descript TEXT;
 
 -- add values based on landuse codes
 UPDATE bushwick_pluto14v1 SET lu_descript = 
@@ -94,10 +94,15 @@ UPDATE bushwick_pluto14v1 SET lu_descript =
          WHEN landuse = '10' THEN 'Parking Facilities'
          WHEN landuse = '11' THEN 'Vacant Land'
          WHEN landuse IS NULL THEN 'N/A'
-         END 
+         END;
 
--- add a column for likely rent stabilized = yes or no
-ALTER TABLE bushwick_pluto14v1 ADD COLUMN rentstabl TEXT
+-- add a column for ACRIS link:
+ALTER TABLE bushwick_pluto14v1 ADD COLUMN acris_link TEXT;
+
+-- set the column to have a hyperlink to the ACRIS URL for the tax lot:
+UPDATE bushwick_pluto14v1 SET acris_link = 
+'<a href="http://a836-acris.nyc.gov/bblsearch/bblsearch.asp?borough=3&block=' 
+|| block::text || '&lot=' || lot::text || '">Click here for ACRIS information</a>' ;
 
 
 

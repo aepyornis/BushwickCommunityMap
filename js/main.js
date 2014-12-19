@@ -454,24 +454,24 @@ app.map = (function(w,d, $, _){
       title : "Available FAR",
       items : [
         {
-          color : "#FFFFB2",
-          label : "0 - 0.8"
-        },
-        {
-          color: "#FECC5C",
-          label : "0.9 - 1.6"
-        },
-        {
-          color : "#FD8D3C",
-          label : "1.7 - 2.4"
+          color : "#BD0026",
+          label : "3.3 - 4"        
         },
         {
           color : "#F03B20",
           label : "2.5 - 3.2"
         },
         {
-          color : "#BD0026",
-          label : "3.3 - 4"        
+          color : "#FD8D3C",
+          label : "1.7 - 2.4"
+        },
+        {
+          color: "#FECC5C",
+          label : "0.9 - 1.6"
+        },
+        {
+          color : "#FFFFB2",
+          label : "0 - 0.8"
         }
       ]
     },

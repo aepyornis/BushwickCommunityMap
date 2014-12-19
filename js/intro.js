@@ -316,11 +316,18 @@ app.intro = (function(w,d,$,O) {
     });    
   }
 
+  function redimensionSlides(){
+    $('#slides').css('height',
+                      window.innerHeight
+                      - $('#intro').height() - 150);
+  }
+
   function init() {
     el = app.map.el;      
     initOdyssey(O);
     listenSlideChange();
     hideShow();
+    redimensionSlides();
   } 
 
   return {

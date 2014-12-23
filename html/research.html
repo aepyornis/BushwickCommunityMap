@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../../favicon.ico">
+    <title>Bushwick Community Map</title>
+    <link rel="stylesheet" href="//libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+    <link rel="stylesheet" href="//cartodb.github.io/odyssey.js/sandbox/css/slides.css">
+    <link href="../css/normalize.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div id="intro_and_slides">
+      <!-- Map title and intro -->
+      <div id="intro">
+        <a id="language" href="#">en Español</a><br>
+        <h1 class="en"><a href="../index.html" class="button">Northwest Bushwick Community Map</a></h1>
+        <h1 class="es"><a href="../index.html" class="button">Mapa Comunitario de Northwest Bushwick</a></h1>
+      </div>
+    </div>
+
+    <!-- top menu bar ENGLISH-->
+    <div class="navigation en">
+      <ul class="navbar">        
+        <li><a href="./about.html" class="button">About</a></li>
+        <li><a href="./get_help.html" class="button">Get Help</a></li>
+        <li><a href="./get_involved.html" class="button">Get Involved</a></li>
+        <li><a href="./research.html" class="button">Research</a></li>
+        <li><a href="./contact.html" class="button">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- top menu bar SPANISH-->
+    <div class="navigation es">
+      <ul class="navbar">        
+        <li><a href="./about.html" class="button">Sobre el Mapa</a></li>
+        <li><a href="./get_help.html" class="button">Obtén ayuda</a></li>
+        <li><a href="./get_involved.html" class="button">Participa</a></li>
+        <li><a href="./research.html" class="button">Investigación</a></li>
+        <li><a href="./contact.html" class="button">Contacto</a></li>
+      </ul>
+    </div>
+  
+   <div class="copy">
+    <div class="en">
+      <a class="anchor" name="rent-regulated"></a>
+      <h3>Rent Regulation</h3>
+      <p>In New York City, Rent Control tenants are generally in buildings built before February 1, 1947, where the tenant is in continuous occupancy prior to July 1, 1971.<br>Tenants who took occupancy after June 30, 1971, in buildings of six or more units built before January 1, 1974, are generally Rent Stabilized.<br>New York City has a complex array of Rent Stabilization Laws and regulations. Generally, the only buildings covered by rent stabilization law are those built before 1974 that have 6 or more units. Newer buildings may qualify if the building has received certain tax benefits.<br>There is also a process where older buildings can also be deregulated, meaning they are no longer are legally rent-stabilized. The rent of a rent stabilized unit can only be raised a certain percentage every year and the tenant must be offered a lease renewal.<br><br>Additionally,<a href="http://elephant-bird.net/bushwickrentstabilized/" target="_blank"><span>this map</span></a> lists all of the rent-stabilized properties derived from owner registrations with DHCR. The data comes with a few caveats: The rent stabilization data is slightly out-of-date because DHCR hasn’t updated their public information since 2012. The list is not 100% complete, so if determining the status is extremely critical, you will still have to contact DHCR. Additionally, not all the units inside the building are necessarily rent-stabilized. There is also a <a href="http://elephant-bird.net/bkrentstabilized/" target="_blank"><span>Brooklyn Wide</span></a> version.<br><br>For more information about your status you can also visit: <a href="http://www.nyshcr.org" target="_blank"><span>NY State Homes &#38 Community Renewal</a></p>
+      
+      <a class="anchor" name="vacant-land"></a>
+      <h3>Vacant Land</h3>
+      <p>This is land without a building. It can be vacant for any number of reasons. It may be owned by a utility company or the government for many reasons. It could be owned by an absentee owner, or an owner might be holding on it waiting for building permits or to re-sell it.<br><br>For more information about land use see the <a href="http://www.nyc.gov/html/dcp/html/landusefacts/landusefactshome.shtml" target="_blank"><span>NYC Department of City Planning</span></a></p>
+      
+      <a class="anchor" name="far"></a>      
+      <h3>F-A-R</h3>
+      <p>F-A-R stands for Floor Area Ratio. It's a zoning regulation that determines the maximum floor area (total sq. feet) that a building is allowed to have. The F-A-R, combined with other regulations, limits how high and how many units a building may have.<br><br>Buildings can be built or renovated to contain up to the maximum allowable F-A-R 'as of right,' meaning they do not need special permission to do so. An owner with a property far below the maximum might decide to evict tenants and rebuild with more units in order to collect more rent.</p>
+      <p><em>For example:</em></p>
+      <div class="far-diagrams">
+      <img class="far" src="../images/far01.png"><p>If we have a 10,000 square foot lot with an FAR of 1.0...</p><br><br>
+      <img class="far" src="../images/far02.png"><p>A developer could build one story across the entire lot.</p><br><br>
+      <img class="far" src="../images/far03.png"><p class="f2">Or they could build two stories across half of the lot. If a lot only has 1 floor built across half of it, then it has 0.5 available FAR meaning the developer has room to build more.</p><br><br>
+      <img class="far" src="../images/far04.png"><p class="f3">If they build on 1/4 of the lot they can build up to four stories.</p>  
+      </div>
+      <p>For more Zoning information visit, <a href="http://www.nyc.gov/html/dcp/html/zone/glossary.shtml" target="_blank"><span>NYC Department of City Planning's Zoning Glossary</a></p>
+      
+      <a class="anchor" name="ulurp"></a>
+      <h3>ULURP</h3>
+      <p>The New York City Charter requires certain actions that are reviewed by the City Planning Commission to undergo a Uniform Land Use Review Procedure (ULURP). ULURP is a standardized procedure whereby applications affecting the land use of the city would be publicly reviewed. The Charter also established mandated time frames within which application review must take place. Key participants in the ULURP process are now the Department of City Planning (DCP) and the City Planning Commission (CPC), Community Boards, the Borough Presidents, the Borough Boards, the City Council and the Mayor.<br><br>For more about the procedure <a href="http://www.nyc.gov/html/dcp/html/ap/step5_ulurp.shtml" target="_blank"><span>check here.</span></a></p>
+      
+      <a class="anchor" name="dob-violation"></a>
+      <h3>DOB Violation</h3>
+      <p>A DOB Violation is a notice that a property is not in compliance with some provision of applicable law and includes an order from the Commissioner of the Department of Buildings to correct the violating condition. The violation is entered against the property in the Department's Buildings Information System (BIS), and must be corrected before a new or amended Certificate of Occupancy (CO) can be obtained.<br><br>For more information see: <a href="http://www.nyc.gov/html/dob/html/safety/dob.shtml"  target="_blank"><span>NYC Buildings DOB</span></a></p>
+
+      <h3>Some Additional Resources:</h3>
+      <p><strong>PLUTO:</strong>This is a released twice a year from the Department of City Planning. Besides city planning data, it also contains information from other agencies. You can gain access to it’s data on the <a href="http://www.nyc.gov/html/dob/html/safety/dob.shtml" target="_blank"><span>DCP’s website</span></a>.<br><br><strong>ACRIS: </strong><a href="http://a836-acris.nyc.gov/CP/" target="_blank"><span>Here</span></a> you will find deed transactions as well as mortgage information directly from the Department of Finance. This is the best way find who is the owner of a building. Very often the owner is listed as a LLC or a company, but ACRIS will allow you to read the entire deed transfer documents, which can provide clues as to who the people are behind the companies.<br><br><strong>Department of Buildings: </strong><a href="http://a810-bisweb.nyc.gov/bisweb/bispi00.jsp" target="_blank"><span>Here</span></a> you can look up an individual buildings and find all the complaints, permits, and applications. You can also search by community district.<br><br><strong>HPD: </strong><a href="https://hpdonline.hpdnyc.org/HPDonline/provide_address.aspx" target="_blank"><span>HpdOnline</span></a>, will allow you to look up active and past HPD complaints and violations on a property.</p>
+    
+    </div>
+
+    <div class="es">
+      <a class="anchor" name="rent-controlled"></a>
+      <h3>Renta Controlada, Renta estabilizada y Posible Renta Estabilizada</h3>
+      <p>En la ciudad de Nueva York, los inquilinos con renta controlada se encuentran generalmente en edificios construidos antes del 1 de Febrero de 1947 donde el inquilino estuvo en ocupación contínua hasta el 1ro de Julio de 1971. <br>Tenants who took occupancy after June 30, 1971, in buildings of six or more units built before January 1, 1974, are generally Rent Stabilized.<br>Inquilinos que ocupaban después del 30 de Junio de 1971, en edificios de seis o más unidades construidos antes del 1 de Enero de 1974, generalmente están em Renta Estabilizada.<br>TLa ciudad de Nueva York tiene un complejo marco de leyes de Estabilización de rentas y regulaciones. Generalmente los únicos edificios cubiertos por estabilización de renta son aquellos construidos antes de 1974 y que tienen 6 o más unidades. Los edificios nuevos pueden calificar si el inmueble ha recibido beneficios de impuestos. Existe también un proceso por el cual edificios más antiguos pueden estar desregulados, es decir, ya no están estabilizados. Una renta estabilizada solo puede ser aumentada un cierto porcentaje anual y el inquilino debe recibir oferta de renovación de contrato.<br><br>Adicionalmente <a href="http://elephant-bird.net/bushwickrentstabilized/" target="_blank"><span>este mapa</span></a> lista todas las propiedades estabilizadas a partir de los registros de propietarios. Los datos tienen algunos problemas: La información pública no ha actualizado sus bases de datos desde el 2012, la lista no está 100% completa así que cuando la información es crítica se debe contactar directamente con la autoridad. Además, no todas las unidades en un edificio cuentan necesariamente con la misma condición de estabilización. <a href="http://elephant-bird.net/bkrentstabilized/" target="_blank"><span>Hay una versión para todo Brooklyn</span></a><br>Para más información visita: <a href="http://www.nyshcr.org" target="_blank"><span>NY State Homes &#38 Community Renewal</a></p>
+      
+      <a class="anchor" name="vacant-land"></a>
+      <h3>Tierra Disponible</h3>
+      <p>Esta es tierra sin construcción en ella. Esto puede tener causas variadas, como ser propiedad del gobierno, un dueño ausente o alguién puede estar esperando algun proceso legal de compra-venta.<br><br>Para más información: <a href="http://www.nyc.gov/html/dcp/html/landusefacts/landusefactshome.shtml" target="_blank"><span>Uso de suelo</span></a></p>
+      
+      <a class="anchor" name="far"></a>
+      <h3>F-A-R</h3>
+      <p>FAR son las siglas para “Floor Area Ratio” (Proporción Area contra suelo). Es una regulación que permite determinar el máximo de pies cuadrados que un edificio tiene permitido ocupar. FAR determina, junto con otras regulaciones, que tan alto y cuantas unidades puede tener un edificio.<br><br>Los edificios pueden ser construidos o renovados para contener hasta su máximo FAR por derechos, es decir, no necesitan permiso especial para hacerlo. Un propietario puede entonces desalojar inquilinos y reconstruir con más unidades para cobrar más renta.<br><br>Para más información visita, <a href="http://www.nyc.gov/html/dcp/html/zone/glossary.shtml" target="_blank"><span>NYC Zoning Glossary</a></p>
+      
+      <a class="anchor" name="ulurp"></a>
+      <h3>ULURP</h3>
+      <p>La Ciudad de Nueva York requiere que ciertas acciones sean revisadas por la Comisión de Planeación Urbana con un Procedimiento de Revisión Uniforme de Uso de Suelo  (ULURP). Es un proceso que somete aplicaciones de cambios legales en el uso de suelo a escrutinio público.<br><br>Para más información del proceso visitar, <a href="http://www.nyc.gov/html/dcp/html/ap/step5_ulurp.shtml" target="_blank"><span>aquí.</span></a></p>
+      
+      <a class="anchor" name="dob-violation"></a>
+      <h3>Violación del DOB</h3>
+      <p>Una violación del DOB (Departamento de Edificios) es un aviso que se aplica cuando una propiedad no está en regla con alguna provisión de ley aplicable e incluye una orden del comisionado del Departamento de Edificios para corregir la violación. Esta violación es aplicada contra la propiedad  en la información del Departamento de Edificios y debe de ser corregida antes de poder expedir un nuevo Certificado de Ocupación.<br><br>Para más información: <a href="http://www.nyc.gov/html/dob/html/safety/dob.shtml" target="_blank"><span>NYC Buildings DOB</span></a></p>
+
+      <h3>Otros recursos útiles:</h3>
+      <p><strong>PLUTO:</strong>Se actualiza dos veces al año por el Departamento de Planeación Urbana. Contiene información de las decisiones de plan urbano y otras entidades. Se puede acceder aquí <a href="http://www.nyc.gov/html/dob/html/safety/dob.shtml" target="_blank"><span>DCP’s website</span></a>.<br><br><strong>Department of Buildings: </strong><a href="http://a810-bisweb.nyc.gov/bisweb/bispi00.jsp" target="_blank"><span>Aquí</span></a> se puede buscar un edificio individualmente para buscar sus quejas, permisos y aplicaciones.<br><br><strong>HPD: </strong><a href="https://hpdonline.hpdnyc.org/HPDonline/provide_address.aspx" target="_blank"><span>HpdOnline</span></a>, permite buscar quejas activas y pasadas en una propiedad.</p>
+     
+    </div>
+  
+  </div>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="../js/internal_pages.js"></script> 
+</body>
+</html>

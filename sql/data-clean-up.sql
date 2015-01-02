@@ -7,35 +7,38 @@ ALTER TABLE bushwick_pluto14v1 DROP COLUMN spdist2
 --- Using Postgres with PostGIS
 --------------------------------------------------------------------------------------------------------------
 -- find out the total number of rows: 11283
-SELECT count(*) FROM bushwick_pluto14v1 
+-- SELECT count(*) FROM bushwick_pluto14v1 
 
 -- find out the individual zoning codes (14 codes total)
-SELECT distinct(allzoning1) FROM bushwick_pluto14v1
+-- SELECT distinct(allzoning1) FROM bushwick_pluto14v1
 
 -- find the zoning codes that are residential and commerical (3 codes)
-SELECT distinct(allzoning1) FROM bushwick_pluto14v1 where allzoning1 ilike 'C%R%' order by allzoning1
+-- SELECT distinct(allzoning1) FROM bushwick_pluto14v1 where allzoning1 ilike 'C%R%' order by allzoning1
 
 -- number of rows from above: 1433
-SELECT count(*) FROM bushwick_pluto14v1 where allzoning1 ilike 'C%R%'
+-- SELECT count(*) FROM bushwick_pluto14v1 where allzoning1 ilike 'C%R%'
 
 -- find the zoning codes that are residential only (4 codes)
-SELECT distinct(allzoning1) FROM bushwick_pluto14v1 where allzoning1 ilike 'R%' order by allzoning1
+-- SELECT distinct(allzoning1) FROM bushwick_pluto14v1 where allzoning1 ilike 'R%' order by allzoning1
 
 -- find the zoning codes that are manufacturing only (2 codes)
-SELECT distinct(allzoning1) FROM bushwick_pluto14v1 where allzoning1 ilike 'M%' order by allzoning1
+-- SELECT distinct(allzoning1) FROM bushwick_pluto14v1 where allzoning1 ilike 'M%' order by allzoning1
 
 -- find the zoning codes that are commercial only (4 codes)
-SELECT distinct(allzoning1) FROM bushwick_pluto14v1 where allzoning1 ilike 'C%' and allzoning1 not ilike '%R%' order by allzoning1
+-- SELECT distinct(allzoning1) FROM bushwick_pluto14v1 where allzoning1 ilike 'C%' and allzoning1 not ilike '%R%' order by allzoning1
 
 -- find the zoning codes that are parkland (1 code)
-SELECT distinct(allzoning1) FROM bushwick_pluto14v1 where allzoning1 ilike 'P%' order by allzoning1
+-- SELECT distinct(allzoning1) FROM bushwick_pluto14v1 where allzoning1 ilike 'P%' order by allzoning1
 
 -- ignore the rows that have null zoning codes (3 rows)
-SELECT count(*) FROM bushwick_pluto14v1 where allzoning1 IS NULL
+-- SELECT count(*) FROM bushwick_pluto14v1 where allzoning1 IS NULL
 
 --------------------------------------------------------------------------------------------------------------
 --- Code to update the column "zoning_style" which will be used to style the tax lot polygon fill based on their zoning
 --- Select all the code below, copy and paste into the SQL panel and run
+
+-- create a column to store value for general zoning 
+ALTER TABLE bushwick_pluto14v1 ADD COLUMN zoning_style TEXT;
 
 -- set zoning_style to 'R' for residential 
 UPDATE bushwick_pluto14v1 SET zoning_style = 'R' WHERE allzoning1 ilike 'R%' ;
@@ -103,7 +106,3 @@ ALTER TABLE bushwick_pluto14v1 ADD COLUMN acris_link TEXT;
 UPDATE bushwick_pluto14v1 SET acris_link = 
 '<a href="http://a836-acris.nyc.gov/bblsearch/bblsearch.asp?borough=3&block=' 
 || block::text || '&lot=' || lot::text || '" target="_blank">Click here for ACRIS information</a>' ;
-
-
-
-

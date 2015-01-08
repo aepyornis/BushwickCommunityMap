@@ -209,7 +209,7 @@ app.map = (function(w,d, $, _){
           // turn on interactivity for mousing events
           layer.getSubLayer(i).setInteraction(true);
           // tell cdb what columns to pass for interactivity
-          layer.getSubLayer(i).setInteractivity('address, jt_description, ownername, ownerphone, ownerbusin, existingst, proposedst');                    
+          layer.getSubLayer(i).setInteractivity('address, jt_description, latestactiondate, ownername, ownerphone, ownerbusin, existingst, proposedst');                    
           // when the user mouses over the dob permit display html & data in a tool tip
           layer.getSubLayer(i).on('featureOver', function(e, pos, latlng, data) {
             $('#tool-tip').html(
@@ -218,6 +218,7 @@ app.map = (function(w,d, $, _){
                                 '<hr>' +
                                 '<p><strong>Address:</strong> '  + data.address + '</p>' +
                                 '<p><strong>Job Description:</strong> ' + data.jt_description + '</p>' +
+                                '<p><strong>Latest Action Date:</strong> ' + data.latestactiondate.slice(0,10) + '</p>' +
                                 '<p><strong>Owner Name:</strong> '  + data.ownername + '</p>' +
                                 '<p><strong>Owner Business:</strong> '  + data.ownerbusin + '</p>' +
                                 '<p><strong>Owner Phone:</strong> '  + data.ownerphone + '</p>' +

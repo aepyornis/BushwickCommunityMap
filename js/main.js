@@ -178,19 +178,19 @@ app.map = (function(w,d, $, _){
 
         // create and store the dob permits a1 sublayer
         el.dobPermitsA1 = layer.createSubLayer({
-          sql : "SELECT * FROM exp_codedjobs_a1",
+          sql : "SELECT * FROM bushwick_jobs_2014_a1",
           cartocss : '#exp_codedjobs_a1 {marker-width: 10; marker-fill: hsl(0,0%,30%); marker-line-color: white; marker-line-width: 0.8;}'
         });
 
         // create and store the dob permits a2a3 sublayer
         el.dobPermitsA2A3 = layer.createSubLayer({
-          sql : "SELECT * FROM exp_codedjobs_a2a3",
+          sql : "SELECT * FROM bushwick_jobs_2014_a2a3",
           cartocss : '#exp_codedjobs_a1 {marker-width: 10; marker-fill: hsl(100,0%,50%); marker-line-color: white; marker-line-width: 0.8;}'
         });
 
         // create and store the dob permits nb sublayer
         el.dobPermitsNB = layer.createSubLayer({
-          sql : "SELECT * FROM exp_codedjobs_nb",
+          sql : "SELECT * FROM bushwick_jobs_2014_nb",
           cartocss : '#exp_codedjobs_a1 {marker-width: 10; marker-fill: hsl(350,0%,0%); marker-line-color: white; marker-line-width: 0.8;}'         
         });
 

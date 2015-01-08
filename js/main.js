@@ -214,7 +214,7 @@ app.map = (function(w,d, $, _){
           layer.getSubLayer(i).on('featureOver', function(e, pos, latlng, data) {
             $('#tool-tip').html(
                                 // text to display when user hovers on dob permit layers
-                                '<h4>DOB Permit Info</h4>' +
+                                '<h4>DOB Job Info:</h4>' +
                                 '<hr>' +
                                 '<p><strong>Address:</strong> '  + data.address + '</p>' +
                                 '<p><strong>Job Description:</strong> ' + data.jt_description + '</p>' +

@@ -1,8 +1,9 @@
 --- DOB Permits layer ---
 -- add a column to translate jobtype codes to human readable
-ALTER TABLE exp_codedjobs ADD COLUMN jt_description TEXT
+-- change table name if needed
+ALTER TABLE bushwick_jobs_2014_nb ADD COLUMN jt_description TEXT
 
-UPDATE exp_codedjobs SET jt_description = 
+UPDATE bushwick_jobs_2014_nb SET jt_description = 
     CASE WHEN jobtype = 'A1' THEN 'Major Alteration'
              WHEN jobtype = 'A2' THEN 'Minor Alteration' 
              WHEN jobtype = 'A3' THEN 'Minor Alteration'

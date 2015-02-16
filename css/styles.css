@@ -788,6 +788,10 @@ mimicks leaflet's zoom ui */
     position: static;
   }
 
+  #intro_and_slides #intro {
+    height: 140px;
+  }
+
   /*hide map and UI on mobile*/
   .ui, #map, #slides_container, #slides * {
     display: none;

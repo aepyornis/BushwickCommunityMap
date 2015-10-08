@@ -920,6 +920,8 @@ object {
   src:url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/fbc6b03a-b3a1-427c-a884-053deca3a53c.eot?#iefix) format('embedded-opentype'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/d999c07b-a049-4eb5-b8a6-4f36ae25e67e.woff) format('woff'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/4d4a75f5-d32a-4a09-8665-133afd39cc37.ttf) format('truetype'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/8152bc4e-d700-4c78-b6be-326893e6f53f.svg) format('svg')
 }
 
+
+
 html, body {
   height: 100%;
   width: 100%;
@@ -951,7 +953,7 @@ img {
 .copy {
     width: 720px;
     margin: 0;
-    font-family: AleoRegular, Serif;
+    font-family: AleoRegular Serif;
     font-size: 16px;
     line-height: 21px; 
     text-align: left;  
@@ -1713,5 +1715,12 @@ mimicks leaflet's zoom ui */
 .wp-sidebar {
   margin-left: 4%;
   margin-top: 4%;
-  font-family: inherit;
+  }
+
+.widget-title {
+  font-family: ProximaNovaBold, Helvetica, Arial, sans-serif;
+}
+
+.wp-sidebar ul li {
+  font-family: ProximaNovaBold, Helvetica, Arial, sans-serif;
 }

@@ -38,12 +38,12 @@
     <!-- top menu bar ENGLISH-->
     <div class="navigation en">
     <ul class="navbar">        
-<li><a href="./about.html" class="button">About</a></li>
-        <li><a href="/html/get_help.html" class="button">Get Help</a></li>
-        <li><a href="/html/get_involved.html" class="button">Get Involved</a></li>
-        <li><a href="/html/research.html" class="button">Research</a></li>
-        <li><a href="/html/contact.html" class="button">Contact</a></li>
-        <li><a href="/blog" class="button">Blog</a></li>
+<li><a href="/html/about.html" class="button">About</a></li>
+        <li><a href="/../html/get_help.html" class="button">Get Help</a></li>
+        <li><a href="/../html/get_involved.html" class="button">Get Involved</a></li>
+        <li><a href="/../html/research.html" class="button">Research</a></li>
+        <li><a href="/../html/contact.html" class="button">Contact</a></li>
+        <li><a href="/blog" class="button selected">Blog</a></li>
     </ul>
     </div>
 

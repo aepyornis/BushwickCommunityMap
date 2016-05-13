@@ -110,6 +110,15 @@ app.map = (function(w,d, $, _){
         el.lindenMarker
       ];
     
+    ////////////////
+    // Interviews //
+    ////////////////
+    
+    el.interviews = interviews.map(function(i){
+      return new L.marker([i.lat, i.lng]);
+    });
+    
+    
     // instantiate the Leaflet map object
     el.map = new L.map('map', params);
     
@@ -320,7 +329,9 @@ app.map = (function(w,d, $, _){
           $a2a3 = $('#a2a3'),
           $nb = $('#nb'),
           $sg = $('#sites-of-gentrification'),
-          $ps = $('#personal-stories');
+          $ps = $('#personal-stories'),
+          $interviews = $('#interviews');
+    
 
     // toggle A1 major alterations layer
     $a1.change(function(){
@@ -369,8 +380,19 @@ app.map = (function(w,d, $, _){
         }
         el.featureGroup.removeLayer(el.rheingoldPoly);
       };
-    });        
+    });
 
+    $interviews.change(function(){
+      if ($interviews.is(':checked')) {
+        el.interviews.forEach(function(interview){
+          el.featureGroup.addLayer(interview);
+        });
+      } else {
+        el.interviews.forEach(function(interview){
+          el.featureGroup.removeLayer(interview);
+        });
+      }
+    });
     // toggle personal stories
     // to do: add stories!
     $ps.change(function(){

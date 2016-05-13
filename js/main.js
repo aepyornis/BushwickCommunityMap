@@ -44,7 +44,7 @@ app.map = (function(w,d, $, _){
   el.sql = {
     all : "SELECT * FROM bushwick_pluto14v1",
     rentStab : "SELECT a.* FROM bushwick_pluto14v1 a, bushwick_rent_stabl_merge_centroids b where st_intersects(a.the_geom, b.the_geom)",
-    vacant : "SELECT * FROM bushwick_pluto14v1 WHERE landuse = '11'",
+    vacant : "SELECT * FROM bushwick_pluto14v1 WHERE landuse = '11'"
   };
 
   // compile the underscore legend template for rendering map legends for choropleth layers
@@ -68,7 +68,7 @@ app.map = (function(w,d, $, _){
       zoomControl : false,
       infoControl: false,
       attributionControl: true
-    }
+    };
 
     // coerce Leaflet into allowing multiple popups to be open simultaneously
     L.Map = L.Map.extend({
@@ -87,7 +87,7 @@ app.map = (function(w,d, $, _){
       iconRetinaUrl: 'https://raw.githubusercontent.com/clhenrick/BushwickCommunityMap/gh-pages/images/gentrification-2x.png',
       iconSize: [30, 30],
       iconAnchor: [15, 15],
-      popupAnchor: [0, -15],
+      popupAnchor: [0, -15]
     });    
 
     // lat lngs for locations of stories
@@ -121,7 +121,7 @@ app.map = (function(w,d, $, _){
     el.map.addLayer(el.mapboxTiles); 
 
     // add mapbox and osm attribution
-    var attr = "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a>"
+    var attr = "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a>";
     el.map.attributionControl.addAttribution(attr);
 
     // feature group to store rheingold geoJSON
@@ -144,20 +144,20 @@ app.map = (function(w,d, $, _){
     // makes sure base layers stay below the cartodb data
     el.map.on('baselayerchange', function(e){
       e.layer.bringToBack();
-    })   
+    });
 
     // load the rheingold GeoJSON layer
     loadRheingold();
     // add the tax lot layer from cartodb
     getCDBData();
-  }
+  };
 
   // load the geoJSON boundary for the Rheingold development
   function loadRheingold() {
     $.getJSON('./data/rheingold_rezoning_area.geojson', function(json, textStatus) {
         el.rheingoldPoly = L.geoJson(json, {
           style: function(feature){
-            return { color: '#000', fill: false, fillOpacity: 0.2, dashArray: '5,10', lineCap: 'square' }
+            return { color: '#000', fill: false, fillOpacity: 0.2, dashArray: '5,10', lineCap: 'square' };
           }
         });
     });
@@ -258,7 +258,7 @@ app.map = (function(w,d, $, _){
   // change SQL query of a layer
   var changeSQL = function(layer, sql) {
     layer.setSQL(sql);
-  }
+  };
 
   // corresponding cartoCSS & SQL changes to tax lot layer buttons
   // legends are displayed or hidden as needed
@@ -310,7 +310,7 @@ app.map = (function(w,d, $, _){
       el.taxLotActions[$(this).attr('id')]();
       el.taxLots.show();
     }); 
-  }
+  };
 
   // toggle additional layers based on check box boolean value
   var initCheckboxes = function() {
@@ -380,7 +380,7 @@ app.map = (function(w,d, $, _){
         console.log('hide stories');
       }
     });
-  }
+  };
 
   // geocode search box text and create a marker on the map
   var geocode = function(address) {
@@ -406,7 +406,7 @@ app.map = (function(w,d, $, _){
             console.log('geocode unsuccesful: ', status);
           }
       });
-  }
+  };
 
   // search box ui interaction TO DO: check to see if point is outside of Bushwick bounds
   var searchAddress = function() {
@@ -417,12 +417,12 @@ app.map = (function(w,d, $, _){
     });
     $('#search-box').on('blur',function(){      
       if ($(this).val()!=="") {
-        $address = $(this).val()
+        $address = $(this).val();
         geocode($address);  
         $(this).val("");
       } 
     });
-  }
+  };
 
   // function to render choropleth legends
   var renderLegend = function(data) {
@@ -432,7 +432,7 @@ app.map = (function(w,d, $, _){
     }
     var legendData = {
       title : data.title,
-      items : data.items,// array of objects containing color and values
+      items : data.items  // array of objects containing color and values
     };    
     el.legend.html(el.template(legendData));
     if (el.legend.hasClass('hidden')) el.legend.removeClass('hidden');
@@ -446,7 +446,7 @@ app.map = (function(w,d, $, _){
     $('#zoom-out').on('click', function(){
       el.map.zoomOut();
     });
-  }
+  };
 
   // data passed to renderLegend();
   // to do: generate this dynamically from cartocss
@@ -564,13 +564,13 @@ app.map = (function(w,d, $, _){
     searchAddress();
     initZoomButtons();
     app.intro.init();    
-  }
+  };
 
   // only return init() and the stuff in the el object
   return {
     init : init,
     el : el
-  }
+  };
 
 })(window, document, jQuery, _);
 

@@ -110,21 +110,34 @@ app.map = (function(w,d, $, _){
         el.lindenMarker
       ];
     
-    ////////////////
-    // Interviews //
-    ////////////////
+    ////////////////// Interviews ///////////
+
+    // mic icon from ionicons
+    var micIcon = L.divIcon({className: 'ion-mic-b interviews-icon'});
     
+    // object -> html string
+    var interviewPopupHtml = function(i) {
+      return '<div class="interview-popup-container">' + 
+        '<p>' + i.name + '</p>' + 
+        '<p>' + i.date + '</p>' + 
+        '<p>' + i.address + '</p>' + 
+        '</div>';
+    };
+    
+    // global var interviews loaded in <script> from js/interviews.js
     el.interviews = interviews.map(function(i){
-      return new L.marker([i.lat, i.lng]);
+      return new L.marker([i.lat, i.lng], {
+        icon: micIcon
+      }).bindPopup(interviewPopupHtml(i));
     });
-    
+
+    /////////////////////////////////////////
     
     // instantiate the Leaflet map object
     el.map = new L.map('map', params);
     
     // api key for mapbox tiles
     L.mapbox.accessToken = 'pk.eyJ1IjoiY2hlbnJpY2siLCJhIjoiLVhZMUZZZyJ9.HcNi26J3P-MiOmBKYHIbxw';
-
     // tileLayer for mapbox basemap
     el.mapboxTiles = L.mapbox.tileLayer('chenrick.map-3gzk4pem');
     el.map.addLayer(el.mapboxTiles); 
@@ -135,8 +148,11 @@ app.map = (function(w,d, $, _){
 
     // feature group to store rheingold geoJSON
     el.featureGroup = L.featureGroup().addTo(el.map);    
+
+    // layer group to store interviews
+    el.interviewsLayerGroup = L.layerGroup().addTo(el.map);
     
-    // add Bing satelitte imagery layer
+// add Bing satelitte imagery layer
     el.satellite = new L.BingLayer('AkuX5_O7AVBpUN7ujcWGCf4uovayfogcNVYhWKjbz2Foggzu8cYBxk6e7wfQyBQW');
 
     // object to pass Leaflet Control
@@ -360,6 +376,14 @@ app.map = (function(w,d, $, _){
       };
     });
 
+
+    // layer/feature group -> opens all popups
+    function openAllPopups(group) {
+      group.eachLayer(function(layer){
+        layer.openPopup();
+      });
+    }
+    
     // toggle sites of gentrification
     $sg.change(function(){
       if ($sg.is(':checked')) {
@@ -368,12 +392,8 @@ app.map = (function(w,d, $, _){
         }
         el.featureGroup.addLayer(el.rheingoldPoly);
         el.map.fitBounds(el.featureGroup, {padding: [200, 200]});
-
-        // open popups of markers on load
-        el.featureGroup.eachLayer(function(layer) {          
-          layer.openPopup();
-        });
         
+        openAllPopups(el.featureGroup);
       } else {
         for (i=0; i<el.sitesGent.length; i++) {
           el.featureGroup.removeLayer(el.sitesGent[i]);  
@@ -385,11 +405,12 @@ app.map = (function(w,d, $, _){
     $interviews.change(function(){
       if ($interviews.is(':checked')) {
         el.interviews.forEach(function(interview){
-          el.featureGroup.addLayer(interview);
+          el.interviewsLayerGroup.addLayer(interview);
         });
+        // openAllPopups(el.interviewsLayerGroup);
       } else {
         el.interviews.forEach(function(interview){
-          el.featureGroup.removeLayer(interview);
+          el.interviewsLayerGroup.removeLayer(interview);
         });
       }
     });

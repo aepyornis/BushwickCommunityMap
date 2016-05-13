@@ -800,3 +800,15 @@ mimicks leaflet's zoom ui */
     display: block;
   }
 }
+
+.interviews-icon {
+  font-size: 36px;
+}
+
+.interview-popup-container {
+ font-family: ProximaNovaBold, Helvetica, Arial, sans-serif;
+ font-size: 13px;
+}
+.interview-popup-container p {
+  margin: 0;
+}

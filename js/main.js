@@ -37,14 +37,14 @@ app.map = (function(w,d, $, _){
   // reference cartocss styles from mapStyles.js
   el.styles = app.mapStyles;
   // url to cartodb bushwick community map viz json
-  el.cdbURL = "https://bushwick.cartodb.com/api/v2/viz/64ceb582-71e2-11e4-b052-0e018d66dc29/viz.json";
+  el.cdbURL = "https://bushwick.carto.com/api/v2/viz/82836656-4ed9-11e6-9cb9-0ef24382571b/viz.json";
 
   // queries for map pluto tax lots
   // sent to cartodb when layer buttons clicked
   el.sql = {
-    all : "SELECT * FROM bushwick_pluto14v1",
-    rentStab : "SELECT a.* FROM bushwick_pluto14v1 a, bushwick_rent_stabl_merge_centroids b where st_intersects(a.the_geom, b.the_geom)",
-    vacant : "SELECT * FROM bushwick_pluto14v1 WHERE landuse = '11'"
+    all : "SELECT * FROM bushwick_pluto_16v1",
+    rentStab : "SELECT a.* FROM bushwick_pluto_16v1 a, bushwick_rent_stabl_merge_centroids b where st_intersects(a.the_geom, b.the_geom)",
+    vacant : "SELECT * FROM bushwick_pluto_16v1 WHERE landuse = '11'"
   };
 
   // compile the underscore legend template for rendering map legends for choropleth layers
@@ -110,12 +110,34 @@ app.map = (function(w,d, $, _){
         el.lindenMarker
       ];
     
+    ////////////////// Interviews ///////////
+
+    // mic icon from ionicons
+    var micIcon = L.divIcon({className: 'ion-mic-b interviews-icon'});
+    
+    // object -> html string
+    var interviewPopupHtml = function(i) {
+      return '<div class="interview-popup-container">' + 
+        '<p>' + i.name + '</p>' + 
+        '<p>' + i.date + '</p>' + 
+        '<p>' + i.address + '</p>' + 
+        '</div>';
+    };
+    
+    // global var interviews loaded in <script> from js/interviews.js
+    el.interviews = interviews.map(function(i){
+      return new L.marker([i.lat, i.lng], {
+        icon: micIcon
+      }).bindPopup(interviewPopupHtml(i));
+    });
+
+    /////////////////////////////////////////
+    
     // instantiate the Leaflet map object
     el.map = new L.map('map', params);
     
     // api key for mapbox tiles
     L.mapbox.accessToken = 'pk.eyJ1IjoiY2hlbnJpY2siLCJhIjoiLVhZMUZZZyJ9.HcNi26J3P-MiOmBKYHIbxw';
-
     // tileLayer for mapbox basemap
     el.mapboxTiles = L.mapbox.tileLayer('chenrick.map-3gzk4pem');
     el.map.addLayer(el.mapboxTiles); 
@@ -126,8 +148,11 @@ app.map = (function(w,d, $, _){
 
     // feature group to store rheingold geoJSON
     el.featureGroup = L.featureGroup().addTo(el.map);    
+
+    // layer group to store interviews
+    el.interviewsLayerGroup = L.layerGroup().addTo(el.map);
     
-    // add Bing satelitte imagery layer
+// add Bing satelitte imagery layer
     el.satellite = new L.BingLayer('AkuX5_O7AVBpUN7ujcWGCf4uovayfogcNVYhWKjbz2Foggzu8cYBxk6e7wfQyBQW');
 
     // object to pass Leaflet Control
@@ -320,7 +345,9 @@ app.map = (function(w,d, $, _){
           $a2a3 = $('#a2a3'),
           $nb = $('#nb'),
           $sg = $('#sites-of-gentrification'),
-          $ps = $('#personal-stories');
+          $ps = $('#personal-stories'),
+          $interviews = $('#interviews');
+    
 
     // toggle A1 major alterations layer
     $a1.change(function(){
@@ -349,6 +376,14 @@ app.map = (function(w,d, $, _){
       };
     });
 
+
+    // layer/feature group -> opens all popups
+    function openAllPopups(group) {
+      group.eachLayer(function(layer){
+        layer.openPopup();
+      });
+    }
+    
     // toggle sites of gentrification
     $sg.change(function(){
       if ($sg.is(':checked')) {
@@ -357,20 +392,28 @@ app.map = (function(w,d, $, _){
         }
         el.featureGroup.addLayer(el.rheingoldPoly);
         el.map.fitBounds(el.featureGroup, {padding: [200, 200]});
-
-        // open popups of markers on load
-        el.featureGroup.eachLayer(function(layer) {          
-          layer.openPopup();
-        });
         
+        openAllPopups(el.featureGroup);
       } else {
         for (i=0; i<el.sitesGent.length; i++) {
           el.featureGroup.removeLayer(el.sitesGent[i]);  
         }
         el.featureGroup.removeLayer(el.rheingoldPoly);
       };
-    });        
+    });
 
+    $interviews.change(function(){
+      if ($interviews.is(':checked')) {
+        el.interviews.forEach(function(interview){
+          el.interviewsLayerGroup.addLayer(interview);
+        });
+        // openAllPopups(el.interviewsLayerGroup);
+      } else {
+        el.interviews.forEach(function(interview){
+          el.interviewsLayerGroup.removeLayer(interview);
+        });
+      }
+    });
     // toggle personal stories
     // to do: add stories!
     $ps.change(function(){

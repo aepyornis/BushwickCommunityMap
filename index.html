@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
   <link rel="stylesheet" href="//libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
   <link rel="stylesheet" href="//cartodb.github.io/odyssey.js/sandbox/css/slides.css">
+  <!-- Icons -->
+  <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
   <!-- Mapbox JS -->
   <script src='//api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
   <!-- CSS for UI  -->  
@@ -89,7 +91,12 @@
       <input type="checkbox" name="stories" class="regular-checkbox" value="sites-of-gentrification" id="sites-of-gentrification"/>
         <label for="sites-of-gentrification"></label><span class="en">Sites of Gentrification</span>
         <span class="es">Sitios de Gentrificación</span>
-        <br/>
+      <br/>
+      <input type="checkbox" name="interviews" class="regular-checkbox" value="interviews" id="interviews"/>
+      <label for="interviews"></label>
+      <span class="en">Interviews</span>
+      <span class="es">Entrevistas</span>
+
       <!-- <input type="checkbox" name="stories" class="regular-checkbox" value="personal-stories" id="personal-stories"/>
         <label for="personal-stories"></label><span class="en">Personal Stories</span>
         <span class="es">Historias Personales</span> -->
@@ -576,6 +583,8 @@
   <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyAwklqaZKCa0fUXSdL4ebZbPKKNJr2oT_Q"></script>  
   <script src="js/internal_pages.js"></script>   
 
+  <!-- Loads interviews.js into global var interviews -->
+  <script src="js/interviews.js"></script>
   <!-- JS code for map interaction  -->
   <script src="js/mapStyles.js"></script>  
   <script src="js/intro.js"></script> 

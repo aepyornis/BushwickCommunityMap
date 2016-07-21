@@ -37,14 +37,14 @@ app.map = (function(w,d, $, _){
   // reference cartocss styles from mapStyles.js
   el.styles = app.mapStyles;
   // url to cartodb bushwick community map viz json
-  el.cdbURL = "https://bushwick.cartodb.com/api/v2/viz/64ceb582-71e2-11e4-b052-0e018d66dc29/viz.json";
+  el.cdbURL = "https://bushwick.carto.com/api/v2/viz/82836656-4ed9-11e6-9cb9-0ef24382571b/viz.json";
 
   // queries for map pluto tax lots
   // sent to cartodb when layer buttons clicked
   el.sql = {
-    all : "SELECT * FROM bushwick_pluto14v1",
-    rentStab : "SELECT a.* FROM bushwick_pluto14v1 a, bushwick_rent_stabl_merge_centroids b where st_intersects(a.the_geom, b.the_geom)",
-    vacant : "SELECT * FROM bushwick_pluto14v1 WHERE landuse = '11'"
+    all : "SELECT * FROM bushwick_pluto_16v1",
+    rentStab : "SELECT a.* FROM bushwick_pluto_16v1 a, bushwick_rent_stabl_merge_centroids b where st_intersects(a.the_geom, b.the_geom)",
+    vacant : "SELECT * FROM bushwick_pluto_16v1 WHERE landuse = '11'"
   };
 
   // compile the underscore legend template for rendering map legends for choropleth layers

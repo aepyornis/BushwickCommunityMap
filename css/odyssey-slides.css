@@ -1,4 +1,3 @@
-@import url("http://fast.fonts.net/t/1.css?apiType=css&projectid=3af16084-ba56-49ca-b37d-0b49b59e1927");
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{
 margin:0;
 padding:0;
@@ -37,18 +36,18 @@ display:block
 }
 @font-face{
 font-family:"AleoRegular";
-src:url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.eot);
-src:url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.eot?#iefix) format('embedded-opentype'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.woff) format('woff'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.ttf) format('truetype'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.svg) format('svg')
+src:url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.eot);
+src:url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.eot?#iefix) format('embedded-opentype'),url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.woff) format('woff'),url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.ttf) format('truetype'),url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.svg) format('svg')
 }
 @font-face{
 font-family:"AleoBold";
-src:url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.eot);
-src:url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.eot?#iefix) format('embedded-opentype'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.woff) format('woff'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.ttf) format('truetype'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.svg) format('svg')
+src:url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.eot);
+src:url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.eot?#iefix) format('embedded-opentype'),url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.woff) format('woff'),url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.ttf) format('truetype'),url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.svg) format('svg')
 }
 @font-face{
 font-family:"ProximaNovaBold";
-src:url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/fbc6b03a-b3a1-427c-a884-053deca3a53c.eot);
-src:url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/fbc6b03a-b3a1-427c-a884-053deca3a53c.eot?#iefix) format('embedded-opentype'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/d999c07b-a049-4eb5-b8a6-4f36ae25e67e.woff) format('woff'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/4d4a75f5-d32a-4a09-8665-133afd39cc37.ttf) format('truetype'),url(//cartodb-assets.global.ssl.fastly.net/odyssey.js/8152bc4e-d700-4c78-b6be-326893e6f53f.svg) format('svg')
+src:url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/fbc6b03a-b3a1-427c-a884-053deca3a53c.eot);
+src:url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/fbc6b03a-b3a1-427c-a884-053deca3a53c.eot?#iefix) format('embedded-opentype'),url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/d999c07b-a049-4eb5-b8a6-4f36ae25e67e.woff) format('woff'),url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/4d4a75f5-d32a-4a09-8665-133afd39cc37.ttf) format('truetype'),url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/8152bc4e-d700-4c78-b6be-326893e6f53f.svg) format('svg')
 }
 body{
 overflow:hidden
@@ -169,14 +168,14 @@ ul#navButtons li a{
 display:inline-block;
 width:23px;
 height:30px;
-background:transparent url('../img/navBtns.png?1407168450') no-repeat -10px 0
+background:transparent url('/images/navBtns.png') no-repeat -10px 0
 }
 ul#navButtons li a:hover{
 background-position:-10px -30px;
 cursor:pointer
 }
 ul#navButtons li a.next{
-background:transparent url('../img/navBtns.png?1407168450') no-repeat -30px 0
+background:transparent url('/images/navBtns.png') no-repeat -30px 0
 }
 ul#navButtons li a.next:hover{
 background-position:-30px -30px
@@ -293,3 +292,4 @@ left:40px !important
 }
 
 
+g

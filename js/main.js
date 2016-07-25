@@ -136,28 +136,24 @@ app.map = (function(w,d, $, _){
     // instantiate the Leaflet map object
     el.map = new L.map('map', params);
     
-    // api key for mapbox tiles
-    L.mapbox.accessToken = 'pk.eyJ1IjoiY2hlbnJpY2siLCJhIjoiLVhZMUZZZyJ9.HcNi26J3P-MiOmBKYHIbxw';
-    // tileLayer for mapbox basemap
-    el.mapboxTiles = L.mapbox.tileLayer('chenrick.map-3gzk4pem');
-    el.map.addLayer(el.mapboxTiles); 
-
-    // add mapbox and osm attribution
-    var attr = "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a>";
-    el.map.attributionControl.addAttribution(attr);
-
+    // create basemap from cartodb & add to map
+    var attr = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://cartodb.com/attributions">CartoDB</a>';
+    var baseMapUrl = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png';
+    el.cartoBasemap = L.tileLayer(baseMapUrl, { attribution:  attr});
+    el.map.addLayer(el.cartoBasemap);
+    
     // feature group to store rheingold geoJSON
     el.featureGroup = L.featureGroup().addTo(el.map);    
 
     // layer group to store interviews
     el.interviewsLayerGroup = L.layerGroup().addTo(el.map);
     
-// add Bing satelitte imagery layer
+    // add Bing satelitte imagery layer
     el.satellite = new L.BingLayer('AkuX5_O7AVBpUN7ujcWGCf4uovayfogcNVYhWKjbz2Foggzu8cYBxk6e7wfQyBQW');
-
+        
     // object to pass Leaflet Control
      el.baseLayers = {
-        streets: el.mapboxTiles,
+        streets: el.cartoBasemap,
         satellite: el.satellite
     };
 
@@ -265,10 +261,10 @@ app.map = (function(w,d, $, _){
 
         } // end sublayer for loop
 
-      // add the cdb layer to the map
-      el.map.addLayer(layer, false);
-      // make sure the base layer stays below the cdb layer      
-      el.mapboxTiles.bringToBack();
+        // add the cdb layer to the map
+        el.map.addLayer(layer, false);
+        // make sure the base layer stays below the cdb layer      
+        el.cartoBasemap.bringToBack();
 
       }).on('done', function() {
         

@@ -6,14 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>North West Bushwick Community Map</title>
   <!-- CSS libraries  -->
-  <link href="css/normalize.css" rel="stylesheet">
-  <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/normalize.css" >
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
   <link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css" />
   <link rel="stylesheet" href="css/odyssey-slides.css">
   <!-- Icons -->
   <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
-  <!-- Mapbox JS -->
-  <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
   <!-- CSS for UI  -->  
   <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>   
@@ -571,18 +569,12 @@
   </script>
 
   <!-- JS libraries -->
-  <script src="//cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+  <!-- <script src="bower_components/leaflet/dist/leaflet.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
   <script src="bower_components/leaflet-plugins/layer/tile/Bing.js"></script>
-  <script src='//api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.standalone.js'></script>
   <script src="bower_components/cartodb.js/dist/cartodb.noleaflet.js"></script>
   <script src="js/odyssey.js" charset="UTF-8"></script>
-
-  <!-- replacing Google Maps API with key for geocoding -->
-  <!--<script src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script> -->
-  <!-- <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyDA9dov5DYQJ1hNgbo1iabbf0A8hGvf2d0"></script> -->
-  <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyAwklqaZKCa0fUXSdL4ebZbPKKNJr2oT_Q"></script>  
-  <script src="js/internal_pages.js"></script>   
-
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwklqaZKCa0fUXSdL4ebZbPKKNJr2oT_Q"></script>  
   <!-- Loads interviews.js into global var interviews -->
   <script src="js/interviews.js"></script>
   <!-- JS code for map interaction  -->
@@ -590,6 +582,5 @@
   <script src="js/intro.js"></script> 
   <script src="js/main.js"></script>    
   <script src="js/internal_pages.js"></script>    
-
 </body>
 </html>

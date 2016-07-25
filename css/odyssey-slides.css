@@ -34,21 +34,7 @@ border:none
 article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{
 display:block
 }
-@font-face{
-font-family:"AleoRegular";
-src:url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.eot);
-src:url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.eot?#iefix) format('embedded-opentype'),url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.woff) format('woff'),url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.ttf) format('truetype'),url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Regular-webfont.svg) format('svg')
-}
-@font-face{
-font-family:"AleoBold";
-src:url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.eot);
-src:url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.eot?#iefix) format('embedded-opentype'),url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.woff) format('woff'),url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.ttf) format('truetype'),url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/Aleo-Bold-webfont.svg) format('svg')
-}
-@font-face{
-font-family:"ProximaNovaBold";
-src:url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/fbc6b03a-b3a1-427c-a884-053deca3a53c.eot);
-src:url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/fbc6b03a-b3a1-427c-a884-053deca3a53c.eot?#iefix) format('embedded-opentype'),url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/d999c07b-a049-4eb5-b8a6-4f36ae25e67e.woff) format('woff'),url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/4d4a75f5-d32a-4a09-8665-133afd39cc37.ttf) format('truetype'),url(https://cartodb-assets.global.ssl.fastly.net/odyssey.js/8152bc4e-d700-4c78-b6be-326893e6f53f.svg) format('svg')
-}
+
 body{
 overflow:hidden
 }
@@ -290,6 +276,3 @@ background-color:#FF7373
 bottom:50px !important;
 left:40px !important
 }
-
-
-g

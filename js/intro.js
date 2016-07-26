@@ -102,7 +102,7 @@ app.intro = (function(w,d,$,O) {
       el.featureGroup.addLayer(el.rheingoldPoly);  
     }      
     el.taxLots.hide();
-    el.dobPermitsNB.show();      
+    el.map.addLayer(el.nb_jobs);
   }
 
   function slideFour() {
@@ -110,7 +110,7 @@ app.intro = (function(w,d,$,O) {
       el.featureGroup.addLayer(el.rheingoldPoly); 
       el.map.fitBounds(el.rheingoldPoly, {paddingTopLeft: [125, 35]});
     }          
-    el.dobPermitsNB.hide();
+    el.map.removeLayer(el.nb_jobs);
     el.taxLotActions['rentstab']();
     el.taxLots.show();
   }
@@ -141,21 +141,18 @@ app.intro = (function(w,d,$,O) {
     if (!el.featureGroup.hasLayer(el.lindenMarker)) {
       el.featureGroup.addLayer(el.lindenMarker);
     }
-    el.dobPermitsA1.hide();
-    el.dobPermitsA2A3.hide();      
+    el.map.removeLayer(el.a1_jobs);
   }
 
   function slideNine() {
-    el.dobPermitsA1.show();
-    el.dobPermitsA2A3.show();
+    el.map.addLayer(el.a1_jobs);
     el.taxLots.hide();
   }
 
   function slideTen() {
     el.featureGroup.clearLayers();
-    el.dobPermitsNB.hide();      
-    el.dobPermitsA1.hide();
-    el.dobPermitsA2A3.hide();
+    el.map.removeLayer(el.nb_jobs);
+    el.map.removeLayer(el.a1_jobs);
     el.taxLotActions['regular']();
     el.taxLots.show();  
   }   

@@ -31,7 +31,10 @@ app.map = (function(w,d, $, _){
     geocoderMarker : null, 
     legend : null,
     taxLotActions : null,
-    story : null
+    story : null,
+    interviews : null,
+    a1_jobs : null,
+    nb_jobs : null
   };
 
   // reference cartocss styles from mapStyles.js
@@ -144,11 +147,16 @@ app.map = (function(w,d, $, _){
     
     // feature group to store rheingold geoJSON
     el.featureGroup = L.featureGroup().addTo(el.map);    
-
+    
     // layer group to store interviews
     el.interviewsLayerGroup = L.layerGroup().addTo(el.map);
     
-    // add Bing satelitte imagery layer
+    // layer group for a1 
+    el.a1_jobs = dobJobsLayerGroup(a1_jobs);
+    // layer group for nb
+    el.nb_jobs = dobJobsLayerGroup(nb_jobs);
+    
+    // add Bing satellite imagery layer
     el.satellite = new L.BingLayer('AkuX5_O7AVBpUN7ujcWGCf4uovayfogcNVYhWKjbz2Foggzu8cYBxk6e7wfQyBQW');
         
     // object to pass Leaflet Control
@@ -173,6 +181,17 @@ app.map = (function(w,d, $, _){
     getCDBData();
   };
 
+  function dobJobsLayerGroup(jobs) {
+    var layerGroup = L.layerGroup();
+    jobs.forEach(function(x){
+      if (x.lat_coord && x.lng_coord) {
+        var marker = L.circleMarker([x.lat_coord, x.lng_coord], app.mapStyles.dobjobs);
+        layerGroup.addLayer(marker);
+      }
+    });
+    return layerGroup;
+  }
+
   // load the geoJSON boundary for the Rheingold development
   function loadRheingold() {
     $.getJSON('./data/rheingold_rezoning_area.geojson', function(json, textStatus) {
@@ -184,6 +203,7 @@ app.map = (function(w,d, $, _){
     });
   } 
 
+  
   // function to load map pluto tax lot layer and dob permit layer from CartoDB
   var getCDBData = function() {  
     cartodb.createLayer(el.map, el.cdbURL, {
@@ -196,79 +216,13 @@ app.map = (function(w,d, $, _){
         layer.getSubLayer(0).setCartoCSS(el.styles.regular);
         layer.getSubLayer(0).setSQL(el.sql.all);
         el.taxLots = layer.getSubLayer(0);
-
-        // create and store the dob permits a1 sublayer
-        el.dobPermitsA1 = layer.createSubLayer({
-          sql : "SELECT * FROM bushwick_jobs_2014_a1",
-          cartocss : '#exp_codedjobs_a1 {marker-width: 10; marker-fill: hsl(0,0%,30%); marker-line-color: white; marker-line-width: 0.8;}'
-        });
-
-        // create and store the dob permits a2a3 sublayer
-        el.dobPermitsA2A3 = layer.createSubLayer({
-          sql : "SELECT * FROM bushwick_jobs_2014_a2a3",
-          cartocss : '#exp_codedjobs_a1 {marker-width: 10; marker-fill: hsl(100,0%,50%); marker-line-color: white; marker-line-width: 0.8;}'
-        });
-
-        // create and store the dob permits nb sublayer
-        el.dobPermitsNB = layer.createSubLayer({
-          sql : "SELECT * FROM bushwick_jobs_2014_nb",
-          cartocss : '#exp_codedjobs_a1 {marker-width: 10; marker-fill: hsl(350,0%,0%); marker-line-color: white; marker-line-width: 0.8;}'         
-        });
-
-        // positions the tool tip in relationship to user's mouse
-        // offset it by 5px vertically and horizontally so the mouse arrow won't cover it
-        var event = function(e){
-              $('#tool-tip').css({
-                 left:  e.pageX + 5,
-                 top:   e.pageY + 5
-              });
-          };                                
-
-        // hide and set interactivity on the DOB permit layers
-        var num_sublayers = layer.getSubLayerCount();
-        for (var i = 1; i < num_sublayers; i++) { 
-          // turn on interactivity for mousing events
-          layer.getSubLayer(i).setInteraction(true);
-          // tell cdb what columns to pass for interactivity
-          layer.getSubLayer(i).setInteractivity('address, jt_description, latestactiondate, ownername, ownerphone, ownerbusin, existingst, proposedst');                    
-          // when the user mouses over the dob permit display html & data in a tool tip
-          layer.getSubLayer(i).on('featureOver', function(e, pos, latlng, data) {
-            $('#tool-tip').html(
-                                // text to display when user hovers on dob permit layers
-                                '<h4>DOB Job Info:</h4>' +
-                                '<hr>' +
-                                '<p><strong>Address:</strong> '  + data.address + '</p>' +
-                                '<p><strong>Job Description:</strong> ' + data.jt_description + '</p>' +
-                                '<p><strong>Latest Action Date:</strong> ' + data.latestactiondate.slice(0,10) + '</p>' +
-                                '<p><strong>Owner Name:</strong> '  + data.ownername + '</p>' +
-                                '<p><strong>Owner Business:</strong> '  + data.ownerbusin + '</p>' +
-                                '<p><strong>Owner Phone:</strong> '  + data.ownerphone + '</p>' +
-                                '<p><strong>Existing Building Stories:</strong> '  + data.existingst + '</p>' +
-                                '<p><strong>Proposed Building Stories:</strong> '  + data.proposedst + '</p>'
-                                );
-            $(document).bind('mousemove', event);
-            $('#tool-tip').show();            
-          });
-          
-          // when the user mouses out remove the tool tip
-          layer.getSubLayer(i).on('featureOut', function(e,pos,latlng,data){           
-            $('#tool-tip').hide();
-            $(document).unbind('mousemove', event, false);
-          });
-
-          // hide the dob permit layers when map loads
-          layer.getSubLayer(i).hide();
-
-        } // end sublayer for loop
-
+        
         // add the cdb layer to the map
         el.map.addLayer(layer, false);
+        
         // make sure the base layer stays below the cdb layer      
         el.cartoBasemap.bringToBack();
-
-      }).on('done', function() {
-        
-      }); // end cartodb.createLayer!      
+      }).on('done', function() {}); // end cartodb.createLayer!      
   };
 
   // change the cartoCSS of a layer
@@ -338,7 +292,6 @@ app.map = (function(w,d, $, _){
     // checkboxes for dob permit layer & stories
     var checkboxDOB = $('input.dob:checkbox'),
           $a1 = $('#a1'),
-          $a2a3 = $('#a2a3'),
           $nb = $('#nb'),
           $sg = $('#sites-of-gentrification'),
           $ps = $('#personal-stories'),
@@ -348,30 +301,20 @@ app.map = (function(w,d, $, _){
     // toggle A1 major alterations layer
     $a1.change(function(){
       if ($a1.is(':checked')){
-        el.dobPermitsA1.show();      
+        el.map.addLayer(el.a1_jobs);
       } else {
-        el.dobPermitsA1.hide();
+        el.map.removeLayer(el.a1_jobs);
       };
     });
-
-    // toggle A2, A3 minor alterations layer
-    $a2a3.change(function(){
-      if ($a2a3.is(':checked')){
-        el.dobPermitsA2A3.show();        
-      } else {
-        el.dobPermitsA2A3.hide();
-      };
-    });    
 
     // toggle NB new buildings layer
     $nb.change(function(){
       if ($nb.is(':checked')){
-        el.dobPermitsNB.show();        
+        el.map.addLayer(el.nb_jobs);
       } else {
-        el.dobPermitsNB.hide();
+        el.map.removeLayer(el.nb_jobs);
       };
     });
-
 
     // layer/feature group -> opens all popups
     function openAllPopups(group) {
@@ -410,15 +353,7 @@ app.map = (function(w,d, $, _){
         });
       }
     });
-    // toggle personal stories
-    // to do: add stories!
-    $ps.change(function(){
-      if ($ps.is(':checked')) {
-        console.log('show stories');
-      } else {
-        console.log('hide stories');
-      }
-    });
+    
   };
 
   // geocode search box text and create a marker on the map

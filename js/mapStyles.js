@@ -172,6 +172,12 @@ app.mapStyles = (function(){
                     "}" +
                     "#bushwick_pluto14v1 [ yearbuilt = 0] {"+
                        "polygon-opacity: 0;"+
-                    "}"                                                                               
+                   "}",
+    dobjobs: {
+      fillColor: "#000",
+      fillOpacity: '0.8',
+      radius: 5
+
+    }
   };
 })();

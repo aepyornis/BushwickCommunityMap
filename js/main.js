@@ -34,7 +34,8 @@ app.map = (function(w,d, $, _){
     story : null,
     interviews : null,
     a1_jobs : null,
-    nb_jobs : null
+    nb_jobs : null,
+    dobPopupTemplate : null
   };
 
   // reference cartocss styles from mapStyles.js
@@ -181,11 +182,34 @@ app.map = (function(w,d, $, _){
     getCDBData();
   };
 
+  //console.log($('#dob-popup-template').html());
+
+  function dobPopupHtml(x){
+    var html = '<div id="dob-popup"><h4>DOB Job Info:</h4><hr>'
+          + '<p><strong>Address:</strong>  ' + x.house + ' ' + x.streetname + '</p>'
+          + '<p><strong>Job Type:</strong>  ' + x.jobtype + '</p>'
+          + '<p><strong>Owner Name:</strong>  ' + x.ownersfirstname + ' ' + x.ownerslastname + '</p>'
+          + '<p><strong>Owner Business:</strong>  ' + x.ownersbusinessname + '</p>'
+          + '<p><strong>Owner Phone:</strong>  ' + x.ownersphone + '</p>'
+          + '<p><strong>Existing Dwelling Units:</strong>  ' + x.existingdwelling + '</p>'
+          + '<p><strong>Proposed Dwelling Units:</strong>  ' + x.proposeddwellingunits + '</p>'
+          + '</div>';
+    return html;
+  }
+  
+  // binds popup to dob layer
+  function dobPopUp(marker, info){
+    marker.bindPopup(dobPopupHtml(info));
+  }
+
+  // array -> LayerGroup
   function dobJobsLayerGroup(jobs) {
     var layerGroup = L.layerGroup();
     jobs.forEach(function(x){
       if (x.lat_coord && x.lng_coord) {
         var marker = L.circleMarker([x.lat_coord, x.lng_coord], app.mapStyles.dobjobs);
+        
+        dobPopUp(marker, x);
         layerGroup.addLayer(marker);
       }
     });

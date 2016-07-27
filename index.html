@@ -546,7 +546,7 @@
   </div>  
 
   <!-- an empty div to render the DOB Permit layer info on mouse hover -->
-  <div id="tool-tip"></div>
+  <!-- <div id="tool-tip"></div> -->
  
  <!-- underscore template for dynamically rendering choropleth map legends -->
   <script type="text/template" class="template">
@@ -563,6 +563,19 @@
       </a>
     </div>
   </script>
+
+  <div id="dob-hoverover">
+      <h4>DOB Job Info:</h4>
+      <hr>
+      <p><strong>Address:</strong><span class="house"></span></p>
+      <p><strong>Job Type:</strong><span class="jobtype"></span></p>
+      <p><strong>Latest Action Date:</strong><span class="latestactiondate"></span></p>
+      <p><strong>Owner Name:</strong><span class="ownersfirstname"> <span class="ownerslastname"></p>
+      <!-- <p><strong>Owner Business:</strong><%= ownersbusinessname %></p>
+           <p><strong>Owner Phone:</strong><%= ownersphone %></p>
+           <p><strong>Existing Dwelling Units:</strong><%= existingdwelling %></p>
+           <p><strong>Proposed Dwelling Units:</strong><% proposeddwellingunits %></p> -->
+  </div>
 
   <!-- JS libraries -->
   <!-- <script src="bower_components/leaflet/dist/leaflet.js"></script> -->

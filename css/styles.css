@@ -806,3 +806,13 @@ mimicks leaflet's zoom ui */
 .interview-popup-container p {
   margin: 0;
 }
+
+
+
+#dob-popup {
+  line-height: 0.4;
+}
+
+#dob-popup strong {
+  font-weight: bold;
+}

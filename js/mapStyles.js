@@ -176,7 +176,7 @@ app.mapStyles = (function(){
     dobjobs: {
       fillColor: "#000",
       fillOpacity: '0.8',
-      radius: 5
+      radius: 7
 
     }
   };

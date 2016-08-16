@@ -800,14 +800,17 @@ mimicks leaflet's zoom ui */
 }
 
 .interview-popup-container {
- font-family: ProximaNovaBold, Helvetica, Arial, sans-serif;
- font-size: 13px;
+ font-family: AleoRegular, Helvetica, Arial, sans-serif;
+ font-size: 12px;
 }
 .interview-popup-container p {
   margin: 0;
 }
 
 
+.bold {
+  font-weight: bold;
+}
 
 #dob-popup {
   line-height: 0.4;

@@ -122,19 +122,21 @@ app.map = (function(w,d, $, _){
     // object -> html string
     var interviewPopupHtml = function(i) {
       return '<div class="interview-popup-container">' + 
-        '<p>' + i.name + '</p>' + 
-        '<p>' + i.date + '</p>' + 
-        '<p>' + i.address + '</p>' + 
+        '<p><center><span class="bold">' + i.name + '</span>, ' + i.date +  '</center></p><br>' + 
+        '<p>' + i.synopsis + '</p>' + 
+        '<p><a href="' + i.link + '">Watch the Interview</a></p>' + 
         '</div>';
     };
-    
-    // global var interviews loaded in <script> from js/interviews.js
-    el.interviews = interviews.map(function(i){
-      return new L.marker([i.lat, i.lng], {
-        icon: micIcon
-      }).bindPopup(interviewPopupHtml(i));
+    	
+    $.getJSON('https://bushwickcommunitymap.org/citiesforppl/map',function(interviews){
+      el.interviews = interviews.Interviews
+        .filter(function(i){ return (i.lat && i.lng);  })
+        .map(function(i){ 
+          return new L.marker([i.lat, i.lng], { icon: micIcon })
+            .bindPopup(interviewPopupHtml(i));
+        });
     });
-
+    
     /////////////////////////////////////////
     
     // instantiate the Leaflet map object
@@ -182,8 +184,6 @@ app.map = (function(w,d, $, _){
     getCDBData();
   };
 
-  //console.log($('#dob-popup-template').html());
-
   function dobPopupHtml(x){
     var html = '<div id="dob-popup"><h4>DOB Job Info:</h4><hr>'
           + '<p><strong>Address:</strong>  ' + x.house + ' ' + x.streetname + '</p>'
@@ -201,14 +201,12 @@ app.map = (function(w,d, $, _){
   function dobPopUp(marker, info){
     marker.bindPopup(dobPopupHtml(info));
   }
-
   // array -> LayerGroup
   function dobJobsLayerGroup(jobs) {
     var layerGroup = L.layerGroup();
     jobs.forEach(function(x){
       if (x.lat_coord && x.lng_coord) {
         var marker = L.circleMarker([x.lat_coord, x.lng_coord], app.mapStyles.dobjobs);
-        
         dobPopUp(marker, x);
         layerGroup.addLayer(marker);
       }
@@ -396,7 +394,7 @@ app.map = (function(w,d, $, _){
           if (el.geocoderMarker) { 
             el.map.removeLayer(el.geocoderMarker);
           }
-          // add a marker and pan and zoom the map to it
+           // add a marker and pan and zoom the map to it
           el.geocoderMarker = new L.marker(latlng).addTo(el.map);
           el.geocoderMarker.bindPopup("<h4>" + results[0].formatted_address + "</h4>" ).openPopup();
           el.map.setView(latlng, 20);          
